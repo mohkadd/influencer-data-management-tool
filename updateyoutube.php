@@ -112,6 +112,17 @@ function checkemptynumber($data){
                 "updated_on"=>$updated_on,"updated_by"=>$updated_by,"id"=>$id
                 ]);
         if($stmt){
+            date_default_timezone_set("Asia/Kolkata");
+            $datenow = date("Y-m-d H:i:s");
+            $operation = "Update";
+            $comment = $_SESSION['admin_username']." has updated ID number $id of youtube data from system at $datenow";
+            $ipaddress = $_SERVER['REMOTE_ADDR'];
+            $browser = $_SERVER['HTTP_USER_AGENT'];
+            $log = "INSERT into `loghistory` (`userid`,`username`,`operation`,`comment`,`ipaddress`,`browser`,
+                `actiontime`) values (:userid,:username,:operation,:comment,:ipaddress,:browser,:actiontime)";
+            $stmt2 = $con->prepare($log);
+            $stmt2->execute(['userid'=>$_SESSION['adminid'],'username'=>$_SESSION['admin_username'],'operation'=>$operation,
+                'comment'=>$comment,'ipaddress'=>$ipaddress,'browser'=>$browser,'actiontime'=>$datenow]);
             echo "success";
         }
         else{

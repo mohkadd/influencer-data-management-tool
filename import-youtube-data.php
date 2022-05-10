@@ -1,4 +1,9 @@
 <?php include "header.php"; ?>
+<?php
+if($_SESSION['admin_username'] == 'generaluser' && $_SESSION['admintype'] == '3'){
+    header("Location: dashboard.php");
+}
+?>
 <?php //header("Set-Cookie: cross-site-cookie=whatever; SameSite=None; Secure");?>
 <?php include "functions/functions.php";?>
   <div id="wrapper">

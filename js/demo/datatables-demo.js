@@ -26,12 +26,14 @@ $(document).ready(function() {
                 } );
             } );
         },
-        pageLength: 10,
+//        pageLength: 10,
+        
         order: [[ 0, 'desc']],
         dom: 'Bfrtip',
       buttons: [
-            'excel', 'pdf'
-        ]
+            'pageLength','excel', 'pdf'
+        ],
+      "bLengthChange": true,
     });
 //   $('#dataTable').DataTable(
 //       {

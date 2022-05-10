@@ -1,4 +1,10 @@
 <?php include "header.php"; ?>
+<?php
+if($_SESSION['admin_username'] == 'generaluser' && $_SESSION['admintype'] == '3'){
+    header("Location: dashboard.php");
+}
+
+?>
 <?php //header("Set-Cookie: cross-site-cookie=whatever; SameSite=None; Secure");?>
 <?php include "functions/functions.php";?>
   <div id="wrapper">
@@ -33,6 +39,7 @@
                         <div class="form-group">
                           <label for="title">Channel Name <strong class="text-danger">**</strong></label>
                           <input type="text" id="channel_name" name="channel_name" class="form-control" placeholder="Enter Channel Name" required>
+                          
                         </div>
                       </div>
                       
@@ -40,6 +47,7 @@
                         <div class="form-group">
                           <label for="title">Profile URL <strong class="text-danger">**</strong></label>
                           <input type="text" id="profile_url" name="profile_url" class="form-control" placeholder="Enter Profile URL" required>
+                          <span class="urlerror" style="display:none"><strong class="text-danger">Please Enter Unique Profile URL</strong></span>    
                         </div>
                       </div>
                       
@@ -576,8 +584,7 @@
                                <option value="Mon">Mon</option> 
                                <option value="Moradabad">Moradabad</option>                                
                                <option value="Morena">Morena</option> 
-                               <option value="Mumbai City">Mumbai City</option> 
-                               <option value="Mumbai suburban">Mumbai suburban</option> 
+                               <option value="Mumbai">Mumbai</option>                                
                                <option value="Munger">Munger</option> 
                                <option value="Murshidabad">Murshidabad</option> 
                                <option value="Muzaffarnagar">Muzaffarnagar</option> 
@@ -1071,6 +1078,7 @@ $(document).ready(function() {
                                                                 beforeSend: function(){
                                                                     $('#insertyoutube').prop("disabled",true);
                                                                     $('#insertyoutube').text("Submitting....");
+                                                                    $(".urlerror").css("display","none");
                                                                 },
                                                                 success: function(data){
                                                                     $('#insertyoutube').prop("disabled",false);
@@ -1085,6 +1093,7 @@ $(document).ready(function() {
                                                                     if(data == 'duplicate'){
                                                                         alert("Profile URL Already Exist, Please Enter Unique URL");
                                                                         $("#profile_url").focus();
+                                                                        $(".urlerror").css("display","inline");
                                                                     }
                                                                     if(data == 'invalid'){
                                                                         alert("Please Fill All Numberic Fields Properly");

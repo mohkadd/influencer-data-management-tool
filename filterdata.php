@@ -10,7 +10,16 @@ $maxsub = $row->maxsub;
 $minviews = $row->minviews;
 $maxviews = $row->maxviews;
 $minlikes = $row->minlikes;
-$maxlikes = $row->maxlikes; 
+$maxlikes = $row->maxlikes;
+
+if(isset($_POST['submit_range'])){
+    $minsub = htmlspecialchars(trim($_POST['minsub']));
+    $maxsub = htmlspecialchars(trim($_POST['maxsub']));
+    $minviews = htmlspecialchars(trim($_POST['minviews']));
+    $maxviews = htmlspecialchars(trim($_POST['maxviews']));
+    $minlikes = htmlspecialchars(trim($_POST['minlikes']));
+    $maxlikes = htmlspecialchars(trim($_POST['maxlikes']));
+}
 ?>
   <div id="wrapper">
 
@@ -82,14 +91,9 @@ $maxlikes = $row->maxlikes;
     clear: both;
 	margin: 30px 0px;
 }
-/*
-    .dataTables_length{
-        margin-left: 250px;
-    }
-*/
 </style>
         <!-- DataTables Example -->
-        <div class="card mb-3" id="allfilters" style="display:none;">
+        <div class="card mb-3" id="allfilters">
             <div class="card-body">
              <form action="filterdata.php" method="post" name="filterform" id="filterform">
               <div>
@@ -236,7 +240,7 @@ $maxlikes = $row->maxlikes;
 
                 <tbody>
                   <?php 
-$table_data = "SELECT * FROM youtube";
+$table_data = "SELECT * FROM `youtube` WHERE (subscribers BETWEEN '$minsub' AND '$maxsub') AND (avg_views BETWEEN '$minviews' AND '$maxviews') AND (avg_likes BETWEEN '$minlikes' AND '$maxlikes');";
 $stmt1 = $con->prepare($table_data);
 $stmt1->execute();
 $i = 1;
@@ -368,7 +372,7 @@ $i = 1;
 
                 <tbody>
                   <?php 
-$table_data = "SELECT * FROM youtube";
+$table_data = "SELECT * FROM `youtube` WHERE (subscribers BETWEEN '$minsub' AND '$maxsub') AND (avg_views BETWEEN '$minviews' AND '$maxviews') AND (avg_likes BETWEEN '$minlikes' AND '$maxlikes');";
 $stmt1 = $con->prepare($table_data);
 $stmt1->execute();
 $i = 1;
@@ -475,7 +479,7 @@ $i = 1;
 
                 <tbody>
                   <?php 
-$table_data = "SELECT * FROM youtube";
+$table_data = "SELECT * FROM `youtube` WHERE (subscribers BETWEEN '$minsub' AND '$maxsub') AND (avg_views BETWEEN '$minviews' AND '$maxviews') AND (avg_likes BETWEEN '$minlikes' AND '$maxlikes');";
 $stmt1 = $con->prepare($table_data);
 $stmt1->execute();
 $i = 1;
@@ -549,13 +553,24 @@ $i = 1;
     </div>
 </div>
       <!-- /.container-fluid -->
-
+<?php 
+$minmax = "SELECT MIN(subscribers) AS minsub,MAX(subscribers) AS maxsub, MIN(avg_views) AS minviews,MAX(avg_views) AS maxviews,MIN(avg_likes) AS minlikes,MAX(avg_likes) AS maxlikes FROM `youtube`;";
+$stmt6 = $con->prepare($minmax);
+$stmt6->execute();
+$row = $stmt6->fetch();
+$minsub1 = $row->minsub;
+$maxsub1 = $row->maxsub;
+$minviews1 = $row->minviews;
+$maxviews1 = $row->maxviews;
+$minlikes1 = $row->minlikes;
+$maxlikes1 = $row->maxlikes;        
+?>
  <?php include "footer.php"; ?>
  <link rel="stylesheet"
     href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>     
 <script>
-//document.oncontextmenu = new Function("return false;");
+document.oncontextmenu = new Function("return false;");
 $(document).ready(function(){
 
  $("#dataTable").on('click','.delete',function(){
@@ -621,7 +636,7 @@ $(function() {
     $( "#slider-range1" ).slider({
       range: true,
       min: 0,
-      max: <?php echo $maxsub ?>,
+      max: <?php echo $maxsub1 ?>,
       values: [ <?php echo $minsub ?>, <?php echo $maxsub ?> ],
       slide: function( event, ui ) {
         $( "#amount" ).html( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
@@ -636,7 +651,7 @@ $(function() {
     $( "#slider-range2" ).slider({
       range: true,
       min: 0,
-      max: <?php echo $maxviews ?>,
+      max: <?php echo $maxviews1 ?>,
       values: [ <?php echo $minviews ?>,<?php echo $maxviews ?> ],
       slide: function( event, ui ) {
         $( "#amount" ).html( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
@@ -651,7 +666,7 @@ $(function() {
     $( "#slider-range3" ).slider({
       range: true,
       min: 0,
-      max: <?php echo $maxlikes ?>,
+      max: <?php echo $maxlikes1 ?>,
       values: [ <?php echo $minlikes ?>,<?php echo $maxlikes ?> ],
       slide: function( event, ui ) {
         $( "#amount" ).html( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );

@@ -568,8 +568,7 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                    <option value='Mon'>Mon</option> 
                                    <option value='Moradabad'>Moradabad</option>                                
                                    <option value='Morena'>Morena</option> 
-                                   <option value='Mumbai City'>Mumbai City</option> 
-                                   <option value='Mumbai suburban'>Mumbai suburban</option> 
+                                   <option value='Mumbai'>Mumbai</option>                                    
                                    <option value='Munger'>Munger</option> 
                                    <option value='Murshidabad'>Murshidabad</option> 
                                    <option value='Muzaffarnagar'>Muzaffarnagar</option> 

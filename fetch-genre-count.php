@@ -2,9 +2,9 @@
 include 'config-pdo.php';
 if (isset($_POST['genre']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 	$genre = htmlspecialchars($_REQUEST['genre']);
-    $query = "SELECT DISTINCT city, COUNT(IF(influencer_category = 'Category A', id, NULL)) AS category_A, 
-    COUNT(IF(influencer_category = 'Category B', id, NULL)) AS category_B, 
-    COUNT(IF(influencer_category = 'Category C', id, NULL)) AS category_C FROM youtube 
+    $query = "SELECT DISTINCT city, COUNT(IF(influencer_category = 'CAT - A', id, NULL)) AS category_A, 
+    COUNT(IF(influencer_category = 'CAT - B', id, NULL)) AS category_B, 
+    COUNT(IF(influencer_category = 'CAT - C', id, NULL)) AS category_C FROM youtube 
     WHERE genre = '$genre' GROUP BY city ORDER BY city ASC;";
     $stmt1 = $con->prepare($query);
     $stmt1->execute();
@@ -20,9 +20,9 @@ if (isset($_POST['genre']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                 <thead class='bg-dark text-white'>
                     <tr>
                         <th>City</th>
-                        <th>Category A</th>
-                        <th>Category B</th>
-                        <th>Category C</th>
+                        <th>CAT - A</th>
+                        <th>CAT - B</th>
+                        <th>CAT - C</th>
                     </tr>
                 </thead>
                 <tbody>

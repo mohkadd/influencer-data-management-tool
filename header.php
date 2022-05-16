@@ -15,8 +15,12 @@ if (!isset($_SESSION['adminid']) && !isset($_SESSION['admin_username']) && !isse
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <?php 
+  $uri = $_SERVER['REQUEST_URI'];
+  
+  ?>
 
-  <title>Admin - Dashboard</title>
+  <title><?php echo basename($uri,".php"); ?></title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -27,6 +31,7 @@ if (!isset($_SESSION['adminid']) && !isset($_SESSION['admin_username']) && !isse
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
+  
 
 </head>
 

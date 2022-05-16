@@ -12,17 +12,19 @@
           <span>YouTube</span>
         </a>
         <?php
-        if($_SESSION['admin_username'] == 'superadminuser' && $_SESSION['admintype'] == '1'){
+        if($_SESSION['admintype'] == '1'){
         ?>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <a class="dropdown-item" href="youtube-dashboard.php">YouTube Dashboard</a>
           <a class="dropdown-item" href="view-youtube-data.php">View YouTube Listing</a>
           <a class="dropdown-item" href="insert-youtube-data.php">Insert YouTube Data</a>
           <a class="dropdown-item" href="import-youtube-data.php">Import YouTube Data</a>
+<!--          <a class="dropdown-item" href="loghistory.php">Log History</a>-->
+          
         </div>
         <?php    
         }
-        if($_SESSION['admin_username'] == 'adminuser' && $_SESSION['admintype'] == '2'){
+        if($_SESSION['admintype'] == '2'){
         ?>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <a class="dropdown-item" href="youtube-dashboard.php">YouTube Dashboard</a>
@@ -32,7 +34,7 @@
         </div>
         <?php     
         }
-        if($_SESSION['admin_username'] == 'generaluser' && $_SESSION['admintype'] == '3'){
+        if($_SESSION['admintype'] == '3'){
         ?>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <a class="dropdown-item" href="youtube-dashboard.php">YouTube Dashboard</a>
@@ -42,6 +44,18 @@
         }
         ?>
       </li>
+      <?php
+      if( $_SESSION['admintype'] == '1' || $_SESSION['admintype'] == '2' ){
+      ?>
+      <li class="nav-item active">
+        <a class="nav-link" href="loghistory.php">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Log History</span>
+        </a>
+      </li>
+      <?php      
+      }
+      ?>
 <!--
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

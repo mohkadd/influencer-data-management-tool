@@ -38,6 +38,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['uploadfile'])){
         require 'PHPExcel1/Classes/PHPExcel.php';
         require_once 'PHPExcel1/Classes/PHPExcel/IOFactory.php';
         $error = 0;
+        $impcount = 0;
         $objExcel=PHPExcel_IOFactory::load($uploadfile);
         foreach($objExcel->getWorksheetIterator() as $worksheet)
         {
@@ -48,6 +49,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['uploadfile'])){
 
                 $channel_name = $worksheet->getCellByColumnAndRow(0,$row)->getValue();
                 $profile_url = $worksheet->getCellByColumnAndRow(1,$row)->getValue();
+                $lastchar = substr($profile_url, -1); //to get last character of the string
+                $parts = explode("/", $profile_url); // convert string into separate array elements after every /
+                $extension1 = end($parts); // get last element of array
+                $extlen = strlen($extension1); // get length of the string
                 $subscribers = $worksheet->getCellByColumnAndRow(2,$row)->getValue();
                 $subscribers = checkemptynumber($subscribers);
                 $genre = $worksheet->getCellByColumnAndRow(3,$row)->getValue();
@@ -88,11 +93,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['uploadfile'])){
                 $stmt3 = $con->prepare($checkurl1);
                 $stmt3->execute(["profile_url"=>$profile_url]);
                 $count1 = $stmt3->rowCount();
-                if($count1 > 0){
+                if((!preg_match("[https://www.youtube.com/channel/]", $profile_url)) || ($lastchar == '/') ||
+                   ($extlen !== 24) || ($count1 > 0)){
                     $error = 1;
-//                    break;
-//                    echo "duplicate";
-//                    die();
                 }
                 else{
                     $insertqry="INSERT INTO `youtube`(`channel_name`, `profile_url`, `subscribers`,`genre`,`language`,`gender`,`enlyft_exclusive`,`integrated_video_cost`,
@@ -125,14 +128,39 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['uploadfile'])){
                     "added_on"=>$added_on,"added_by"=>$added_by,
                     "updated_on"=>$updated_on,"updated_by"=>$updated_by
                     ]);
+                    $impcount = $impcount + 1;
                 }
 
                     
             }
             if($stmt && $error == 0){
+                $impcount = $impcount - 1;
+                date_default_timezone_set("Asia/Kolkata");
+                $datenow = date("Y-m-d H:i:s");
+                $operation = "Import";
+                $comment = $_SESSION['admin_username']." has imported $impcount entries in  youtube data at $datenow";
+                $ipaddress = $_SERVER['REMOTE_ADDR'];
+                $browser = $_SERVER['HTTP_USER_AGENT'];
+                $log = "INSERT into `loghistory` (`userid`,`username`,`operation`,`comment`,`ipaddress`,`browser`,
+                    `actiontime`) values (:userid,:username,:operation,:comment,:ipaddress,:browser,:actiontime)";
+                $stmt2 = $con->prepare($log);
+                $stmt2->execute(['userid'=>$_SESSION['adminid'],'username'=>$_SESSION['admin_username'],'operation'=>$operation,
+                    'comment'=>$comment,'ipaddress'=>$ipaddress,'browser'=>$browser,'actiontime'=>$datenow]);
                 echo "success";
             }
             elseif($error == 1){
+//                $impcount = $impcount - 1;
+                date_default_timezone_set("Asia/Kolkata");
+                $datenow = date("Y-m-d H:i:s");
+                $operation = "Import";
+                $comment = $_SESSION['admin_username']." has imported $impcount entries in  youtube data at $datenow";
+                $ipaddress = $_SERVER['REMOTE_ADDR'];
+                $browser = $_SERVER['HTTP_USER_AGENT'];
+                $log = "INSERT into `loghistory` (`userid`,`username`,`operation`,`comment`,`ipaddress`,`browser`,
+                    `actiontime`) values (:userid,:username,:operation,:comment,:ipaddress,:browser,:actiontime)";
+                $stmt2 = $con->prepare($log);
+                $stmt2->execute(['userid'=>$_SESSION['adminid'],'username'=>$_SESSION['admin_username'],'operation'=>$operation,
+                    'comment'=>$comment,'ipaddress'=>$ipaddress,'browser'=>$browser,'actiontime'=>$datenow]);
                 echo "duplicate";
             }
             else{
@@ -148,6 +176,21 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['uploadfile'])){
 if(isset($_POST['insertyoutube']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
     $channel_name = cleanup($_POST['channel_name']);
     $profile_url = cleanup($_POST['profile_url']);
+    if(!preg_match("[https://www.youtube.com/channel/]", $profile_url)){
+        echo "format";
+        die();
+    }
+    $lastchar = substr($profile_url, -1);
+    if($lastchar == '/'){
+        echo "validurl";
+        die();
+    }
+    $extension1 = cleanup($_POST['extension1']);
+    $extlen = strlen($extension1);
+    if($extlen !== 24){
+        echo "length";
+        die();
+    }
     $checkurl = "SELECT `profile_url` from `youtube` WHERE `profile_url`=:profile_url";
     $stmt2 = $con->prepare($checkurl);
     $stmt2->execute(["profile_url"=>$profile_url]);
@@ -230,6 +273,17 @@ if(isset($_POST['insertyoutube']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
             "updated_on"=>$updated_on,"updated_by"=>$updated_by
             ]);
         if($stmt){
+            date_default_timezone_set("Asia/Kolkata");
+            $datenow = date("Y-m-d H:i:s");
+            $operation = "Insert";
+            $comment = $_SESSION['admin_username']." has inserted youtube data in system at $datenow";
+            $ipaddress = $_SERVER['REMOTE_ADDR'];
+            $browser = $_SERVER['HTTP_USER_AGENT'];
+            $log = "INSERT into `loghistory` (`userid`,`username`,`operation`,`comment`,`ipaddress`,`browser`,
+                `actiontime`) values (:userid,:username,:operation,:comment,:ipaddress,:browser,:actiontime)";
+            $stmt2 = $con->prepare($log);
+            $stmt2->execute(['userid'=>$_SESSION['adminid'],'username'=>$_SESSION['admin_username'],'operation'=>$operation,
+                'comment'=>$comment,'ipaddress'=>$ipaddress,'browser'=>$browser,'actiontime'=>$datenow]);
             echo "success";
         }
         else{

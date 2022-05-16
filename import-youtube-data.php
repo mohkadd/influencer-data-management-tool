@@ -1,6 +1,6 @@
 <?php include "header.php"; ?>
 <?php
-if($_SESSION['admin_username'] == 'generaluser' && $_SESSION['admintype'] == '3'){
+if($_SESSION['admintype'] == '3'){
     header("Location: dashboard.php");
 }
 ?>
@@ -41,7 +41,7 @@ if($_SESSION['admin_username'] == 'generaluser' && $_SESSION['admintype'] == '3'
                             <li>Step 4 => Once you have entered or copied the data properly, <span class="text-danger"><strong>delete the header row which have column name</strong></span></li>
                             <li>Step 5 => Save the file and Import the excel below by selecting <span class="text-danger"><strong>.xlsx</strong></span> the file</li>
                         </ul>
-                        <p><span class="text-danger"><strong>Note: Make sure each profile url excel you are uploading is not present in system database, otherwise data importing will be failed due to already existing data.</strong></span></p>
+<!--                        <p><span class="text-danger"><strong>Note: Make sure each profile url excel you are uploading is not present in system database, otherwise data importing will be failed due to already existing data.</strong></span></p>-->
                       </div>
                     </div>
                   </div>
@@ -67,7 +67,7 @@ if($_SESSION['admin_username'] == 'generaluser' && $_SESSION['admintype'] == '3'
                           <label for="uploadfile">Upload Excel (<strong class="text-danger">**only .xlsx file to be uploaded</strong>)</label>
                           <input type="file" id="uploadfile" name="uploadfile" class="form-control" required="required" accept=".xlsx">
                           <span class="text-danger" id="exterror" style="display: none;"><strong>Please Enter Valid File</strong></span>
-                          <span class="text-danger" id="msgerror" style="display: none;"><strong>Partial Data Imported due to duplicate profile urls found in some rows</strong></span>
+                          <span class="text-danger" id="msgerror" style="display: none;"><strong>Data Imported Successfully with Profile URL Validation</strong></span>
                           <span class="text-success" id="msgsuccess" style="display: none;"><strong>Data Imported Successfully</strong></span>
 
                         </div>
@@ -129,7 +129,7 @@ $(document).ready(function(){
                 if(data == 'duplicate'){
                     $("#submitfile").prop("disabled",false);
                     $("#submitfile").text("Import");
-                    alert("Partial Data Imported due to duplicate profile urls found in some rows");
+                    alert("Data Imported Successfully with Profile URL Validation");
                     $("#importyoutube")[0].reset();
                     $("#msgerror").css({"display":"inline"});
                 }

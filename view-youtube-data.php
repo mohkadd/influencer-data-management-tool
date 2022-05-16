@@ -142,7 +142,6 @@ $maxlikes = $row->maxlikes;
                         value="Submit" class="btn-submit btn btn-danger">
                         <a class="btn btn-success" href="view-youtube-data.php">Close Filters</a>
                     </center>
-                    
                 </div>
                 </form>
             </div>
@@ -160,7 +159,7 @@ $maxlikes = $row->maxlikes;
           <div class="card-body">
             <div class="table-responsive">
              <?php
-             if($_SESSION['admin_username'] == 'superadminuser' && $_SESSION['admintype'] == '1'){
+             if($_SESSION['admintype'] == '1'){
              ?>
              <table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-dark text-white">
@@ -250,15 +249,15 @@ $i = 1;
 <!--                      <td><?php //echo $i; ?></td>-->
                       <td><?php echo $row->channel_name; ?></td>
                       <td><?php echo $row->profile_url; ?></td>
-                      <td><?php echo $row->subscribers; ?></td>
+                      <td><?php echo number_format($row->subscribers); ?></td>
                       <td><?php echo $row->genre; ?></td>
                       <td><?php echo $row->language; ?></td>
                       <td><?php echo $row->gender; ?></td>
                       <td><?php echo $row->enlyft_exclusive; ?></td>
-                      <td><?php echo $row->integrated_video_cost; ?></td>
-                      <td><?php echo $row->dedicated_video_cost; ?></td>
-                      <td><?php echo $row->youtube_story_cost; ?></td>
-                      <td><?php echo $row->youtube_shorts_cost; ?></td>
+                      <td><?php echo number_format($row->integrated_video_cost); ?></td>
+                      <td><?php echo number_format($row->dedicated_video_cost); ?></td>
+                      <td><?php echo number_format($row->youtube_story_cost); ?></td>
+                      <td><?php echo number_format($row->youtube_shorts_cost); ?></td>
                       <td><?php echo $row->contact_number; ?></td>
                       <td><?php echo $row->contact_person_name; ?></td>
                       <td><?php echo $row->email_id ?></td>
@@ -266,8 +265,8 @@ $i = 1;
                       <td><?php echo $row->address; ?></td>
                       <td><?php echo $row->city; ?></td>
                       <td><?php echo $row->state; ?></td>
-                      <td><?php echo $row->avg_views; ?></td>
-                      <td><?php echo $row->avg_likes; ?></td> 
+                      <td><?php echo number_format($row->avg_views); ?></td>
+                      <td><?php echo number_format($row->avg_likes); ?></td> 
                       <td><?php echo $row->influencer_name; ?></td>
                       <td><?php echo $row->campaign_done_earlier ?></td>
                       <td><?php echo $row->no_of_campaign ?></td>
@@ -292,7 +291,7 @@ $i = 1;
               </table>
              <?php     
              } 
-             if($_SESSION['admin_username'] == 'adminuser' && $_SESSION['admintype'] == '2'){
+             if($_SESSION['admintype'] == '2'){
              ?>
              <table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-dark text-white">
@@ -382,15 +381,15 @@ $i = 1;
 <!--                      <td><?php //echo $i; ?></td>-->
                       <td><?php echo $row->channel_name; ?></td>
                       <td><?php echo $row->profile_url; ?></td>
-                      <td><?php echo $row->subscribers; ?></td>
+                      <td><?php echo number_format($row->subscribers); ?></td>
                       <td><?php echo $row->genre; ?></td>
                       <td><?php echo $row->language; ?></td>
                       <td><?php echo $row->gender; ?></td>
                       <td><?php echo $row->enlyft_exclusive; ?></td>
-                      <td><?php echo $row->integrated_video_cost; ?></td>
-                      <td><?php echo $row->dedicated_video_cost; ?></td>
-                      <td><?php echo $row->youtube_story_cost; ?></td>
-                      <td><?php echo $row->youtube_shorts_cost; ?></td>
+                      <td><?php echo number_format($row->integrated_video_cost); ?></td>
+                      <td><?php echo number_format($row->dedicated_video_cost); ?></td>
+                      <td><?php echo number_format($row->youtube_story_cost); ?></td>
+                      <td><?php echo number_format($row->youtube_shorts_cost); ?></td>
                       <td><?php echo $row->contact_number; ?></td>
                       <td><?php echo $row->contact_person_name; ?></td>
                       <td><?php echo $row->email_id ?></td>
@@ -398,8 +397,8 @@ $i = 1;
                       <td><?php echo $row->address; ?></td>
                       <td><?php echo $row->city; ?></td>
                       <td><?php echo $row->state; ?></td>
-                      <td><?php echo $row->avg_views; ?></td>
-                      <td><?php echo $row->avg_likes; ?></td> 
+                      <td><?php echo number_format($row->avg_views); ?></td>
+                      <td><?php echo number_format($row->avg_likes); ?></td> 
                       <td><?php echo $row->influencer_name; ?></td>
                       <td><?php echo $row->campaign_done_earlier ?></td>
                       <td><?php echo $row->no_of_campaign ?></td>
@@ -421,7 +420,7 @@ $i = 1;
               </table>
              <?php     
              } 
-             if($_SESSION['admin_username'] == 'generaluser' && $_SESSION['admintype'] == '3'){
+             if($_SESSION['admintype'] == '3'){
              ?>
              <table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-dark text-white">
@@ -489,19 +488,19 @@ $i = 1;
 <!--                      <td><?php //echo $i; ?></td>-->
                       <td><?php echo $row->channel_name; ?></td>
                       <td><?php echo $row->profile_url; ?></td>
-                      <td><?php echo $row->subscribers; ?></td>
+                      <td><?php echo number_format($row->subscribers); ?></td>
                       <td><?php echo $row->genre; ?></td>
                       <td><?php echo $row->language; ?></td>
                       <td><?php echo $row->gender; ?></td>
                       <td><?php echo $row->enlyft_exclusive; ?></td>
-                      <td><?php echo $row->integrated_video_cost; ?></td>
-                      <td><?php echo $row->dedicated_video_cost; ?></td>
-                      <td><?php echo $row->youtube_story_cost; ?></td>
-                      <td><?php echo $row->youtube_shorts_cost; ?></td>                      
+                      <td><?php echo number_format($row->integrated_video_cost); ?></td>
+                      <td><?php echo number_format($row->dedicated_video_cost); ?></td>
+                      <td><?php echo number_format($row->youtube_story_cost); ?></td>
+                      <td><?php echo number_format($row->youtube_shorts_cost); ?></td>                      
                       <td><?php echo $row->city; ?></td>
                       <td><?php echo $row->state; ?></td>
-                      <td><?php echo $row->avg_views; ?></td>
-                      <td><?php echo $row->avg_likes; ?></td> 
+                      <td><?php echo number_format($row->avg_views); ?></td>
+                      <td><?php echo number_format($row->avg_likes); ?></td> 
                       <td><?php echo $row->influencer_name; ?></td>
                       <td><?php echo $row->campaign_done_earlier ?></td>
                       <td><?php echo $row->no_of_campaign ?></td>
@@ -621,7 +620,7 @@ $(function() {
     $( "#slider-range1" ).slider({
       range: true,
       min: 0,
-      max: <?php echo $maxsub ?>,
+      max: <?php echo $maxsub ?> ,
       values: [ <?php echo $minsub ?>, <?php echo $maxsub ?> ],
       slide: function( event, ui ) {
         $( "#amount" ).html( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
@@ -636,7 +635,7 @@ $(function() {
     $( "#slider-range2" ).slider({
       range: true,
       min: 0,
-      max: <?php echo $maxviews ?>,
+      max: <?php echo $maxviews ?> ,
       values: [ <?php echo $minviews ?>,<?php echo $maxviews ?> ],
       slide: function( event, ui ) {
         $( "#amount" ).html( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
@@ -651,7 +650,7 @@ $(function() {
     $( "#slider-range3" ).slider({
       range: true,
       min: 0,
-      max: <?php echo $maxlikes ?>,
+      max: <?php echo $maxlikes ?> ,
       values: [ <?php echo $minlikes ?>,<?php echo $maxlikes ?> ],
       slide: function( event, ui ) {
         $( "#amount" ).html( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );

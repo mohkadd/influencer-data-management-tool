@@ -1,6 +1,6 @@
 <?php include "header.php"; ?>
 <?php
-if($_SESSION['admin_username'] == 'generaluser' && $_SESSION['admintype'] == '3'){
+if($_SESSION['admintype'] == '3'){
     header("Location: dashboard.php");
 }
 
@@ -24,11 +24,37 @@ if($_SESSION['admin_username'] == 'generaluser' && $_SESSION['admintype'] == '3'
         </ol>
 
         <!-- DataTables Example -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-atom"></i>
+            <span class="text-danger"><strong>Important Note for Inserting Data</strong></span></div>
+          <div class="card-body">
+            <div class="userform">
+                <form name="importinventory" id="importinventory" method="post" action="addinventory.php" enctype="multipart/form-data">
+                  <div class="form-group">
+                    <div class="form-row">
+
+                      <div class="col-md-12">
+                        <ul>
+                            <li>Fields mark with <strong><span class="text-danger">**</span></strong> are mandatory, fields mark with <strong><span class="text-danger">##</span></strong> has to be numeric</li>
+                            <li><strong class="text-danger">Profile URL has to be UNIQUE</strong></li>
+                            <li><strong class="text-danger">Profile URL has to be in below FORMAT: https://www.youtube.com/channel/UCRGl2gA9X6BXqOvNL2jePtw</strong></li>
+                            <li><strong class="text-danger">Profile URL ID has to be 24 character i.e UCRGl2gA9X6BXqOvNL2jePtw</strong></li>
+                        </ul> 
+                                              
+                      </div>
+                    </div>
+                  </div>
+                </form>
+            </div>
+          </div>
+          <!-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
+        </div>   
             
         <div class="card mb-3">
           <div class="card-header">
             <i class="fas fa-table"></i>
-            Insert Youtube Data <span style="float:right;"><strong>Fields mark with <span class="text-danger">**</span> are mandatory, fields mark with <span class="text-danger">##</span> has to be numeric</strong></span></div>
+            Insert Youtube Data </div>
           <div class="card-body">
             <div class="userform">
                 <form name="addyoutube" id="addyoutube" method="post" action="addyoutube.php">
@@ -46,8 +72,8 @@ if($_SESSION['admin_username'] == 'generaluser' && $_SESSION['admintype'] == '3'
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="title">Profile URL <strong class="text-danger">**</strong></label>
-                          <input type="text" id="profile_url" name="profile_url" class="form-control" placeholder="Enter Profile URL" required>
-                          <span class="urlerror" style="display:none"><strong class="text-danger">Please Enter Unique Profile URL</strong></span>    
+                          <input type="url" id="profile_url" name="profile_url" class="form-control" placeholder="https://www.youtube.com/channel/UCRGl2gA9X6BXqOvNL2jePtw" required>
+                          <span class="urlerror" style="display:none"><strong class="text-danger">Please Enter Unique Profile URL with proper format</strong></span>    
                         </div>
                       </div>
                       
@@ -925,9 +951,9 @@ if($_SESSION['admin_username'] == 'generaluser' && $_SESSION['admintype'] == '3'
                           <label for="title">Influencer Category <strong class="text-danger">**</strong></label>
                           <select name="influencer_category" id="influencer_category" class="form-control" required>
                               <option value="">Select Influencer Category</option>
-                              <option value="Category A">Category A</option>
-                              <option value="Category B">Category B</option>        
-                              <option value="Category C">Category C</option>        
+                              <option value="CAT - A">CAT - A</option>
+                              <option value="CAT - B">CAT - B</option>        
+                              <option value="CAT - C">CAT - C</option>        
                           </select>
                         </div>
                       </div>
@@ -970,6 +996,8 @@ $(document).ready(function() {
      function insert(){         
         var channel_name = $('#channel_name').val().trim();
         var profile_url = $('#profile_url').val().trim();
+        var extension1 = profile_url.split('/').pop();
+//        alert(extension1);
         var subscribers = $('#subscribers').val().trim();
         var genre = $('#genre').val().trim();
         var language = $('#language').val().trim();
@@ -1062,7 +1090,7 @@ $(document).ready(function() {
                                                                 url: 'addyoutube.php',
                                                                 type: 'POST',
                                                                 data:{channel_name:channel_name,
-                                                                profile_url:profile_url,subscribers:subscribers,
+                                                                profile_url:profile_url,extension1:extension1,subscribers:subscribers,
                                                                 genre:genre,language:language,gender:gender,
                                                                 enlyft_exclusive:enlyft_exclusive,
                                                                 integrated_video_cost:integrated_video_cost,
@@ -1095,8 +1123,26 @@ $(document).ready(function() {
                                                                         $("#profile_url").focus();
                                                                         $(".urlerror").css("display","inline");
                                                                     }
+                                                                    if(data == 'format'){
+                                                                        alert("Please Enter Valid Profile URL Format");
+                                                                        $("#profile_url").focus();
+                                                                        $(".urlerror").css("display","inline");
+                                                                        $(".urlerror").html("<strong class='text-danger'>Please Enter Valid Profile URL Format</strong>");
+                                                                    }
+                                                                    if(data == 'validurl'){
+                                                                        alert("Profile URL Should Not End with /");
+                                                                        $("#profile_url").focus();
+                                                                        $(".urlerror").css("display","inline");
+                                                                        $(".urlerror").html("<strong class='text-danger'>Profile URL Should Not End with /</strong>");
+                                                                    }
+                                                                    if(data == 'length'){
+                                                                        alert("Profile URL ID Character Length Cannot Be Greater Than 24");
+                                                                        $("#profile_url").focus();
+                                                                        $(".urlerror").css("display","inline");
+                                                                        $(".urlerror").html("<strong class='text-danger'>Profile URL ID Character Length Cannot Be Greater Than 24</strong>");
+                                                                    }
                                                                     if(data == 'invalid'){
-                                                                        alert("Please Fill All Numberic Fields Properly");
+                                                                        alert("Please Fill All Numeric Fields Properly");
                                                                     }
                                                                     if(data == 'mandatory'){
                                                                         alert("Please Fill All Fields Properly");

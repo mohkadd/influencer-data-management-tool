@@ -29,7 +29,7 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                           <div class='col-md-4'>
                             <div class='form-group'>
                               <label for='title'>Profile URL <strong class='text-danger'>**</strong></label>
-                              <input type='text' id='profile_url' name='profile_url' class='form-control' placeholder='Enter Profile URL' value='$row->profile_url' required>
+                              <input type='text' id='profile_url' name='profile_url' class='form-control' placeholder='Enter Profile URL' value='$row->profile_url' required readonly>
                             </div>
                           </div>
 
@@ -912,9 +912,9 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                           <select name='influencer_category' id='influencer_category' class='form-control' required>
                               <option value=''>Select Influencer Category</option>
                               <option value='$row->influencer_category' selected>$row->influencer_category</option>
-                              <option value='Category A'>Category A</option>
-                              <option value='Category B'>Category B</option>        
-                              <option value='Category C'>Category C</option>        
+                              <option value='CAT - A'>CAT - A</option>
+                              <option value='CAT - B'>CAT - B</option>        
+                              <option value='CAT - C'>CAT - C</option>        
                           </select>
                         </div>
                       </div>

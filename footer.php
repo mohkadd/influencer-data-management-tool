@@ -68,6 +68,9 @@
 
   <!-- Demo scripts for this page-->
   <script src="js/demo/datatables-demo.js"></script>
+  <script>
+document.body.style.zoom="90%";
+</script>
   <!-- <script src="js/demo/chart-area-demo.js"></script> -->
 
 </body>

@@ -70,7 +70,10 @@ $(document).ready(function(){
             method:"post",
             data:{genre:genre},
             success:function(response){
-                $(".responsetxt").html(response); 
+                $(".responsetxt").html(response);
+                $("html , body").animate({
+                        scrollTop: $(".responsetxt").offset().top},
+                    'slow');
             }
         });
     });

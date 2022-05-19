@@ -31,7 +31,7 @@ $(document).ready(function() {
         order: [[ 0, 'desc']],
         dom: 'Bfrtip',
       buttons: [
-            'pageLength','excel', 'pdf'
+            'pageLength','excel'
         ],
       "bLengthChange": true,
     });

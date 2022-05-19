@@ -7,6 +7,33 @@ $added_on = date('Y-m-d H:i:s');
 $added_by = $_SESSION['admin_username'];
 $updated_on = "0000-00-00 00:00:00";
 $updated_by = $_SESSION['admin_username'];
+define("encryption_method", "AES-128-CBC");
+define("key", "enlyft@2022#$%");
+define("iv", "dataencrypt@2022");
+function encrypt($data) {
+    $key = key;
+    $plaintext = $data;
+    $ivlen = openssl_cipher_iv_length($cipher = encryption_method);
+    $iv = iv;
+    $ciphertext_raw = openssl_encrypt($plaintext, $cipher, $key, $options = OPENSSL_RAW_DATA, $iv);
+    $hmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary = true);
+    $ciphertext = base64_encode($iv . $hmac . $ciphertext_raw);
+    return $ciphertext;
+}
+function decrypt($data) {
+    $key = key;
+    $c = base64_decode($data);
+    $ivlen = openssl_cipher_iv_length($cipher = encryption_method);
+    $iv = iv;
+    $hmac = substr($c, $ivlen, $sha2len = 32);
+    $ciphertext_raw = substr($c, $ivlen + $sha2len);
+    $original_plaintext = openssl_decrypt($ciphertext_raw, $cipher, $key, $options = OPENSSL_RAW_DATA, $iv);
+    $calcmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary = true);
+    if (hash_equals($hmac, $calcmac))
+    {
+        return $original_plaintext;
+    }
+}
 function cleanup( $data ) {
 //    global $con;
     $data = trim( $data );
@@ -88,16 +115,31 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['uploadfile'])){
                 $influencer_category = $worksheet->getCellByColumnAndRow(23,$row)->getValue();
                 $name_of_client_worked_before = $worksheet->getCellByColumnAndRow(24,$row)->getValue();
                 $name_of_client_worked_before = checkemptystring($name_of_client_worked_before);
-                
+                $encrypturl = encrypt($profile_url);
                 $checkurl1 = "SELECT `profile_url` from `youtube` WHERE `profile_url`=:profile_url";
                 $stmt3 = $con->prepare($checkurl1);
-                $stmt3->execute(["profile_url"=>$profile_url]);
+                $stmt3->execute(["profile_url"=>$encrypturl]);
                 $count1 = $stmt3->rowCount();
                 if((!preg_match("[https://www.youtube.com/channel/]", $profile_url)) || ($lastchar == '/') ||
                    ($extlen !== 24) || ($count1 > 0)){
                     $error = 1;
                 }
                 else{
+                    $channel_name = encrypt($channel_name);
+                    $profile_url = encrypt($profile_url);
+                    $enlyft_exclusive = encrypt($enlyft_exclusive);
+                    $integrated_video_cost = encrypt($integrated_video_cost);
+                    $dedicated_video_cost = encrypt($dedicated_video_cost);
+                    $youtube_story_cost = encrypt($youtube_story_cost);
+                    $youtube_shorts_cost = encrypt($youtube_shorts_cost);
+                    $contact_number = encrypt($contact_number);
+                    $contact_person_name = encrypt($contact_person_name);
+                    $email_id = encrypt($email_id);
+                    $address = encrypt($address);
+                    $influencer_name = encrypt($influencer_name);
+                    $campaign_done_earlier = encrypt($campaign_done_earlier);
+                    $no_of_campaign = encrypt($no_of_campaign);
+                    $name_of_client_worked_before = encrypt($name_of_client_worked_before);
                     $insertqry="INSERT INTO `youtube`(`channel_name`, `profile_url`, `subscribers`,`genre`,`language`,`gender`,`enlyft_exclusive`,`integrated_video_cost`,
                     `dedicated_video_cost`,`youtube_story_cost`,`youtube_shorts_cost`,`contact_number`,`contact_person_name`,
                     `email_id`,`comment`,`address`,`city`,`state`,`avg_views`,`avg_likes`,
@@ -191,6 +233,7 @@ if(isset($_POST['insertyoutube']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
         echo "length";
         die();
     }
+    $profile_url = encrypt($profile_url);
     $checkurl = "SELECT `profile_url` from `youtube` WHERE `profile_url`=:profile_url";
     $stmt2 = $con->prepare($checkurl);
     $stmt2->execute(["profile_url"=>$profile_url]);
@@ -243,6 +286,21 @@ if(isset($_POST['insertyoutube']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
         echo "mandatory";
     }
     else{
+        $channel_name = encrypt($channel_name);
+//        $profile_url = encrypt($profile_url);
+        $enlyft_exclusive = encrypt($enlyft_exclusive);
+        $integrated_video_cost = encrypt($integrated_video_cost);
+        $dedicated_video_cost = encrypt($dedicated_video_cost);
+        $youtube_story_cost = encrypt($youtube_story_cost);
+        $youtube_shorts_cost = encrypt($youtube_shorts_cost);
+        $contact_number = encrypt($contact_number);
+        $contact_person_name = encrypt($contact_person_name);
+        $email_id = encrypt($email_id);
+        $address = encrypt($address);
+        $influencer_name = encrypt($influencer_name);
+        $campaign_done_earlier = encrypt($campaign_done_earlier);
+        $no_of_campaign = encrypt($no_of_campaign);
+        $name_of_client_worked_before = encrypt($name_of_client_worked_before);
         $insertqry="INSERT INTO `youtube`(`channel_name`, `profile_url`, `subscribers`,`genre`,`language`,`gender`,`enlyft_exclusive`,`integrated_video_cost`,
             `dedicated_video_cost`,`youtube_story_cost`,`youtube_shorts_cost`,`contact_number`,`contact_person_name`,
             `email_id`,`comment`,`address`,`city`,`state`,`avg_views`,`avg_likes`,

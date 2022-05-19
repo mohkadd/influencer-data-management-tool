@@ -39,8 +39,8 @@ if (!isset($_SESSION['adminid']) && !isset($_SESSION['admin_username']) && !isse
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="dashboard.php">IDMT
-<!--    <img class="img-responsive" width="90px" src="enable-logo.jpeg">-->
+    <a class="navbar-brand mr-1" href="dashboard.php">
+    <img class="img-responsive" width="150px" src="enlyftpng.png">
     </a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">

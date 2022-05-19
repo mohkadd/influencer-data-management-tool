@@ -1,6 +1,7 @@
 <?php include "header.php"; ?>
 <?php include "functions/functions.php";?>
 <?php
+
 $minmax = "SELECT MIN(subscribers) AS minsub,MAX(subscribers) AS maxsub, MIN(avg_views) AS minviews,MAX(avg_views) AS maxviews,MIN(avg_likes) AS minlikes,MAX(avg_likes) AS maxlikes FROM `youtube`;";
 $stmt5 = $con->prepare($minmax);
 $stmt5->execute();
@@ -101,8 +102,7 @@ $maxlikes = $row->maxlikes;
                         <div id="slider-range1"></div>
                         <input type="" id="maxsub" placeholder="Maximum Subscribers" name="maxsub"
                             value="<?php echo $maxsub ?>">
-                    </div>
-                
+                    </div>                
                     </center>
               </div>
               <div class="clearfix"></div>
@@ -116,8 +116,7 @@ $maxlikes = $row->maxlikes;
                         <div id="slider-range2"></div>
                         <input type="" id="maxviews" placeholder="Maximum Views" name="maxviews"
                             value="<?php echo $maxviews ?>">
-                    </div>
-                
+                    </div>                
                     </center>
               </div>
                <div class="clearfix"></div>
@@ -131,8 +130,7 @@ $maxlikes = $row->maxlikes;
                         <div id="slider-range3"></div>
                         <input type="" id="maxlikes" placeholder="Maximum Likes" name="maxlikes"
                             value="<?php echo $maxlikes ?>">
-                    </div>
-                
+                    </div>                
                     </center>
               </div>
                 
@@ -247,31 +245,31 @@ $i = 1;
                 ?>
                   <tr onmousedown = 'return false' onselectstart = 'return false'>
 <!--                      <td><?php //echo $i; ?></td>-->
-                      <td><?php echo $row->channel_name; ?></td>
-                      <td><?php echo $row->profile_url; ?></td>
+                      <td><?php echo decrypt($row->channel_name); ?></td>
+                      <td><?php echo decrypt($row->profile_url); ?></td>
                       <td><?php echo number_format($row->subscribers); ?></td>
                       <td><?php echo $row->genre; ?></td>
                       <td><?php echo $row->language; ?></td>
                       <td><?php echo $row->gender; ?></td>
-                      <td><?php echo $row->enlyft_exclusive; ?></td>
-                      <td><?php echo number_format($row->integrated_video_cost); ?></td>
-                      <td><?php echo number_format($row->dedicated_video_cost); ?></td>
-                      <td><?php echo number_format($row->youtube_story_cost); ?></td>
-                      <td><?php echo number_format($row->youtube_shorts_cost); ?></td>
-                      <td><?php echo $row->contact_number; ?></td>
-                      <td><?php echo $row->contact_person_name; ?></td>
-                      <td><?php echo $row->email_id ?></td>
+                      <td><?php echo decrypt($row->enlyft_exclusive); ?></td>
+                      <td><?php echo number_format(decrypt($row->integrated_video_cost)); ?></td>
+                      <td><?php echo number_format(decrypt($row->dedicated_video_cost)); ?></td>
+                      <td><?php echo number_format(decrypt($row->youtube_story_cost)); ?></td>
+                      <td><?php echo number_format(decrypt($row->youtube_shorts_cost)); ?></td>
+                      <td><?php echo decrypt($row->contact_number); ?></td>
+                      <td><?php echo decrypt($row->contact_person_name); ?></td>
+                      <td><?php echo decrypt($row->email_id); ?></td>
                       <td><?php echo $row->comment; ?></td>
-                      <td><?php echo $row->address; ?></td>
+                      <td><?php echo decrypt($row->address); ?></td>
                       <td><?php echo $row->city; ?></td>
                       <td><?php echo $row->state; ?></td>
                       <td><?php echo number_format($row->avg_views); ?></td>
                       <td><?php echo number_format($row->avg_likes); ?></td> 
-                      <td><?php echo $row->influencer_name; ?></td>
-                      <td><?php echo $row->campaign_done_earlier ?></td>
-                      <td><?php echo $row->no_of_campaign ?></td>
+                      <td><?php echo decrypt($row->influencer_name); ?></td>
+                      <td><?php echo decrypt($row->campaign_done_earlier); ?></td>
+                      <td><?php echo decrypt($row->no_of_campaign); ?></td>
                       <td><?php echo $row->influencer_category ?></td>
-                      <td><?php echo $row->name_of_client_worked_before ?></td>
+                      <td><?php echo decrypt($row->name_of_client_worked_before); ?></td>
                       <td><?php echo $row->added_on; ?></td>
                       <td><?php echo $row->added_by; ?></td>
                       <td><?php echo $row->updated_on; ?></td>
@@ -379,31 +377,31 @@ $i = 1;
                 ?>
                   <tr onmousedown = 'return false' onselectstart = 'return false'>
 <!--                      <td><?php //echo $i; ?></td>-->
-                      <td><?php echo $row->channel_name; ?></td>
-                      <td><?php echo $row->profile_url; ?></td>
+                      <td><?php echo decrypt($row->channel_name); ?></td>
+                      <td><?php echo decrypt($row->profile_url); ?></td>
                       <td><?php echo number_format($row->subscribers); ?></td>
                       <td><?php echo $row->genre; ?></td>
                       <td><?php echo $row->language; ?></td>
                       <td><?php echo $row->gender; ?></td>
-                      <td><?php echo $row->enlyft_exclusive; ?></td>
-                      <td><?php echo number_format($row->integrated_video_cost); ?></td>
-                      <td><?php echo number_format($row->dedicated_video_cost); ?></td>
-                      <td><?php echo number_format($row->youtube_story_cost); ?></td>
-                      <td><?php echo number_format($row->youtube_shorts_cost); ?></td>
-                      <td><?php echo $row->contact_number; ?></td>
-                      <td><?php echo $row->contact_person_name; ?></td>
-                      <td><?php echo $row->email_id ?></td>
+                      <td><?php echo decrypt($row->enlyft_exclusive); ?></td>
+                      <td><?php echo number_format(decrypt($row->integrated_video_cost)); ?></td>
+                      <td><?php echo number_format(decrypt($row->dedicated_video_cost)); ?></td>
+                      <td><?php echo number_format(decrypt($row->youtube_story_cost)); ?></td>
+                      <td><?php echo number_format(decrypt($row->youtube_shorts_cost)); ?></td>
+                      <td><?php echo decrypt($row->contact_number); ?></td>
+                      <td><?php echo decrypt($row->contact_person_name); ?></td>
+                      <td><?php echo decrypt($row->email_id); ?></td>
                       <td><?php echo $row->comment; ?></td>
-                      <td><?php echo $row->address; ?></td>
+                      <td><?php echo decrypt($row->address); ?></td>
                       <td><?php echo $row->city; ?></td>
                       <td><?php echo $row->state; ?></td>
                       <td><?php echo number_format($row->avg_views); ?></td>
                       <td><?php echo number_format($row->avg_likes); ?></td> 
-                      <td><?php echo $row->influencer_name; ?></td>
-                      <td><?php echo $row->campaign_done_earlier ?></td>
-                      <td><?php echo $row->no_of_campaign ?></td>
+                      <td><?php echo decrypt($row->influencer_name); ?></td>
+                      <td><?php echo decrypt($row->campaign_done_earlier); ?></td>
+                      <td><?php echo decrypt($row->no_of_campaign); ?></td>
                       <td><?php echo $row->influencer_category ?></td>
-                      <td><?php echo $row->name_of_client_worked_before ?></td>
+                      <td><?php echo decrypt($row->name_of_client_worked_before); ?></td>
                       <td><?php echo $row->added_on; ?></td>
                       <td><?php echo $row->added_by; ?></td>
                       <td><?php echo $row->updated_on; ?></td>
@@ -486,24 +484,24 @@ $i = 1;
                 ?>
                   <tr onmousedown = 'return false' onselectstart = 'return false'>
 <!--                      <td><?php //echo $i; ?></td>-->
-                      <td><?php echo $row->channel_name; ?></td>
-                      <td><?php echo $row->profile_url; ?></td>
+                      <td><?php echo decrypt($row->channel_name); ?></td>
+                      <td><?php echo decrypt($row->profile_url); ?></td>
                       <td><?php echo number_format($row->subscribers); ?></td>
                       <td><?php echo $row->genre; ?></td>
                       <td><?php echo $row->language; ?></td>
                       <td><?php echo $row->gender; ?></td>
-                      <td><?php echo $row->enlyft_exclusive; ?></td>
-                      <td><?php echo number_format($row->integrated_video_cost); ?></td>
-                      <td><?php echo number_format($row->dedicated_video_cost); ?></td>
-                      <td><?php echo number_format($row->youtube_story_cost); ?></td>
-                      <td><?php echo number_format($row->youtube_shorts_cost); ?></td>                      
+                      <td><?php echo decrypt($row->enlyft_exclusive); ?></td>
+                      <td><?php echo number_format(decrypt($row->integrated_video_cost)); ?></td>
+                      <td><?php echo number_format(decrypt($row->dedicated_video_cost)); ?></td>
+                      <td><?php echo number_format(decrypt($row->youtube_story_cost)); ?></td>
+                      <td><?php echo number_format(decrypt($row->youtube_shorts_cost)); ?></td>                      
                       <td><?php echo $row->city; ?></td>
                       <td><?php echo $row->state; ?></td>
                       <td><?php echo number_format($row->avg_views); ?></td>
                       <td><?php echo number_format($row->avg_likes); ?></td> 
-                      <td><?php echo $row->influencer_name; ?></td>
-                      <td><?php echo $row->campaign_done_earlier ?></td>
-                      <td><?php echo $row->no_of_campaign ?></td>
+                      <td><?php echo decrypt($row->influencer_name); ?></td>
+                      <td><?php echo decrypt($row->campaign_done_earlier); ?></td>
+                      <td><?php echo decrypt($row->no_of_campaign); ?></td>
                       <td><?php echo $row->influencer_category ?></td>
                   </tr>
 

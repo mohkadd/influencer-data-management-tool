@@ -5,6 +5,33 @@
 -->
 <?php 
 include 'config-pdo.php';
+define("encryption_method", "AES-128-CBC");
+define("key", "enlyft@2022#$%");
+define("iv", "dataencrypt@2022");
+function encrypt($data) {
+    $key = key;
+    $plaintext = $data;
+    $ivlen = openssl_cipher_iv_length($cipher = encryption_method);
+    $iv = iv;
+    $ciphertext_raw = openssl_encrypt($plaintext, $cipher, $key, $options = OPENSSL_RAW_DATA, $iv);
+    $hmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary = true);
+    $ciphertext = base64_encode($iv . $hmac . $ciphertext_raw);
+    return $ciphertext;
+}
+function decrypt($data) {
+    $key = key;
+    $c = base64_decode($data);
+    $ivlen = openssl_cipher_iv_length($cipher = encryption_method);
+    $iv = iv;
+    $hmac = substr($c, $ivlen, $sha2len = 32);
+    $ciphertext_raw = substr($c, $ivlen + $sha2len);
+    $original_plaintext = openssl_decrypt($ciphertext_raw, $cipher, $key, $options = OPENSSL_RAW_DATA, $iv);
+    $calcmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary = true);
+    if (hash_equals($hmac, $calcmac))
+    {
+        return $original_plaintext;
+    }
+}
 if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 	$id = htmlspecialchars($_REQUEST['id']);
     $query = "SELECT * FROM youtube WHERE id = '$id'";
@@ -22,14 +49,14 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class='form-group'>
                               <label for='title'>Channel Name <strong class='text-danger'>**</strong></label>
                               <input type='hidden' id='id' name='id' value='$row->id'>
-                              <input type='text' id='channel_name' name='channel_name' class='form-control' placeholder='Enter Channel Name' value='$row->channel_name' required>
+                              <input type='text' id='channel_name' name='channel_name' class='form-control' placeholder='Enter Channel Name' value='".decrypt($row->channel_name)."' required>
                             </div>
                           </div>
 
                           <div class='col-md-4'>
                             <div class='form-group'>
                               <label for='title'>Profile URL <strong class='text-danger'>**</strong></label>
-                              <input type='text' id='profile_url' name='profile_url' class='form-control' placeholder='Enter Profile URL' value='$row->profile_url' required readonly>
+                              <input type='text' id='profile_url' name='profile_url' class='form-control' placeholder='Enter Profile URL' value='".decrypt($row->profile_url)."' required readonly>
                             </div>
                           </div>
 
@@ -98,7 +125,7 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                               <label for='title'>ENLYFT Exclusive <strong class='text-danger'>**</strong></label>
                               <select name='enlyft_exclusive' id='enlyft_exclusive' class='form-control' required>
                                   <option value=''>Select ENLYFT Exclusive</option>
-                                  <option value='$row->enlyft_exclusive' selected>$row->enlyft_exclusive</option>
+                                  <option value='".decrypt($row->enlyft_exclusive)."' selected>".decrypt($row->enlyft_exclusive)."</option>
                                   <option value='Yes'>Yes</option>
                                   <option value='No'>No</option>        
                               </select>
@@ -108,21 +135,21 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                           <div class='col-md-4'>
                             <div class='form-group'>
                               <label for='title'>Integrated Video Cost</label>
-                              <input type='text' id='integrated_video_cost' onkeypress='return numericheck(event)' name='integrated_video_cost' class='form-control' placeholder='Enter Integrated Video Cost' value='$row->integrated_video_cost'>
+                              <input type='text' id='integrated_video_cost' onkeypress='return numericheck(event)' name='integrated_video_cost' class='form-control' placeholder='Enter Integrated Video Cost' value='".decrypt($row->integrated_video_cost)."'>
                             </div>
                           </div>
 
                           <div class='col-md-4'>
                             <div class='form-group'>
                               <label for='title'>Dedicated Video Cost</label>
-                              <input type='text' id='dedicated_video_cost' name='dedicated_video_cost' class='form-control' placeholder='Enter Dedicated Video Cost' value='$row->dedicated_video_cost'>
+                              <input type='text' id='dedicated_video_cost' name='dedicated_video_cost' class='form-control' placeholder='Enter Dedicated Video Cost' value='".decrypt($row->dedicated_video_cost)."'>
                             </div>
                           </div>
 
                           <div class='col-md-4'>
                             <div class='form-group'>
                               <label for='title'>Youtube Story Cost</label>
-                              <input type='text' id='youtube_story_cost' name='youtube_story_cost' class='form-control' placeholder='Enter Youtube Story Cost' value='$row->youtube_story_cost'>
+                              <input type='text' id='youtube_story_cost' name='youtube_story_cost' class='form-control' placeholder='Enter Youtube Story Cost' value='".decrypt($row->youtube_story_cost)."'>
                             </div>
                           </div>
 
@@ -130,7 +157,7 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                            <div class='col-md-4'>
                             <div class='form-group'>
                               <label for='title'>Youtube Shorts Cost</label>
-                              <input type='text' id='youtube_shorts_cost' name='youtube_shorts_cost' class='form-control' placeholder='Enter Youtube Shorts Cost' value='$row->youtube_shorts_cost'>
+                              <input type='text' id='youtube_shorts_cost' name='youtube_shorts_cost' class='form-control' placeholder='Enter Youtube Shorts Cost' value='".decrypt($row->youtube_shorts_cost)."'>
                             </div>
                           </div>                   
 
@@ -138,21 +165,21 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                           <div class='col-md-4'>
                             <div class='form-group'>
                               <label for='title'>Contact Number <strong class='text-danger'>**</strong></label>
-                              <input type='text' id='contact_number' name='contact_number' onkeypress='return isNumberKey(event)' class='form-control' placeholder='Enter Valid 10 Digit Contact Number' value='$row->contact_number' required>
+                              <input type='text' id='contact_number' name='contact_number' onkeypress='return isNumberKey(event)' class='form-control' placeholder='Enter Valid 10 Digit Contact Number' value='".decrypt($row->contact_number)."' required>
                             </div>
                           </div>
 
                           <div class='col-md-4'>
                             <div class='form-group'>
                               <label for='title'>Contact Person Name <strong class='text-danger'>**</strong></label>
-                              <input type='text' id='contact_person_name' name='contact_person_name' class='form-control' placeholder='Enter Contact Person Name' value='$row->contact_person_name' required>
+                              <input type='text' id='contact_person_name' name='contact_person_name' class='form-control' placeholder='Enter Contact Person Name' value='".decrypt($row->contact_person_name)."' required>
                             </div>
                           </div>
 
                           <div class='col-md-4'>
                             <div class='form-group'>
                               <label for='title'>Email ID <strong class='text-danger'>**</strong></label>
-                              <input type='text' id='email_id' name='email_id' class='form-control' placeholder='Enter Email ID' value='$row->email_id' required>
+                              <input type='text' id='email_id' name='email_id' class='form-control' placeholder='Enter Email ID' value='".decrypt($row->email_id)."' required>
                             </div>
                           </div>
 
@@ -166,7 +193,7 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                           <div class='col-md-12'>
                             <div class='form-group'>
                               <label for='title'>Address</label>
-                              <textarea name='address' class='form-control' id='address' placeholder='Enter Address' cols='30' rows='2'>$row->address</textarea>
+                              <textarea name='address' class='form-control' id='address' placeholder='Enter Address' cols='30' rows='2'>".decrypt($row->address)."</textarea>
                             </div>
                           </div>
 
@@ -195,7 +222,7 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                   <option value='Ambala'>Ambala</option> 
                                   <option value='AmbedkarNagar'>Ambedkar Nagar</option> 
                                   <option value='Amravati'>Amravati</option> 
-                                  <option value='Amrelidistrict'>Amreli district</option> 
+                                  <option value='Amreli district'>Amreli district</option> 
                                   <option value='Amritsar'>Amritsar</option> 
                                   <option value='Anand'>Anand</option> 
                                   <option value='Anantapur'>Anantapur</option> 
@@ -225,8 +252,7 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                   <option value='Banaskantha'>Banaskantha</option> 
                                   <option value='Banda'>Banda</option> 
                                   <option value='Bandipora'>Bandipora</option> 
-                                  <option value='Bangalore Rural'>Bangalore Rural</option> 
-                                  <option value='Bangalore Urban'>Bangalore Urban</option> 
+                                  <option value='Bangalore'>Bangalore</option>
                                   <option value='Banka'>Banka</option> 
                                   <option value='Bankura'>Bankura</option>                               
                                   <option value='Banswara'>Banswara</option> 
@@ -336,9 +362,9 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                    <option value='Dholpur'>Dholpur</option> 
                                    <option value='Dhubri'>Dhubri</option> 
                                    <option value='Dhule'>Dhule</option> 
-                                   <option value='DibangValley'>Dibang Valley</option> 
+                                   <option value='Dibang Valley'>Dibang Valley</option> 
                                    <option value='Dibrugarh'>Dibrugarh</option> 
-                                   <option value='DimaHasao'>Dima Hasao</option> 
+                                   <option value='Dima Hasao'>Dima Hasao</option> 
                                    <option value='Dimapur'>Dimapur</option> 
                                    <option value='Dindigul'>Dindigul</option> 
                                    <option value='Dindori'>Dindori</option> 
@@ -404,7 +430,7 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                    <option value='Hardoi'>Hardoi</option> 
                                    <option value='Haridwar'>Haridwar</option> 
                                    <option value='Hassan'>Hassan</option> 
-                                   <option value='Haveridistrict'>Haveri district</option> 
+                                   <option value='Haveri district'>Haveri district</option> 
                                    <option value='Hazaribag'>Hazaribag</option> 
                                    <option value='Hingoli'>Hingoli</option> 
                                    <option value='Hissar'>Hissar</option> 
@@ -412,8 +438,7 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                    <option value='Hoshangabad'>Hoshangabad</option> 
                                    <option value='Hoshiarpur'>Hoshiarpur</option> 
                                    <option value='Howrah'>Howrah</option> 
-                                   <option value='Hyderabad'>Hyderabad</option> 
-                                   <option value='Hyderabad'>Hyderabad</option> 
+                                   <option value='Hyderabad'>Hyderabad</option>  
                                    <option value='Idukki'>Idukki</option> 
                                    <option value='Imphal East'>Imphal East</option> 
                                    <option value='Imphal West'>Imphal West</option> 
@@ -449,7 +474,7 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                    <option value='Jorhat'>Jorhat</option> 
                                    <option value='Junagadh'>Junagadh</option> 
                                    <option value='Jyotiba Phule Nagar'>Jyotiba Phule Nagar</option> 
-                                   <option value='Kabirdham (formerlyKawardha)'> Kabirdham (formerly Kawardha) </option> 
+                                   <option value='Kabirdham (formerly Kawardha)'> Kabirdham (formerly Kawardha) </option> 
                                    <option value='Kadapa'>Kadapa</option> 
                                    <option value='Kaimur'>Kaimur</option> 
                                    <option value='Kaithal'>Kaithal</option> 
@@ -484,8 +509,8 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                    <option value='Kendujhar (Keonjhar)'> Kendujhar (Keonjhar) </option> 
                                    <option value='Khagaria'>Khagaria</option> 
                                    <option value='Khammam'>Khammam</option> 
-                                   <option value='Khandwa (EastNimar)'>Khandwa (East Nimar)</option> 
-                                   <option value='Khargone(WestNimar)'> Khargone (West Nimar) </option> 
+                                   <option value='Khandwa (East Nimar)'>Khandwa (East Nimar)</option> 
+                                   <option value='Khargone(West Nimar)'> Khargone (West Nimar) </option> 
                                    <option value='Kheda'>Kheda</option> 
                                    <option value='Khordha'>Khordha</option> 
                                    <option value='Khowai'>Khowai</option> 
@@ -515,12 +540,12 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                    <option value='Kupwara'>Kupwara</option> 
                                    <option value='Kurnool'>Kurnool</option> 
                                    <option value='Kurukshetra'>Kurukshetra</option> 
-                                   <option value='KurungKumey'>Kurung Kumey</option> 
+                                   <option value='Kurung Kumey'>Kurung Kumey</option> 
                                    <option value='Kushinagar'>Kushinagar</option> 
                                    <option value='Kutch'>Kutch</option> 
-                                   <option value='LahaulandSpiti'>Lahaul and Spiti</option> 
+                                   <option value='Lahaul and Spiti'>Lahaul and Spiti</option> 
                                    <option value='Lakhimpur'>Lakhimpur</option> 
-                                   <option value='LakhimpurKheri'>Lakhimpur Kheri</option> 
+                                   <option value='Lakhimpur Kheri'>Lakhimpur Kheri</option> 
                                    <option value='Lakhisarai'>Lakhisarai</option> 
                                    <option value='Lalitpur'>Lalitpur</option> 
                                    <option value='Latehar'>Latehar</option> 
@@ -529,15 +554,15 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                    <option value='Leh'>Leh</option> 
                                    <option value='Lohardaga'>Lohardaga</option> 
                                    <option value='Lohit'>Lohit</option> 
-                                   <option value='LowerDibangValley'>Lower Dibang Valley</option> 
-                                   <option value='LowerSubansiri'>Lower Subansiri</option> 
+                                   <option value='Lower Dibang Valley'>Lower Dibang Valley</option> 
+                                   <option value='Lower Subansiri'>Lower Subansiri</option> 
                                    <option value='Lucknow'>Lucknow</option> 
                                    <option value='Ludhiana'>Ludhiana</option> 
                                    <option value='Lunglei'>Lunglei</option> 
                                    <option value='Madhepura'>Madhepura</option> 
                                    <option value='Madhubani'>Madhubani</option> 
                                    <option value='Madurai'>Madurai</option> 
-                                   <option value='MahamayaNagar'>Mahamaya Nagar</option> 
+                                   <option value='Mahamaya Nagar'>Mahamaya Nagar</option> 
                                    <option value='Maharajganj'>Maharajganj</option> 
                                    <option value='Mahasamund'>Mahasamund</option> 
                                    <option value='Mahbubnagar'>Mahbubnagar</option>                                
@@ -621,9 +646,9 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                    <option value='Panchsheel Nagar district (Hapur)'> Panchsheel Nagar district (Hapur) </option> 
                                    <option value='Panipat'>Panipat</option> 
                                    <option value='Panna'>Panna</option> 
-                                   <option value='PapumPare'>Papum Pare</option> 
+                                   <option value='Papum Pare'>Papum Pare</option> 
                                    <option value='Parbhani'>Parbhani</option> 
-                                   <option value='PaschimMedinipur'>Paschim Medinipur</option> 
+                                   <option value='Paschim Medinipur'>Paschim Medinipur</option> 
                                    <option value='Patan'>Patan</option> 
                                    <option value='Pathanamthitta'>Pathanamthitta</option> 
                                    <option value='Pathankot'>Pathankot</option> 
@@ -670,7 +695,7 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                    <option value='Reasi'>Reasi</option> 
                                    <option value='Rewa'>Rewa</option> 
                                    <option value='Rewari'>Rewari</option> 
-                                   <option value='RiBhoi'>Ri Bhoi</option> 
+                                   <option value='Ri Bhoi'>Ri Bhoi</option> 
                                    <option value='Rohtak'>Rohtak</option> 
                                    <option value='Rohtas'>Rohtas</option> 
                                    <option value='Rudraprayag'>Rudraprayag</option> 
@@ -883,7 +908,7 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                           <div class='col-md-4'>
                             <div class='form-group'>
                               <label for='title'>Influencer Name <strong class='text-danger'>**</strong></label>
-                              <input type='text' id='influencer_name' name='influencer_name' class='form-control' placeholder='Enter Influencer Name' value='$row->influencer_name' required>
+                              <input type='text' id='influencer_name' name='influencer_name' class='form-control' placeholder='Enter Influencer Name' value='".decrypt($row->influencer_name)."' required>
                             </div>
                           </div>
                           
@@ -892,7 +917,7 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                           <label for='title'>Campaign Done Earlier? <strong class='text-danger'>**</strong></label>
                           <select name='campaign_done_earlier' id='campaign_done_earlier' class='form-control' required>
                               <option value=''>Campaign Done Earlier?</option>
-                              <option value='$row->campaign_done_earlier' selected>$row->campaign_done_earlier</option>
+                              <option value='".decrypt($row->campaign_done_earlier)."' selected>".decrypt($row->campaign_done_earlier)."</option>
                               <option value='Yes'>Yes</option>
                               <option value='No'>No</option>        
                           </select>
@@ -902,7 +927,7 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                       <div class='col-md-4'>
                         <div class='form-group'>
                           <label for='title'>No. of Campaign done <strong class='text-danger'>** ##</strong></label>
-                          <input type='number' id='no_of_campaign' name='no_of_campaign' class='form-control' placeholder='Enter No. of Campaign' value='$row->no_of_campaign' required>
+                          <input type='number' id='no_of_campaign' name='no_of_campaign' class='form-control' placeholder='Enter No. of Campaign' value='".decrypt($row->no_of_campaign)."' required>
                         </div>
                       </div>
                       
@@ -922,7 +947,7 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                       <div class='col-md-4'>
                         <div class='form-group'>
                           <label for='title'>Name of Client Worked Before</label>
-                          <input type='text' id='name_of_client_worked_before' name='name_of_client_worked_before' class='form-control' placeholder='Enter Name of Client Worked Before' value='$row->name_of_client_worked_before'>
+                          <input type='text' id='name_of_client_worked_before' name='name_of_client_worked_before' class='form-control' placeholder='Enter Name of Client Worked Before' value='".decrypt($row->name_of_client_worked_before)."'>
                         </div>
                       </div>
                           

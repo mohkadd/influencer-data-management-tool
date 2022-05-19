@@ -37,7 +37,7 @@ if($_SESSION['admintype'] == '3'){
              <table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-dark text-white">
                   <tr>
-<!--                    <th>Sr. No.</th>-->
+                    <th>Sr. No.</th>
                     <th>Username</th>
                     <th>Activity</th>
                     <th>Message</th>
@@ -48,7 +48,7 @@ if($_SESSION['admintype'] == '3'){
                 </thead>
                 <tfoot>
                   <tr>
-<!--                    <th>Sr. No.</th>-->
+                    <th>Sr. No.</th>
                     <th>Username</th>
                     <th>Activity</th>
                     <th>Message</th>
@@ -72,7 +72,7 @@ $i = 1;
                 {
                 ?>
                   <tr onmousedown = 'return false' onselectstart = 'return false'>
-<!--                      <td><?php //echo $i; ?></td>-->
+                      <td><?php echo $i; ?></td>
                       <td><?php echo $row->username; ?></td>
                       <td><?php echo $row->operation; ?></td>
                       <td><?php echo $row->comment; ?></td>

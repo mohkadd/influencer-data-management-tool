@@ -36,6 +36,12 @@
         <!-- DataTables Example -->
         <div class="row">
             <div class="col-xl-4 col-md-4">
+              <?php 
+//                $localIP = getHostByName(getHostName());
+  
+// Displaying the address 
+//echo $localIP;
+                ?>
                <div class="card mb-3" style="border:1px solid black;">
                   <div class="card-header bg-dark text-white">
                     <i class="fas fa-table"></i>

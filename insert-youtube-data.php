@@ -453,6 +453,7 @@ if($_SESSION['admintype'] == '3'){
                                <option value="Hoshangabad">Hoshangabad</option> 
                                <option value="Hoshiarpur">Hoshiarpur</option> 
                                <option value="Howrah">Howrah</option> 
+                               <option value="Habra">Habra</option> 
                                <option value="Hyderabad">Hyderabad</option> 
                                <option value="Hyderabad">Hyderabad</option> 
                                <option value="Idukki">Idukki</option> 
@@ -929,8 +930,8 @@ if($_SESSION['admintype'] == '3'){
                       
                       <div class="col-md-4">
                         <div class="form-group">
-                          <label for="title">Campaign Done Earlier? <strong class="text-danger">**</strong></label>
-                          <select name="campaign_done_earlier" id="campaign_done_earlier" class="form-control" required>
+                          <label for="title">Campaign Done Earlier? <strong class="text-danger"></strong></label>
+                          <select name="campaign_done_earlier" id="campaign_done_earlier" class="form-control">
                               <option value="">Campaign Done Earlier?</option>
                               <option value="Yes">Yes</option>
                               <option value="No">No</option>        
@@ -940,8 +941,8 @@ if($_SESSION['admintype'] == '3'){
                       
                       <div class="col-md-4">
                         <div class="form-group">
-                          <label for="title">No. of Campaign done <strong class="text-danger">** ##</strong></label>
-                          <input type="number" id="no_of_campaign" name="no_of_campaign" class="form-control" placeholder="Enter No. of Campaign" required>
+                          <label for="title">No. of Campaign done <strong class="text-danger">##</strong></label>
+                          <input type="number" id="no_of_campaign" name="no_of_campaign" class="form-control" placeholder="Enter No. of Campaign">
                         </div>
                       </div>
                       
@@ -1081,8 +1082,6 @@ $(document).ready(function() {
                                                 }
                                             }
                                             if(influencer_name !== ""){
-                                                if(campaign_done_earlier !== ""){
-                                                    if(no_of_campaign !== ""){
                                                         if(influencer_category !== ""){
                                                             $.ajax({
 
@@ -1156,16 +1155,6 @@ $(document).ready(function() {
                                                             alert("Please Select Influencer Category");
                                                             $("#influencer_category").focus();
                                                         }
-                                                    }
-                                                    else{
-                                                        alert("Please Enter No. of Campaign");
-                                                        $("#no_of_campaign").focus();
-                                                    }
-                                                }
-                                                else{
-                                                    alert("Please Select Campaign Done Earlier");
-                                                    $("#campaign_done_earlier").focus();
-                                                }
                                             }
                                             else{
                                                 alert("Please Enter Influencer Name");

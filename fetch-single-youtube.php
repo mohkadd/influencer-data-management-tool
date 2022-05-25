@@ -437,7 +437,8 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                    <option value='Hooghly'>Hooghly</option> 
                                    <option value='Hoshangabad'>Hoshangabad</option> 
                                    <option value='Hoshiarpur'>Hoshiarpur</option> 
-                                   <option value='Howrah'>Howrah</option> 
+                                   <option value='Howrah'>Howrah</option>
+                                   <option value='Habra'>Habra</option>
                                    <option value='Hyderabad'>Hyderabad</option>  
                                    <option value='Idukki'>Idukki</option> 
                                    <option value='Imphal East'>Imphal East</option> 
@@ -914,8 +915,8 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                           
                           <div class='col-md-4'>
                         <div class='form-group'>
-                          <label for='title'>Campaign Done Earlier? <strong class='text-danger'>**</strong></label>
-                          <select name='campaign_done_earlier' id='campaign_done_earlier' class='form-control' required>
+                          <label for='title'>Campaign Done Earlier? <strong class='text-danger'></strong></label>
+                          <select name='campaign_done_earlier' id='campaign_done_earlier' class='form-control'>
                               <option value=''>Campaign Done Earlier?</option>
                               <option value='".decrypt($row->campaign_done_earlier)."' selected>".decrypt($row->campaign_done_earlier)."</option>
                               <option value='Yes'>Yes</option>
@@ -926,8 +927,8 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                       
                       <div class='col-md-4'>
                         <div class='form-group'>
-                          <label for='title'>No. of Campaign done <strong class='text-danger'>** ##</strong></label>
-                          <input type='number' id='no_of_campaign' name='no_of_campaign' class='form-control' placeholder='Enter No. of Campaign' value='".decrypt($row->no_of_campaign)."' required>
+                          <label for='title'>No. of Campaign done <strong class='text-danger'>##</strong></label>
+                          <input type='number' id='no_of_campaign' name='no_of_campaign' class='form-control' placeholder='Enter No. of Campaign' value='".decrypt($row->no_of_campaign)."'>
                         </div>
                       </div>
                       

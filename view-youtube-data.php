@@ -276,7 +276,7 @@ $i = 1;
                       <td><?php echo $row->updated_by; ?></td>
                       <td>
                       <a href="javascript:void(0);" class="btn btn-sm btn-info edit modalButton" data-toggle="modal" data-id="<?php echo $row->id;?>"><i class="fas fa-fw fa-edit" title="EDIT/UPDATE"></i></a>
-                      <a href="javascript:void(0);" class="btn btn-sm btn-danger delete" id="<?php echo $row->id; ?>"><i class="fas fa-fw fa-trash" title="DELETE"></i></a>
+                      <a href="javascript:void(0);" class="btn btn-sm btn-danger delete" data-channel-name="<?php echo decrypt($row->channel_name); ?>" id="<?php echo $row->id; ?>"><i class="fas fa-fw fa-trash" title="DELETE"></i></a>
                       </td>
                   </tr>
 
@@ -557,12 +557,13 @@ $(document).ready(function(){
 
  $("#dataTable").on('click','.delete',function(){
      var id = $(this).attr("id");
-     var ask = confirm("Are you sure you want to delete this row?");
+     var channel = $(this).data("channel-name");
+     var ask = confirm("Are you sure you want to delete "+channel+" channel?");
      if(ask){
          $.ajax({
          url:'deleteyoutubedata.php',
          type:'POST',
-         data:{id:id},
+         data:{id:id,channel:channel},
          cache:false,
          beforeSend: function(){
              $('.delete').addClass("disabled");
@@ -750,8 +751,6 @@ function update(){
                                             }
                                             if(influencer_name !== ""){
                                                 
-                                                if(campaign_done_earlier !== ""){
-                                                    if(no_of_campaign !== ""){
                                                         if(influencer_category !== ""){
                                                             $.ajax({
 
@@ -809,16 +808,6 @@ function update(){
                                                             alert("Please Select Influencer Category");
                                                             $("#influencer_category").focus();
                                                         }
-                                                    }
-                                                    else{
-                                                        alert("Please Enter No. of Campaign");
-                                                        $("#no_of_campaign").focus();
-                                                    }
-                                                }
-                                                else{
-                                                    alert("Please Select Campaign Done Earlier");
-                                                    $("#campaign_done_earlier").focus();
-                                                }
                                             }
                                             else{
                                                 alert("Please Enter Influencer Name");

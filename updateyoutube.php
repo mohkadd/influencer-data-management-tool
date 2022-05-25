@@ -95,8 +95,8 @@ function checkemptynumber($data){
         $avg_likes = cleanup($_POST['avg_likes']);
         $avg_likes = checkemptynumber($avg_likes);
         $influencer_name = cleanup($_POST['influencer_name']);
-        $campaign_done_earlier = cleanup($_POST['campaign_done_earlier']);
-        $no_of_campaign = cleanup($_POST['no_of_campaign']);
+        $campaign_done_earlier = checkemptystring($_POST['campaign_done_earlier']);
+        $no_of_campaign = checkemptynumber($_POST['no_of_campaign']);
     //    $no_of_campaign = checkemptynumber($no_of_campaign);
         $influencer_category = cleanup($_POST['influencer_category']);
         $name_of_client_worked_before = cleanup($_POST['name_of_client_worked_before']);
@@ -104,7 +104,7 @@ function checkemptynumber($data){
 
         if(empty($channel_name) || empty($profile_url) || empty($language) || empty($gender) || 
            empty($enlyft_exclusive) || empty($contact_number) || empty($contact_person_name) ||
-          empty($email_id) || empty($state) || empty($influencer_name) || empty($campaign_done_earlier) || 
+          empty($email_id) || empty($state) || empty($influencer_name) || 
         empty($influencer_category)){
             echo "mandatory";
     //        echo "<script>alert('Please Fill All Fields Properly'); window.location.href='insert-inventory.php';</script>";

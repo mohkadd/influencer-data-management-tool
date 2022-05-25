@@ -4,6 +4,7 @@ include 'config-pdo.php';
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['id'])) {
 //    echo "success";
 	$id = htmlspecialchars(trim($_POST['id']));
+    $channel = htmlspecialchars(trim($_POST['channel']));
 	if (!empty($id)) {
 		$delete = "DELETE FROM `youtube` WHERE `id` = :id";
         $stmt = $con->prepare($delete);
@@ -13,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['id'])) {
             date_default_timezone_set("Asia/Kolkata");
             $datenow = date("Y-m-d H:i:s");
             $operation = "Delete";
-            $comment = $_SESSION['admin_username']." has deleted ID number $id of youtube data from system at $datenow";
+            $comment = $_SESSION['admin_username']." has deleted $channel channel from youtube data at $datenow";
             $ipaddress = $_SERVER['REMOTE_ADDR'];
             $browser = $_SERVER['HTTP_USER_AGENT'];
             $log = "INSERT into `loghistory` (`userid`,`username`,`operation`,`comment`,`ipaddress`,`browser`,

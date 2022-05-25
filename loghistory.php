@@ -32,7 +32,7 @@ if($_SESSION['admintype'] == '3'){
           <div class="card-body">
             <div class="table-responsive">
              <?php
-             if($_SESSION['admintype'] == '1' || $_SESSION['admintype'] == '2'){
+             if($_SESSION['admintype'] == '1'){
              ?>
              <table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-dark text-white">
@@ -90,7 +90,66 @@ $i = 1;
                 </tbody>
               </table>
              <?php     
-             } 
+             }
+             if($_SESSION['admintype'] == '2'){
+             ?>
+             <table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
+                <thead class="bg-dark text-white">
+                  <tr>
+                    <th>Sr. No.</th>
+                    <th>Username</th>
+                    <th>Activity</th>
+                    <th>Message</th>
+                    <th>IP Address</th>
+<!--                    <th>Browser</th>-->
+                    <th>Datetime</th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>Sr. No.</th>
+                    <th>Username</th>
+                    <th>Activity</th>
+                    <th>Message</th>
+                    <th>IP Address</th>
+<!--                    <th>Browser</th>-->
+                    <th>Datetime</th>
+                                        
+                  </tr>
+                </tfoot>
+
+                <tbody>
+                  <?php 
+$table_data = "SELECT * FROM loghistory WHERE userid = '".$_SESSION['adminid']."'";
+$stmt1 = $con->prepare($table_data);
+$stmt1->execute();
+$i = 1;
+// $result = mysqli_query($connect, $table_data);
+?>
+<?php  
+                while($row = $stmt1->fetch())  
+                {
+                ?>
+                  <tr onmousedown = 'return false' onselectstart = 'return false'>
+                      <td><?php echo $i; ?></td>
+                      <td><?php echo $row->username; ?></td>
+                      <td><?php echo $row->operation; ?></td>
+                      <td><?php echo $row->comment; ?></td>
+                      <td><?php echo $row->ipaddress; ?></td>
+<!--                      <td><?php //echo $row->browser; ?></td>-->
+                      <td><?php echo $row->actiontime; ?></td>
+                      
+                  </tr>
+
+                <?php 
+                    $i++;
+                }  
+                ?>
+                  
+                </tbody>
+              </table>
+             <?php       
+             }
              ?>
             </div>
           </div>

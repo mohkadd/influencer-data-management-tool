@@ -88,11 +88,11 @@ if($_SESSION['admintype'] == '3'){
 $(document).ready(function(){
     $('#uploadfile').change(function(){
         var extension1 = $(this).val().split('\\').pop();
-        var validfile = ['import-youtube-data-template.xlsx']
+        var validfile = ['import-youtube-data-template.xlsx'];
 //        alert(extension1);
         var extension = $(this).val().split('.').pop().toLowerCase();
         var validextension = ['xlsx'];
-        if(($.inArray(extension, validextension) == -1) || ($.inArray(extension1, validfile))){
+        if(($.inArray(extension, validextension) == -1) || (!extension1.startsWith("import-youtube-data-template"))){
             $("#exterror").css({"display":"inline"});
             $("#submitfile").prop("disabled",true);
         }

@@ -16,9 +16,10 @@
         ?>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <a class="dropdown-item" href="youtube-dashboard.php">YouTube Dashboard</a>
-          <a class="dropdown-item" href="view-youtube-data.php">View YouTube Listing</a>
+          <a class="dropdown-item" href="view-youtube-data.php">View YouTube Data</a>
           <a class="dropdown-item" href="insert-youtube-data.php">Insert YouTube Data</a>
           <a class="dropdown-item" href="import-youtube-data.php">Import YouTube Data</a>
+          <a class="dropdown-item" href="bulk-delete-youtube.php">Delete Youtube Data</a>
 <!--          <a class="dropdown-item" href="loghistory.php">Log History</a>-->
           
         </div>

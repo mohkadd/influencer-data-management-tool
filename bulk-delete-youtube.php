@@ -38,7 +38,7 @@
                 <thead class="bg-dark text-white">
                   <tr>
 <!--                    <th>Sr. No.</th>-->
-                    <th>Delete</th>
+                    <th><input type='checkbox' id='select_all'></th>
                     <th>Channel Name</th>
                     <th>Profile URL</th>
                     <th>Subscribers</th>
@@ -72,7 +72,7 @@
                 <tfoot>
                   <tr>
 <!--                    <th>Sr. No.</th>-->
-                    <th>Delete</th>
+                    <th><input type='checkbox' id='select_all'></th>
                     <th>Channel Name</th>
                     <th>Profile URL</th>
                     <th>Subscribers</th>
@@ -169,40 +169,46 @@ $i = 1;
 
  <?php include "footer.php"; ?>
 <script>
-$(document).on('click', '.delete-youtube', function() {		
+$('document').ready(function() {
+    $(document).on('click', '#select_all', function() {          	
+		$(".delete-youtube").prop("checked", this.checked);
 		$("#select_count").html($("input.delete-youtube:checked").length+" Selected");
 	});
-// delete selected records
-$('#delete_records').on('click', function(e) { 
-	var youtube = [];  
-	$(".delete-youtube:checked").each(function() {  
-		youtube.push($(this).data('channel-id'));
-	});	
-	if(youtube.length <=0)  {  
-		alert("Please select records.");  
-	}  
-	else {
-//        alert(youtube);
-		WRN_PROFILE_DELETE = "Are you sure you want to delete "+youtube.length+" channel?";  
-		var checked = confirm(WRN_PROFILE_DELETE);  
-		if(checked == true) {			
-			var selected_values = youtube.join(","); 
-			$.ajax({ 
-				type: "POST",  
-				url: "delete-youtube-bulk.php",  
-				cache:false,  
-				data: 'yt_id='+selected_values,  
-				success: function(response) {	
-					// remove deleted employee rows
-					var yt_ids = response.split(",");
-                    alert(youtube.length+" youtube channel deleted");
-					for (var i=0; i < yt_ids.length; i++ ) {						
-						$("#"+yt_ids[i]).remove();
-					}
-                    location.reload();
-				}   
-			});				
-		}  
-	}  
+    $(document).on('click', '.delete-youtube', function() {		
+            $("#select_count").html($("input.delete-youtube:checked").length+" Selected");
+        });
+    // delete selected records
+    $('#delete_records').on('click', function(e) { 
+        var youtube = [];  
+        $(".delete-youtube:checked").each(function() {  
+            youtube.push($(this).data('channel-id'));
+        });	
+        if(youtube.length <=0)  {  
+            alert("Please select records.");  
+        }  
+        else {
+    //        alert(youtube);
+            WRN_PROFILE_DELETE = "Are you sure you want to delete "+youtube.length+" channel?";  
+            var checked = confirm(WRN_PROFILE_DELETE);  
+            if(checked == true) {			
+                var selected_values = youtube.join(","); 
+                $.ajax({ 
+                    type: "POST",  
+                    url: "delete-youtube-bulk.php",  
+                    cache:false,  
+                    data: 'yt_id='+selected_values,  
+                    success: function(response) {	
+                        // remove deleted employee rows
+                        var yt_ids = response.split(",");
+                        alert(youtube.length+" youtube channel deleted");
+                        for (var i=0; i < yt_ids.length; i++ ) {						
+                            $("#"+yt_ids[i]).remove();
+                        }
+                        location.reload();
+                    }   
+                });				
+            }  
+        }  
+    });
 });
 </script>

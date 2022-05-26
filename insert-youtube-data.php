@@ -217,7 +217,6 @@ if($_SESSION['admintype'] == '3'){
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="title">City</label>
-<!--                          <input type="text" name="city" id="city" class="form-control" placeholder="Enter City">-->
                           <select name="city" id="city" class="form-control select2">
                               <option value="">Select City</option>
                               <?php 

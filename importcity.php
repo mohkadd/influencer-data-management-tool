@@ -39,7 +39,7 @@ if(isset($_POST['submitfile'])){
                 $added_by = $worksheet->getCellByColumnAndRow(2,$row)->getValue();
                 $updated_on = $worksheet->getCellByColumnAndRow(3,$row)->getValue();
                 $updated_by = $worksheet->getCellByColumnAndRow(4,$row)->getValue();
-                    $insertqry="INSERT INTO `city`(`name`, `added_on`, `added_by`,`updated_on`,`updated_by`) VALUES 
+                    $insertqry="INSERT INTO `state`(`name`, `added_on`, `added_by`,`updated_on`,`updated_by`) VALUES 
                     (:name,:added_on,:added_by,:updated_on,:updated_by)";
                     $stmt = $con->prepare($insertqry);
                     $stmt->execute([

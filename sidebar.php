@@ -12,7 +12,7 @@
           <span>YouTube</span>
         </a>
         <?php
-        if($_SESSION['admintype'] == '1'){
+        if($_SESSION['admintype'] == 1){
         ?>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <a class="dropdown-item" href="youtube-dashboard.php">YouTube Dashboard</a>
@@ -25,7 +25,7 @@
         </div>
         <?php    
         }
-        if($_SESSION['admintype'] == '2'){
+        if($_SESSION['admintype'] == 2){
         ?>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <a class="dropdown-item" href="youtube-dashboard.php">YouTube Dashboard</a>
@@ -35,7 +35,7 @@
         </div>
         <?php     
         }
-        if($_SESSION['admintype'] == '3'){
+        if($_SESSION['admintype'] == 3){
         ?>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <a class="dropdown-item" href="youtube-dashboard.php">YouTube Dashboard</a>
@@ -46,11 +46,23 @@
         ?>
       </li>
       <?php
-      if( $_SESSION['admintype'] == '1' || $_SESSION['admintype'] == '2' ){
+      if( $_SESSION['admintype'] == 1 || $_SESSION['admintype'] == 2 ){
       ?>
       <li class="nav-item active">
+        <a class="nav-link" href="view-city.php">
+          <i class="fas fa-fw fa-city"></i>
+          <span>City</span>
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="view-state.php">
+          <i class="fas fa-fw fa-map-marker"></i>
+          <span>State</span>
+        </a>
+      </li>
+      <li class="nav-item active">
         <a class="nav-link" href="loghistory.php">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <i class="fas fa-fw fa-history"></i>
           <span>Log History</span>
         </a>
       </li>

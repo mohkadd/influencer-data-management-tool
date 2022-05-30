@@ -164,7 +164,7 @@ if(isset($_POST['submit_range'])){
           <div class="card-body">
             <div class="table-responsive">
              <?php
-             if($_SESSION['admintype'] == '1'){
+             if($_SESSION['admintype'] == 1){
              ?>
              <table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-dark text-white">
@@ -296,7 +296,7 @@ $i = 1;
               </table>
              <?php     
              } 
-             if($_SESSION['admintype'] == '2'){
+             if($_SESSION['admintype'] == 2){
              ?>
              <table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-dark text-white">
@@ -425,7 +425,7 @@ $i = 1;
               </table>
              <?php     
              } 
-             if($_SESSION['admintype'] == '3'){
+             if($_SESSION['admintype'] == 3){
              ?>
              <table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-dark text-white">

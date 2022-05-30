@@ -31,7 +31,7 @@
                         $genre = $row->genre;
                     ?>
         
-          <div class="col-xl-4 col-sm-6 mb-3">
+          <div class="col-xl-3 col-sm-6 mb-3">
             <a href="javascript:void(0);" class="genre" id="<?php echo $row->genre; ?>">
              <div class="card text-white o-hidden h-100 bg-dark">
               <div class="card-body">

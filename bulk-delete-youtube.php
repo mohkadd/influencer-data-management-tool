@@ -1,6 +1,6 @@
 <?php include "header.php"; ?>
 <?php
-if($_SESSION['admintype'] !== '1'){
+if($_SESSION['admintype'] !== 1){
     header("Location: dashboard.php");
 }
 
@@ -38,7 +38,7 @@ if($_SESSION['admintype'] !== '1'){
           <div class="card-body">
             <div class="table-responsive">
              <?php
-             if($_SESSION['admintype'] == '1'){
+             if($_SESSION['admintype'] == 1){
              ?>
              <table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-dark text-white">

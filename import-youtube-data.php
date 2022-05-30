@@ -1,6 +1,6 @@
 <?php include "header.php"; ?>
 <?php
-if($_SESSION['admintype'] == '3'){
+if($_SESSION['admintype'] == 3){
     header("Location: dashboard.php");
 }
 ?>

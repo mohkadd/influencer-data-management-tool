@@ -147,7 +147,16 @@ $maxlikes = $row->maxlikes;
         <div class="card mb-3">
         <div class="card-header bg-dark text-white">
                     <i class="fas fa-table"></i>
-                   YouTube Data <span style="float: right;"><a class="btn btn-danger" id="showfilter" href="javascript:void(0);"><i class="fas fa-filter"></i> Special Filters</a></span>
+                   YouTube Data 
+                   <span style="float: right;">
+                   <?php 
+                   if($_SESSION['admintype'] == 1){
+                   ?>
+                       <a class="btn btn-danger" href="bulk-delete-youtube.php"><i class="fas fa-trash"></i> Bulk Delete</a> 
+                   <?php
+                   }       
+                   ?>
+                   <a class="btn btn-primary" id="showfilter" href="javascript:void(0);"><i class="fas fa-filter"></i> Special Filters</a></span>
                     </div>
 <!--
           <div class="card-header">
@@ -157,7 +166,7 @@ $maxlikes = $row->maxlikes;
           <div class="card-body">
             <div class="table-responsive">
              <?php
-             if($_SESSION['admintype'] == '1'){
+             if($_SESSION['admintype'] == 1){
              ?>
              <table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-dark text-white">
@@ -289,7 +298,7 @@ $i = 1;
               </table>
              <?php     
              } 
-             if($_SESSION['admintype'] == '2'){
+             if($_SESSION['admintype'] == 2){
              ?>
              <table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-dark text-white">
@@ -418,7 +427,7 @@ $i = 1;
               </table>
              <?php     
              } 
-             if($_SESSION['admintype'] == '3'){
+             if($_SESSION['admintype'] == 3){
              ?>
              <table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-dark text-white">
@@ -548,6 +557,7 @@ $i = 1;
       <!-- /.container-fluid -->
 
  <?php include "footer.php"; ?>
+ 
  <link rel="stylesheet"
     href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>     

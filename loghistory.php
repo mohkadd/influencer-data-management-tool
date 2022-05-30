@@ -1,6 +1,6 @@
 <?php include "header.php"; ?>
 <?php
-if($_SESSION['admintype'] == '3'){
+if($_SESSION['admintype'] == 3){
     header("Location: dashboard.php");
 }
 ?>
@@ -32,7 +32,7 @@ if($_SESSION['admintype'] == '3'){
           <div class="card-body">
             <div class="table-responsive">
              <?php
-             if($_SESSION['admintype'] == '1'){
+             if($_SESSION['admintype'] == 1){
              ?>
              <table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-dark text-white">
@@ -41,7 +41,7 @@ if($_SESSION['admintype'] == '3'){
                     <th>Username</th>
                     <th>Activity</th>
                     <th>Message</th>
-                    <th>IP Address</th>
+<!--                    <th>IP Address</th>-->
 <!--                    <th>Browser</th>-->
                     <th>Datetime</th>
                   </tr>
@@ -52,7 +52,7 @@ if($_SESSION['admintype'] == '3'){
                     <th>Username</th>
                     <th>Activity</th>
                     <th>Message</th>
-                    <th>IP Address</th>
+<!--                    <th>IP Address</th>-->
 <!--                    <th>Browser</th>-->
                     <th>Datetime</th>
                                         
@@ -76,7 +76,7 @@ $i = 1;
                       <td><?php echo $row->username; ?></td>
                       <td><?php echo $row->operation; ?></td>
                       <td><?php echo $row->comment; ?></td>
-                      <td><?php echo $row->ipaddress; ?></td>
+<!--                      <td><?php //echo $row->ipaddress; ?></td>-->
 <!--                      <td><?php //echo $row->browser; ?></td>-->
                       <td><?php echo $row->actiontime; ?></td>
                       
@@ -91,7 +91,7 @@ $i = 1;
               </table>
              <?php     
              }
-             if($_SESSION['admintype'] == '2'){
+             if($_SESSION['admintype'] == 2){
              ?>
              <table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-dark text-white">
@@ -100,7 +100,7 @@ $i = 1;
                     <th>Username</th>
                     <th>Activity</th>
                     <th>Message</th>
-                    <th>IP Address</th>
+<!--                    <th>IP Address</th>-->
 <!--                    <th>Browser</th>-->
                     <th>Datetime</th>
                   </tr>
@@ -111,7 +111,7 @@ $i = 1;
                     <th>Username</th>
                     <th>Activity</th>
                     <th>Message</th>
-                    <th>IP Address</th>
+<!--                    <th>IP Address</th>-->
 <!--                    <th>Browser</th>-->
                     <th>Datetime</th>
                                         
@@ -135,7 +135,7 @@ $i = 1;
                       <td><?php echo $row->username; ?></td>
                       <td><?php echo $row->operation; ?></td>
                       <td><?php echo $row->comment; ?></td>
-                      <td><?php echo $row->ipaddress; ?></td>
+<!--                      <td><?php //echo $row->ipaddress; ?></td>-->
 <!--                      <td><?php //echo $row->browser; ?></td>-->
                       <td><?php echo $row->actiontime; ?></td>
                       

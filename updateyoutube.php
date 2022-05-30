@@ -153,6 +153,34 @@ function checkemptynumber($data){
                 "name_of_client_worked_before"=>$name_of_client_worked_before,
                 "updated_on"=>$updated_on,"updated_by"=>$updated_by,"id"=>$id
                 ]);
+            $updatemaster="UPDATE `masteryoutube` SET `channel_name`=:channel_name, `profile_url`=:profile_url, 
+            `subscribers`=:subscribers,`genre`=:genre,`language`=:language,`gender`=:gender,
+            `enlyft_exclusive`=:enlyft_exclusive,`integrated_video_cost`=:integrated_video_cost,
+            `dedicated_video_cost`=:dedicated_video_cost,`youtube_story_cost`=:youtube_story_cost,
+            `youtube_shorts_cost`=:youtube_shorts_cost,`contact_number`=:contact_number,
+            `contact_person_name`=:contact_person_name,`email_id`=:email_id,`comment`=:comment,
+            `address`=:address,`city`=:city,`state`=:state,`avg_views`=:avg_views,`avg_likes`=:avg_likes,
+            `influencer_name`=:influencer_name,`campaign_done_earlier`=:campaign_done_earlier,
+            `no_of_campaign`=:no_of_campaign,`influencer_category`=:influencer_category,
+            `name_of_client_worked_before`=:name_of_client_worked_before,
+            `updated_on`=:updated_on,`updated_by`=:updated_by WHERE `id`=:id";
+                $stmt1 = $con->prepare($updatemaster);
+                $stmt1->execute([
+                "channel_name"=>$channel_name,"profile_url"=>$profile_url,
+                "subscribers"=>$subscribers, "genre"=>$genre,
+                "language"=>$language,"gender"=>$gender,
+                "enlyft_exclusive"=>$enlyft_exclusive,"integrated_video_cost"=>$integrated_video_cost,
+                "dedicated_video_cost"=>$dedicated_video_cost,
+                "youtube_story_cost"=>$youtube_story_cost,"youtube_shorts_cost"=>$youtube_shorts_cost,
+                "contact_number"=>$contact_number,"contact_person_name"=>$contact_person_name,
+                "email_id"=>$email_id,"comment"=>$comment,
+                "address"=>$address,"city"=>$city,"state"=>$state,
+                "avg_views"=>$avg_views,"avg_likes"=>$avg_likes,
+                "influencer_name"=>$influencer_name,"campaign_done_earlier"=>$campaign_done_earlier,
+                "no_of_campaign"=>$no_of_campaign,"influencer_category"=>$influencer_category,
+                "name_of_client_worked_before"=>$name_of_client_worked_before,
+                "updated_on"=>$updated_on,"updated_by"=>$updated_by,"id"=>$id
+                ]);
         if($stmt){
             date_default_timezone_set("Asia/Kolkata");
             $datenow = date("Y-m-d H:i:s");

@@ -1,4 +1,10 @@
 <?php include "header.php"; ?>
+<?php
+if($_SESSION['admintype'] !== '1'){
+    header("Location: dashboard.php");
+}
+
+?>
 <?php include "functions/functions.php";?>
   <div id="wrapper">
 

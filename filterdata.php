@@ -255,27 +255,27 @@ $i = 1;
                       <td><?php echo decrypt($row->channel_name); ?></td>
                       <td><?php echo decrypt($row->profile_url); ?></td>
                       <td><?php echo number_format($row->subscribers); ?></td>
-                      <td><?php echo $row->genre; ?></td>
-                      <td><?php echo $row->language; ?></td>
+                      <td><?php echo ucwords($row->genre); ?></td>
+                      <td><?php echo ucwords($row->language); ?></td>
                       <td><?php echo $row->gender; ?></td>
-                      <td><?php echo decrypt($row->enlyft_exclusive); ?></td>
+                      <td><?php echo ucwords(decrypt($row->enlyft_exclusive)); ?></td>
                       <td><?php echo number_format(decrypt($row->integrated_video_cost)); ?></td>
                       <td><?php echo number_format(decrypt($row->dedicated_video_cost)); ?></td>
                       <td><?php echo number_format(decrypt($row->youtube_story_cost)); ?></td>
                       <td><?php echo number_format(decrypt($row->youtube_shorts_cost)); ?></td>
                       <td><?php echo decrypt($row->contact_number); ?></td>
-                      <td><?php echo decrypt($row->contact_person_name); ?></td>
+                      <td><?php echo ucwords(decrypt($row->contact_person_name)); ?></td>
                       <td><?php echo decrypt($row->email_id); ?></td>
                       <td><?php echo $row->comment; ?></td>
                       <td><?php echo decrypt($row->address); ?></td>
-                      <td><?php echo $row->city; ?></td>
-                      <td><?php echo $row->state; ?></td>
+                      <td><?php echo ucwords($row->city); ?></td>
+                      <td><?php echo ucwords($row->state); ?></td>
                       <td><?php echo number_format($row->avg_views); ?></td>
                       <td><?php echo number_format($row->avg_likes); ?></td> 
                       <td><?php echo decrypt($row->influencer_name); ?></td>
                       <td><?php echo decrypt($row->campaign_done_earlier); ?></td>
                       <td><?php echo decrypt($row->no_of_campaign); ?></td>
-                      <td><?php echo $row->influencer_category ?></td>
+                      <td><?php echo strtoupper($row->influencer_category); ?></td>
                       <td><?php echo decrypt($row->name_of_client_worked_before); ?></td>
                       <td><?php echo $row->added_on; ?></td>
                       <td><?php echo $row->added_by; ?></td>
@@ -387,27 +387,27 @@ $i = 1;
                       <td><?php echo decrypt($row->channel_name); ?></td>
                       <td><?php echo decrypt($row->profile_url); ?></td>
                       <td><?php echo number_format($row->subscribers); ?></td>
-                      <td><?php echo $row->genre; ?></td>
-                      <td><?php echo $row->language; ?></td>
+                      <td><?php echo ucwords($row->genre); ?></td>
+                      <td><?php echo ucwords($row->language); ?></td>
                       <td><?php echo $row->gender; ?></td>
-                      <td><?php echo decrypt($row->enlyft_exclusive); ?></td>
+                      <td><?php echo ucwords(decrypt($row->enlyft_exclusive)); ?></td>
                       <td><?php echo number_format(decrypt($row->integrated_video_cost)); ?></td>
                       <td><?php echo number_format(decrypt($row->dedicated_video_cost)); ?></td>
                       <td><?php echo number_format(decrypt($row->youtube_story_cost)); ?></td>
                       <td><?php echo number_format(decrypt($row->youtube_shorts_cost)); ?></td>
                       <td><?php echo decrypt($row->contact_number); ?></td>
-                      <td><?php echo decrypt($row->contact_person_name); ?></td>
+                      <td><?php echo ucwords(decrypt($row->contact_person_name)); ?></td>
                       <td><?php echo decrypt($row->email_id); ?></td>
                       <td><?php echo $row->comment; ?></td>
                       <td><?php echo decrypt($row->address); ?></td>
-                      <td><?php echo $row->city; ?></td>
-                      <td><?php echo $row->state; ?></td>
+                      <td><?php echo ucwords($row->city); ?></td>
+                      <td><?php echo ucwords($row->state); ?></td>
                       <td><?php echo number_format($row->avg_views); ?></td>
                       <td><?php echo number_format($row->avg_likes); ?></td> 
                       <td><?php echo decrypt($row->influencer_name); ?></td>
                       <td><?php echo decrypt($row->campaign_done_earlier); ?></td>
                       <td><?php echo decrypt($row->no_of_campaign); ?></td>
-                      <td><?php echo $row->influencer_category ?></td>
+                      <td><?php echo strtoupper($row->influencer_category); ?></td>
                       <td><?php echo decrypt($row->name_of_client_worked_before); ?></td>
                       <td><?php echo $row->added_on; ?></td>
                       <td><?php echo $row->added_by; ?></td>
@@ -494,22 +494,22 @@ $i = 1;
                       <td><?php echo decrypt($row->channel_name); ?></td>
                       <td><?php echo decrypt($row->profile_url); ?></td>
                       <td><?php echo number_format($row->subscribers); ?></td>
-                      <td><?php echo $row->genre; ?></td>
-                      <td><?php echo $row->language; ?></td>
+                      <td><?php echo ucwords($row->genre); ?></td>
+                      <td><?php echo ucwords($row->language); ?></td>
                       <td><?php echo $row->gender; ?></td>
-                      <td><?php echo decrypt($row->enlyft_exclusive); ?></td>
+                      <td><?php echo ucwords(decrypt($row->enlyft_exclusive)); ?></td>
                       <td><?php echo number_format(decrypt($row->integrated_video_cost)); ?></td>
                       <td><?php echo number_format(decrypt($row->dedicated_video_cost)); ?></td>
                       <td><?php echo number_format(decrypt($row->youtube_story_cost)); ?></td>
                       <td><?php echo number_format(decrypt($row->youtube_shorts_cost)); ?></td>                      
-                      <td><?php echo $row->city; ?></td>
-                      <td><?php echo $row->state; ?></td>
+                      <td><?php echo ucwords($row->city); ?></td>
+                      <td><?php echo ucwords($row->state); ?></td>
                       <td><?php echo number_format($row->avg_views); ?></td>
                       <td><?php echo number_format($row->avg_likes); ?></td> 
                       <td><?php echo decrypt($row->influencer_name); ?></td>
                       <td><?php echo decrypt($row->campaign_done_earlier); ?></td>
                       <td><?php echo decrypt($row->no_of_campaign); ?></td>
-                      <td><?php echo $row->influencer_category ?></td>
+                      <td><?php echo strtoupper($row->influencer_category); ?></td>
                   </tr>
 
                 <?php 

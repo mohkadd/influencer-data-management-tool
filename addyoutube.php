@@ -83,10 +83,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['uploadfile'])){
                 $subscribers = $worksheet->getCellByColumnAndRow(2,$row)->getValue();
                 $subscribers = checkemptynumber($subscribers);
                 $genre = $worksheet->getCellByColumnAndRow(3,$row)->getValue();
+                $genre = ucwords($genre);
                 $genre = checkemptystring($genre);
                 $language = $worksheet->getCellByColumnAndRow(4,$row)->getValue();
+                $language = ucwords($language);
                 $gender = $worksheet->getCellByColumnAndRow(5,$row)->getValue();
+                $gender = ucwords($gender);
                 $enlyft_exclusive = $worksheet->getCellByColumnAndRow(6,$row)->getValue();
+                $enlyft_exclusive = ucwords($enlyft_exclusive);
                 $integrated_video_cost = $worksheet->getCellByColumnAndRow(7,$row)->getValue();
                 $integrated_video_cost = checkemptynumber($integrated_video_cost);
                 $dedicated_video_cost = $worksheet->getCellByColumnAndRow(8,$row)->getValue();
@@ -97,14 +101,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['uploadfile'])){
                 $youtube_shorts_cost = checkemptynumber($youtube_shorts_cost);
                 $contact_number = $worksheet->getCellByColumnAndRow(11,$row)->getValue();
                 $contact_person_name = $worksheet->getCellByColumnAndRow(12,$row)->getValue();
+                $contact_person_name = ucwords($contact_person_name);
                 $email_id = $worksheet->getCellByColumnAndRow(13,$row)->getValue();
                 $comment = $worksheet->getCellByColumnAndRow(14,$row)->getValue();
                 $comment = checkemptystring($comment);
                 $address = $worksheet->getCellByColumnAndRow(15,$row)->getValue();
                 $address = checkemptystring($address);
                 $city = $worksheet->getCellByColumnAndRow(16,$row)->getValue();
+                $city = ucwords($city);
                 $city = checkemptystring($city);
                 $state = $worksheet->getCellByColumnAndRow(17,$row)->getValue();
+                $state = ucwords($state);
                 $avg_views = $worksheet->getCellByColumnAndRow(18,$row)->getValue();
                 $avg_views = checkemptynumber($avg_views);
                 $avg_likes = $worksheet->getCellByColumnAndRow(19,$row)->getValue();
@@ -115,6 +122,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['uploadfile'])){
                 $no_of_campaign = $worksheet->getCellByColumnAndRow(22,$row)->getValue();
                 $no_of_campaign = checkemptynumber($no_of_campaign);
                 $influencer_category = $worksheet->getCellByColumnAndRow(23,$row)->getValue();
+                $influencer_category = strtoupper($influencer_category);
                 $name_of_client_worked_before = $worksheet->getCellByColumnAndRow(24,$row)->getValue();
                 $name_of_client_worked_before = checkemptystring($name_of_client_worked_before);
                 $encrypturl = encrypt($profile_url);
@@ -122,6 +130,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['uploadfile'])){
                 $stmt3 = $con->prepare($checkurl1);
                 $stmt3->execute(["profile_url"=>$encrypturl]);
                 $count1 = $stmt3->rowCount();
+                $checkurl2 = "SELECT `profile_url` from `masteryoutube` WHERE `profile_url`=:profile_url";
+                $stmt4 = $con->prepare($checkurl2);
+                $stmt4->execute(["profile_url"=>$encrypturl]);
+                $count2 = $stmt4->rowCount();
                 if((!preg_match("[https://www.youtube.com/channel/]", $profile_url)) || ($lastchar == '/') ||
                    ($extlen !== 24) || ($count1 > 0)){
                     $error = 1;
@@ -172,36 +184,38 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['uploadfile'])){
                     "added_on"=>$added_on,"added_by"=>$added_by,
                     "updated_on"=>$updated_on,"updated_by"=>$updated_by
                     ]);
-                    $masterqry="INSERT INTO `masteryoutube`(`channel_name`, `profile_url`, `subscribers`,`genre`,`language`,`gender`,`enlyft_exclusive`,`integrated_video_cost`,
-                    `dedicated_video_cost`,`youtube_story_cost`,`youtube_shorts_cost`,`contact_number`,`contact_person_name`,
-                    `email_id`,`comment`,`address`,`city`,`state`,`avg_views`,`avg_likes`,
-                    `influencer_name`,`campaign_done_earlier`,`no_of_campaign`,`influencer_category`,`name_of_client_worked_before`,`added_on`,`added_by`,`updated_on`,`updated_by`) VALUES 
-                    (:channel_name,:profile_url,:subscribers,:genre,:language,
-                    :gender,:enlyft_exclusive,:integrated_video_cost,:dedicated_video_cost,
-                    :youtube_story_cost,:youtube_shorts_cost,:contact_number,:contact_person_name,
-                    :email_id,:comment,:address,:city,
-                    :state,:avg_views,:avg_likes,:influencer_name,:campaign_done_earlier,:no_of_campaign,
-                    :influencer_category,:name_of_client_worked_before,
-                    :added_on,:added_by,:updated_on,:updated_by)";
-                    $stmt1 = $con->prepare($masterqry);
-                    $stmt1->execute([
-                    "channel_name"=>$channel_name,"profile_url"=>$profile_url,
-                    "subscribers"=>$subscribers, "genre"=>$genre,
-                    "language"=>$language,"gender"=>$gender,
-                    "enlyft_exclusive"=>$enlyft_exclusive,"integrated_video_cost"=>$integrated_video_cost,
-                    "dedicated_video_cost"=>$dedicated_video_cost,
-                    "youtube_story_cost"=>$youtube_story_cost,"youtube_shorts_cost"=>$youtube_shorts_cost,
-                    "contact_number"=>$contact_number,"contact_person_name"=>$contact_person_name,
-                    "email_id"=>$email_id,"comment"=>$comment,
-                    "address"=>$address,"city"=>$city,
-                    "state"=>$state,
-                    "avg_views"=>$avg_views,"avg_likes"=>$avg_likes,
-                    "influencer_name"=>$influencer_name,"campaign_done_earlier"=>$campaign_done_earlier,
-                    "no_of_campaign"=>$no_of_campaign,"influencer_category"=>$influencer_category,
-                    "name_of_client_worked_before"=>$name_of_client_worked_before,
-                    "added_on"=>$added_on,"added_by"=>$added_by,
-                    "updated_on"=>$updated_on,"updated_by"=>$updated_by
-                    ]);
+                    if($count2 == 0){
+                        $masterqry="INSERT INTO `masteryoutube`(`channel_name`, `profile_url`, `subscribers`,`genre`,`language`,`gender`,`enlyft_exclusive`,`integrated_video_cost`,
+                        `dedicated_video_cost`,`youtube_story_cost`,`youtube_shorts_cost`,`contact_number`,`contact_person_name`,
+                        `email_id`,`comment`,`address`,`city`,`state`,`avg_views`,`avg_likes`,
+                        `influencer_name`,`campaign_done_earlier`,`no_of_campaign`,`influencer_category`,`name_of_client_worked_before`,`added_on`,`added_by`,`updated_on`,`updated_by`) VALUES 
+                        (:channel_name,:profile_url,:subscribers,:genre,:language,
+                        :gender,:enlyft_exclusive,:integrated_video_cost,:dedicated_video_cost,
+                        :youtube_story_cost,:youtube_shorts_cost,:contact_number,:contact_person_name,
+                        :email_id,:comment,:address,:city,
+                        :state,:avg_views,:avg_likes,:influencer_name,:campaign_done_earlier,:no_of_campaign,
+                        :influencer_category,:name_of_client_worked_before,
+                        :added_on,:added_by,:updated_on,:updated_by)";
+                        $stmt1 = $con->prepare($masterqry);
+                        $stmt1->execute([
+                        "channel_name"=>$channel_name,"profile_url"=>$profile_url,
+                        "subscribers"=>$subscribers, "genre"=>$genre,
+                        "language"=>$language,"gender"=>$gender,
+                        "enlyft_exclusive"=>$enlyft_exclusive,"integrated_video_cost"=>$integrated_video_cost,
+                        "dedicated_video_cost"=>$dedicated_video_cost,
+                        "youtube_story_cost"=>$youtube_story_cost,"youtube_shorts_cost"=>$youtube_shorts_cost,
+                        "contact_number"=>$contact_number,"contact_person_name"=>$contact_person_name,
+                        "email_id"=>$email_id,"comment"=>$comment,
+                        "address"=>$address,"city"=>$city,
+                        "state"=>$state,
+                        "avg_views"=>$avg_views,"avg_likes"=>$avg_likes,
+                        "influencer_name"=>$influencer_name,"campaign_done_earlier"=>$campaign_done_earlier,
+                        "no_of_campaign"=>$no_of_campaign,"influencer_category"=>$influencer_category,
+                        "name_of_client_worked_before"=>$name_of_client_worked_before,
+                        "added_on"=>$added_on,"added_by"=>$added_by,
+                        "updated_on"=>$updated_on,"updated_by"=>$updated_by
+                        ]);
+                    }
                     $impcount = $impcount + 1;
                 }
 
@@ -277,10 +291,14 @@ if(isset($_POST['insertyoutube']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
     $subscribers = cleanup($_POST['subscribers']);
     $subscribers = checkemptynumber($subscribers);
     $genre = cleanup($_POST['genre']);
+    $genre = ucwords($genre);
     $genre = checkemptystring($genre);
     $language = cleanup($_POST['language']);
+    $language = ucwords($language);
     $gender = cleanup($_POST['gender']);
+    $gender = ucwords($gender);
     $enlyft_exclusive = cleanup($_POST['enlyft_exclusive']);
+    $enlyft_exclusive = ucwords($enlyft_exclusive);
     $integrated_video_cost = cleanup($_POST['integrated_video_cost']);
     $integrated_video_cost = checkemptynumber($integrated_video_cost);
     $dedicated_video_cost = cleanup($_POST['dedicated_video_cost']);
@@ -291,14 +309,17 @@ if(isset($_POST['insertyoutube']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
     $youtube_shorts_cost = checkemptynumber($youtube_shorts_cost);
     $contact_number = cleanup($_POST['contact_number']);
     $contact_person_name = cleanup($_POST['contact_person_name']);
+    $contact_person_name = ucwords($contact_person_name);
     $email_id = cleanup($_POST['email_id']);
     $comment = cleanup($_POST['comment']);
     $comment = checkemptystring($comment);
     $address = cleanup($_POST['address']);
     $address = checkemptystring($address);
     $city = cleanup($_POST['city']);
+    $city = ucwords($city);
     $city = checkemptystring($city);
     $state = cleanup($_POST['state']);
+    $state = ucwords($state);
     $avg_views = cleanup($_POST['avg_views']);
     $avg_views = checkemptynumber($avg_views);
     $avg_likes = cleanup($_POST['avg_likes']);
@@ -308,6 +329,7 @@ if(isset($_POST['insertyoutube']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
     $no_of_campaign = checkemptynumber($_POST['no_of_campaign']);
 //    $no_of_campaign = checkemptynumber($no_of_campaign);
     $influencer_category = cleanup($_POST['influencer_category']);
+    $influencer_category = strtoupper($influencer_category);
     $name_of_client_worked_before = cleanup($_POST['name_of_client_worked_before']);
     $name_of_client_worked_before = checkemptystring($name_of_client_worked_before);
     

@@ -211,6 +211,12 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
           $stmt2 = $con->prepare($city_query);
           $stmt2->execute();
           while($row1= $stmt2->fetch()){
+              if($row->city == $row1->name){
+                  $selected = "selected";
+              }
+              else{
+                  $selected = "";
+              }
               $output .= "<option value='$row1->name'>$row1->name</option>";
           }
             $output.=                  "</select>
@@ -223,43 +229,21 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                               <label for='title'>State <strong class='text-danger'>**</strong></label>
                               <select name='state' id='state' class='form-control select2' required>
                                   <option value=''>Select State</option>
-                                  <option value='$row->state' selected>$row->state</option>
-                                  <option value='Andhra Pradesh'>Andhra Pradesh</option>
-                                    <option value='Andaman and Nicobar Islands'>Andaman and Nicobar Islands</option>
-                                    <option value='Arunachal Pradesh'>Arunachal Pradesh</option>
-                                    <option value='Assam'>Assam</option>
-                                    <option value='Bihar'>Bihar</option>
-                                    <option value='Chandigarh'>Chandigarh</option>
-                                    <option value='Chhattisgarh'>Chhattisgarh</option>
-                                    <option value='Dadar and Nagar Haveli'>Dadar and Nagar Haveli</option>
-                                    <option value='Daman and Diu'>Daman and Diu</option>
-                                    <option value='Delhi'>Delhi</option>
-                                    <option value='Lakshadweep'>Lakshadweep</option>
-                                    <option value='Puducherry'>Puducherry</option>
-                                    <option value='Goa'>Goa</option>
-                                    <option value='Gujarat'>Gujarat</option>
-                                    <option value='Haryana'>Haryana</option>
-                                    <option value='Himachal Pradesh'>Himachal Pradesh</option>
-                                    <option value='Jammu and Kashmir'>Jammu and Kashmir</option>
-                                    <option value='Jharkhand'>Jharkhand</option>
-                                    <option value='Karnataka'>Karnataka</option>
-                                    <option value='Kerala'>Kerala</option>
-                                    <option value='Madhya Pradesh'>Madhya Pradesh</option>
-                                    <option value='Maharashtra'>Maharashtra</option>
-                                    <option value='Manipur'>Manipur</option>
-                                    <option value='Meghalaya'>Meghalaya</option>
-                                    <option value='Mizoram'>Mizoram</option>
-                                    <option value='Nagaland'>Nagaland</option>
-                                    <option value='Odisha'>Odisha</option>
-                                    <option value='Punjab'>Punjab</option>
-                                    <option value='Rajasthan'>Rajasthan</option>
-                                    <option value='Sikkim'>Sikkim</option>
-                                    <option value='Tamil Nadu'>Tamil Nadu</option>
-                                    <option value='Telangana'>Telangana</option>
-                                    <option value='Tripura'>Tripura</option>
-                                    <option value='Uttar Pradesh'>Uttar Pradesh</option>
-                                    <option value='Uttarakhand'>Uttarakhand</option>
-                                    <option value='West Bengal'>West Bengal</option>
+                                  <option value='$row->state' selected>$row->state</option>";
+          $state_query = "select name from state";
+          $stmt4 = $con->prepare($state_query);
+          $stmt4->execute();
+          while($row2= $stmt4->fetch()){
+              if($row->city == $row2->name){
+                  $selected = "selected";
+              }
+              else{
+                  $selected = "";
+              }
+              $output .= "<option value='$row2->name'>$row2->name</option>";
+          }
+          
+            $output .= "                      
                               </select>
     
                             </div>
@@ -328,6 +312,13 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <button class='btn btn-primary update' onclick='return update()' type='submit' name='updateyoutube' id='updateyoutube'>Update</button>
                     </form>
+                    <link href='https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css' rel='stylesheet' />
+<script src='https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js'></script>
+<script>
+$(document).ready(function() {
+    //$('.select2').select2({dropdownAutoWidth : true});
+});
+</script>
                 
             
             ";

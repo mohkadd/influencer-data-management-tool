@@ -31,7 +31,10 @@ $(document).ready(function() {
         order: [[ 0, 'desc']],
         dom: 'Bfrtip',
       buttons: [
-            'pageLength','excel'
+            'pageLength',{
+        extend: 'excel',
+        text: 'Download Excel'
+      }
         ],
       "bLengthChange": true,
     });

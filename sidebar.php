@@ -46,6 +46,18 @@
         ?>
       </li>
       <?php
+      if( $_SESSION['admintype'] == 1 ){
+      ?>
+      <li class="nav-item active">
+        <a class="nav-link" href="view-user.php">
+          <i class="fas fa-fw fa-user-circle"></i>
+          <span>Users</span>
+        </a>
+      </li>
+      <?php      
+      }
+      ?>
+      <?php
       if( $_SESSION['admintype'] == 1 || $_SESSION['admintype'] == 2 ){
       ?>
       <li class="nav-item active">

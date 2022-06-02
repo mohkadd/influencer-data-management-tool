@@ -80,6 +80,54 @@
 
                 </div>
             </div>
+            <div class="col-xl-8">
+                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                  <script type="text/javascript">
+                    google.charts.load("current", {packages:['corechart']});
+                    google.charts.setOnLoadCallback(drawChart);
+                    function drawChart() {
+                      var data = google.visualization.arrayToDataTable([
+                        ["Element", "Count", { role: "style" } ],
+                        ["Total Influencers", <?php echo youinfluencercount(); ?>, "black"],
+                        ["Exclusive Influencers", <?php echo youexclusivecount(); ?>, "red"],
+                        ["Male Influencers", <?php echo youmalecount(); ?>, "blue"],
+                        ["Female Influencers", <?php echo youfemalecount(); ?>, "pink"]
+                      ]);
+
+                      var view = new google.visualization.DataView(data);
+                      view.setColumns([0, 1,
+                                       { calc: "stringify",
+                                         sourceColumn: 1,
+                                         type: "string",
+                                         role: "annotation" },
+                                       2]);
+
+                      var options = {
+                        title: "Overall Count of Youtube Influencers",
+//                        width: 800,
+//                        height: 400,
+                        bar: {groupWidth: "75%"},
+                        legend: { position: "none" },
+                      };
+                      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+                      chart.draw(view, options);
+                  }
+                  </script>
+                <div id="columnchart_values" style="width: auto; height: 400px;"></div>
+            </div>
+<!--
+            <div class="col-xl-8">
+                <div class="card mb-3">
+                  <div class="card-header">
+                    <i class="fas fa-chart-bar"></i>
+                    Bar Chart Example</div>
+                  <div class="card-body">
+                    <canvas id="myBarChart" width="100%" height="50"></canvas>
+                  </div>
+                </div>
+            </div>
+-->
+            
             
 <!--
             <div class="col-xl-4 col-md-4">
@@ -169,5 +217,51 @@
 
       </div>
       <!-- /.container-fluid -->
-
+<!--
+<script src="vendor/chart.js/Chart.min.js"></script>
+<script>
+var ctx = document.getElementById("myBarChart");
+var myLineChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ["Total Influencers", "Exclusive Influencers", "Male Influencers", "Female Influencers"],
+    datasets: [{
+      label: "Count",
+      backgroundColor: ['black','red','blue','pink'],
+      borderColor: "rgba(2,117,216,1)",
+      data: [<?php //echo youinfluencercount(); ?>, <?php //echo youexclusivecount(); ?>, <?php //echo youmalecount(); ?>,
+            <?php //echo youfemalecount(); ?>],
+    }],
+  },
+  options: {
+    scales: {
+      xAxes: [{
+        time: {
+          unit: 'influencers'
+        },
+        gridLines: {
+          display: false
+        },
+        ticks: {
+          maxTicksLimit: 6
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          min: 0,
+          max: <?php //echo youinfluencercount(); ?>,
+          maxTicksLimit: 7
+        },
+        gridLines: {
+          display: true
+        }
+      }],
+    },
+    legend: {
+      display: false
+    }
+  }
+});    
+</script>
+-->
  <?php include "footer.php"; ?>     

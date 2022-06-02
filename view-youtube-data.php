@@ -560,7 +560,12 @@ $i = 1;
  
  <link rel="stylesheet"
     href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>     
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+<style>
+    .ui-slider{background: #9099a3;}
+    .ui-slider-range{background: #0062cc;}
+    .ui-state-default, .ui-state-hover{background: #ED1B34 !important;}
+</style>    
 <script>
 //document.oncontextmenu = new Function("return false;");
 $(document).ready(function(){

@@ -4,7 +4,7 @@ include "functions/functions.php";
 date_default_timezone_set("Asia/Kolkata");
 //header('Content-type: application/json');  
 //$API_Url = 'https://youtube.googleapis.com/youtube/v3/channels?part=snippet&part=statistics&id=UCA7RxVq2pMGYp_-Qo4S2dEw&key=AIzaSyClR56gbTmK3BhSka8UdrV8bjLYmJYHqSk';
-$API_Key = 'AIzaSyDnY3cRDBb-K2QlEHXdKc1mmN2bYY1NVGY'; //ZAKI API KEY
+$API_Key = ''; //ZAKI API KEY
 $date = date('Y-m-d');
 //$date2 = date('Y-m-d', strtotime('-7 days') );
 $time = date('10:00:00');
@@ -90,7 +90,7 @@ while($j < $arrcount){
 //            $mail->Host = 'smtp.gmail.com';   
 //            $mail->SMTPAuth = true;     
 //            $mail->Username = 'faizan.kazi@enlyft.in';        
-//            $mail->Password = 'Enableayaan@2022#$%';    
+//            $mail->Password = '';    
 //            $mail->SMTPSecure = 'tls';   
 //            $mail->Port = 587;
 //            $mail->setFrom('faizan.kazi@enlyft.in', 'YouTube Email Alert');

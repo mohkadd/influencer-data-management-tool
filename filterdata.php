@@ -195,6 +195,8 @@ if(isset($_POST['submit_range'])){
                     <th>No. of Campaign done</th>
                     <th>Influencer Category</th>
                     <th>Name of Client Worked Before</th>
+                    <th>Celebrity</th>
+                    <th>Brands</th>
                     <th>Added On</th>
                     <th>Added By</th>
                     <th>Updated On</th>
@@ -230,6 +232,8 @@ if(isset($_POST['submit_range'])){
                     <th>No. of Campaign done</th>
                     <th>Influencer Category</th>
                     <th>Name of Client Worked Before</th>
+                    <th>Celebrity</th>
+                    <th>Brands</th>
                     <th>Added On</th>
                     <th>Added By</th>
                     <th>Updated On</th>
@@ -277,6 +281,8 @@ $i = 1;
                       <td><?php echo decrypt($row->no_of_campaign); ?></td>
                       <td><?php echo strtoupper($row->influencer_category); ?></td>
                       <td><?php echo decrypt($row->name_of_client_worked_before); ?></td>
+                      <td><?php echo $row->celebrity ?></td>
+                      <td><?php echo $row->brands ?></td>
                       <td><?php echo $row->added_on; ?></td>
                       <td><?php echo $row->added_by; ?></td>
                       <td><?php echo $row->updated_on; ?></td>
@@ -327,6 +333,8 @@ $i = 1;
                     <th>No. of Campaign done</th>
                     <th>Influencer Category</th>
                     <th>Name of Client Worked Before</th>
+                    <th>Celebrity</th>
+                    <th>Brands</th>
                     <th>Added On</th>
                     <th>Added By</th>
                     <th>Updated On</th>
@@ -362,6 +370,8 @@ $i = 1;
                     <th>No. of Campaign done</th>
                     <th>Influencer Category</th>
                     <th>Name of Client Worked Before</th>
+                    <th>Celebrity</th>
+                    <th>Brands</th>
                     <th>Added On</th>
                     <th>Added By</th>
                     <th>Updated On</th>
@@ -409,6 +419,8 @@ $i = 1;
                       <td><?php echo decrypt($row->no_of_campaign); ?></td>
                       <td><?php echo strtoupper($row->influencer_category); ?></td>
                       <td><?php echo decrypt($row->name_of_client_worked_before); ?></td>
+                      <td><?php echo $row->celebrity ?></td>
+                      <td><?php echo $row->brands ?></td>
                       <td><?php echo $row->added_on; ?></td>
                       <td><?php echo $row->added_by; ?></td>
                       <td><?php echo $row->updated_on; ?></td>
@@ -449,7 +461,9 @@ $i = 1;
                     <th>Influencer Name</th>
                     <th>Campaign Done Earlier</th>
                     <th>No. of Campaign done</th>
-                    <th>Influencer Category</th>                    
+                    <th>Influencer Category</th> 
+                    <th>Celebrity</th>
+                    <th>Brands</th>                   
                   </tr>
                 </thead>
                 <tfoot>
@@ -473,7 +487,9 @@ $i = 1;
                     <th>Influencer Name</th>
                     <th>Campaign Done Earlier</th>
                     <th>No. of Campaign done</th>
-                    <th>Influencer Category</th>                    
+                    <th>Influencer Category</th>
+                    <th>Celebrity</th>
+                    <th>Brands</th>                    
                   </tr>
                 </tfoot>
 
@@ -510,6 +526,8 @@ $i = 1;
                       <td><?php echo decrypt($row->campaign_done_earlier); ?></td>
                       <td><?php echo decrypt($row->no_of_campaign); ?></td>
                       <td><?php echo strtoupper($row->influencer_category); ?></td>
+                      <td><?php echo $row->celebrity ?></td>
+                      <td><?php echo $row->brands ?></td>
                   </tr>
 
                 <?php 
@@ -711,6 +729,8 @@ function update(){
         var no_of_campaign = $("#no_of_campaign").val().trim();
         var influencer_category = $("#influencer_category").val().trim();
         var name_of_client_worked_before = $("#name_of_client_worked_before").val().trim();
+        var celebrity = $('#celebrity').val().trim();
+        var brands = $('#brands').val().trim();
         
         if(channel_name !== ""){
 //            alert("hello");
@@ -793,7 +813,7 @@ function update(){
                                                                 avg_views:avg_views,avg_likes:avg_likes,influencer_name:influencer_name,
                                                                 campaign_done_earlier:campaign_done_earlier,no_of_campaign:no_of_campaign,
                                                                 influencer_category:influencer_category,name_of_client_worked_before:name_of_client_worked_before,
-                                                                updateyoutube:"updateyoutube"},
+                                                                celebrity:celebrity,brands:brands,updateyoutube:"updateyoutube"},
                                                                 beforeSend: function(){
                                                                     $('.update').prop("disabled",true);
                                                                     $('.update').text("Updating....");

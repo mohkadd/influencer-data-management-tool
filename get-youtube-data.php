@@ -3,8 +3,8 @@ include "config-pdo.php";
 include "functions/functions.php";
 
 //header('Content-type: application/json');  
-//$API_Url = 'https://youtube.googleapis.com/youtube/v3/channels?part=snippet&part=statistics&id=UCA7RxVq2pMGYp_-Qo4S2dEw&key=AIzaSyClR56gbTmK3BhSka8UdrV8bjLYmJYHqSk';
-$API_Key = 'AIzaSyClR56gbTmK3BhSka8UdrV8bjLYmJYHqSk';
+//$API_Url = 'https://youtube.googleapis.com/youtube/v3/channels?part=snippet&part=statistics&id=UCA7RxVq2pMGYp_-Qo4S2dEw&key=[APIKEY]';
+$API_Key = '';
 
 $selectqry = "SELECT id, subscribers, channel_name, profile_url, influencer_category, celebrity from youtube";
 $stmt = $con->prepare($selectqry);

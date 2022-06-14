@@ -101,6 +101,10 @@ function checkemptynumber($data){
         $influencer_category = cleanup($_POST['influencer_category']);
         $name_of_client_worked_before = cleanup($_POST['name_of_client_worked_before']);
         $name_of_client_worked_before = checkemptystring($name_of_client_worked_before);
+        $celebrity = cleanup($_POST['celebrity']);
+        $celebrity = checkemptystring($celebrity);
+        $brands = cleanup($_POST['brands']);
+        $brands = checkemptystring($brands);
 
         if(empty($channel_name) || empty($profile_url) || empty($language) || empty($gender) || 
            empty($enlyft_exclusive) || empty($contact_number) || empty($contact_person_name) ||
@@ -135,6 +139,7 @@ function checkemptynumber($data){
             `influencer_name`=:influencer_name,`campaign_done_earlier`=:campaign_done_earlier,
             `no_of_campaign`=:no_of_campaign,`influencer_category`=:influencer_category,
             `name_of_client_worked_before`=:name_of_client_worked_before,
+            `celebrity`=:celebrity,`brands`=:brands,
             `updated_on`=:updated_on,`updated_by`=:updated_by WHERE `id`=:id";
                 $stmt = $con->prepare($updateqry);
                 $stmt->execute([
@@ -151,6 +156,7 @@ function checkemptynumber($data){
                 "influencer_name"=>$influencer_name,"campaign_done_earlier"=>$campaign_done_earlier,
                 "no_of_campaign"=>$no_of_campaign,"influencer_category"=>$influencer_category,
                 "name_of_client_worked_before"=>$name_of_client_worked_before,
+                "celebrity"=>$celebrity,"brands"=>$brands,    
                 "updated_on"=>$updated_on,"updated_by"=>$updated_by,"id"=>$id
                 ]);
             $updatemaster="UPDATE `masteryoutube` SET `channel_name`=:channel_name, `profile_url`=:profile_url, 
@@ -163,6 +169,7 @@ function checkemptynumber($data){
             `influencer_name`=:influencer_name,`campaign_done_earlier`=:campaign_done_earlier,
             `no_of_campaign`=:no_of_campaign,`influencer_category`=:influencer_category,
             `name_of_client_worked_before`=:name_of_client_worked_before,
+            `celebrity`=:celebrity,`brands`=:brands,
             `updated_on`=:updated_on,`updated_by`=:updated_by WHERE `id`=:id";
                 $stmt1 = $con->prepare($updatemaster);
                 $stmt1->execute([
@@ -179,6 +186,7 @@ function checkemptynumber($data){
                 "influencer_name"=>$influencer_name,"campaign_done_earlier"=>$campaign_done_earlier,
                 "no_of_campaign"=>$no_of_campaign,"influencer_category"=>$influencer_category,
                 "name_of_client_worked_before"=>$name_of_client_worked_before,
+                "celebrity"=>$celebrity,"brands"=>$brands,
                 "updated_on"=>$updated_on,"updated_by"=>$updated_by,"id"=>$id
                 ]);
         if($stmt){

@@ -308,6 +308,26 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                           <input type='text' id='name_of_client_worked_before' name='name_of_client_worked_before' class='form-control' placeholder='Enter Name of Client Worked Before' value='".decrypt($row->name_of_client_worked_before)."'>
                         </div>
                       </div>
+                      
+                      <div class='col-md-4'>
+                        <div class='form-group'>
+                          <label for='celebrity'>Is He/She Celebrity?</label>
+                          <select name='celebrity' id='celebrity' class='form-control'>
+                              <option value=''>Select Option</option>
+                              <option value='$row->celebrity' selected>$row->celebrity</option>
+                              <option value='Yes'>Yes</option>
+                              <option value='No'>No</option>        
+                              <option value='NA'>NA</option>        
+                          </select>
+                        </div>
+                      </div>
+                      
+                      <div class='col-md-4'>
+                        <div class='form-group'>
+                          <label for='brands'>Brand Names Work With</label>
+                          <input type='text' id='brands' name='brands' class='form-control' placeholder='Enter Influencer Name' value='$row->brands'>
+                        </div>
+                      </div>
                           
                     </div>
                     <button class='btn btn-primary update' onclick='return update()' type='submit' name='updateyoutube' id='updateyoutube'>Update</button>

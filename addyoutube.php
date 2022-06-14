@@ -125,6 +125,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['uploadfile'])){
                 $influencer_category = strtoupper($influencer_category);
                 $name_of_client_worked_before = $worksheet->getCellByColumnAndRow(24,$row)->getValue();
                 $name_of_client_worked_before = checkemptystring($name_of_client_worked_before);
+                $celebrity = $worksheet->getCellByColumnAndRow(25,$row)->getValue();
+                $celebrity = checkemptystring($celebrity);
+                $brands = $worksheet->getCellByColumnAndRow(26,$row)->getValue();
+                $brands = checkemptystring($brands);
                 $encrypturl = encrypt($profile_url);
                 $checkurl1 = "SELECT `profile_url` from `youtube` WHERE `profile_url`=:profile_url";
                 $stmt3 = $con->prepare($checkurl1);
@@ -157,13 +161,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['uploadfile'])){
                     $insertqry="INSERT INTO `youtube`(`channel_name`, `profile_url`, `subscribers`,`genre`,`language`,`gender`,`enlyft_exclusive`,`integrated_video_cost`,
                     `dedicated_video_cost`,`youtube_story_cost`,`youtube_shorts_cost`,`contact_number`,`contact_person_name`,
                     `email_id`,`comment`,`address`,`city`,`state`,`avg_views`,`avg_likes`,
-                    `influencer_name`,`campaign_done_earlier`,`no_of_campaign`,`influencer_category`,`name_of_client_worked_before`,`added_on`,`added_by`,`updated_on`,`updated_by`) VALUES 
+                    `influencer_name`,`campaign_done_earlier`,`no_of_campaign`,`influencer_category`,`name_of_client_worked_before`,
+                    `celebrity`,`brands`,`added_on`,`added_by`,`updated_on`,`updated_by`) VALUES 
                     (:channel_name,:profile_url,:subscribers,:genre,:language,
                     :gender,:enlyft_exclusive,:integrated_video_cost,:dedicated_video_cost,
                     :youtube_story_cost,:youtube_shorts_cost,:contact_number,:contact_person_name,
                     :email_id,:comment,:address,:city,
                     :state,:avg_views,:avg_likes,:influencer_name,:campaign_done_earlier,:no_of_campaign,
-                    :influencer_category,:name_of_client_worked_before,
+                    :influencer_category,:name_of_client_worked_before,:celebrity,:brands,
                     :added_on,:added_by,:updated_on,:updated_by)";
                     $stmt = $con->prepare($insertqry);
                     $stmt->execute([
@@ -181,6 +186,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['uploadfile'])){
                     "influencer_name"=>$influencer_name,"campaign_done_earlier"=>$campaign_done_earlier,
                     "no_of_campaign"=>$no_of_campaign,"influencer_category"=>$influencer_category,
                     "name_of_client_worked_before"=>$name_of_client_worked_before,
+                    "celebrity"=>$celebrity,"brands"=>$brands,    
                     "added_on"=>$added_on,"added_by"=>$added_by,
                     "updated_on"=>$updated_on,"updated_by"=>$updated_by
                     ]);
@@ -188,13 +194,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['uploadfile'])){
                         $masterqry="INSERT INTO `masteryoutube`(`channel_name`, `profile_url`, `subscribers`,`genre`,`language`,`gender`,`enlyft_exclusive`,`integrated_video_cost`,
                         `dedicated_video_cost`,`youtube_story_cost`,`youtube_shorts_cost`,`contact_number`,`contact_person_name`,
                         `email_id`,`comment`,`address`,`city`,`state`,`avg_views`,`avg_likes`,
-                        `influencer_name`,`campaign_done_earlier`,`no_of_campaign`,`influencer_category`,`name_of_client_worked_before`,`added_on`,`added_by`,`updated_on`,`updated_by`) VALUES 
+                        `influencer_name`,`campaign_done_earlier`,`no_of_campaign`,`influencer_category`,`name_of_client_worked_before`,
+                        `celebrity`,`brands`,`added_on`,`added_by`,`updated_on`,`updated_by`) VALUES 
                         (:channel_name,:profile_url,:subscribers,:genre,:language,
                         :gender,:enlyft_exclusive,:integrated_video_cost,:dedicated_video_cost,
                         :youtube_story_cost,:youtube_shorts_cost,:contact_number,:contact_person_name,
                         :email_id,:comment,:address,:city,
                         :state,:avg_views,:avg_likes,:influencer_name,:campaign_done_earlier,:no_of_campaign,
-                        :influencer_category,:name_of_client_worked_before,
+                        :influencer_category,:name_of_client_worked_before,:celebrity,:brands,
                         :added_on,:added_by,:updated_on,:updated_by)";
                         $stmt1 = $con->prepare($masterqry);
                         $stmt1->execute([
@@ -212,6 +219,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['uploadfile'])){
                         "influencer_name"=>$influencer_name,"campaign_done_earlier"=>$campaign_done_earlier,
                         "no_of_campaign"=>$no_of_campaign,"influencer_category"=>$influencer_category,
                         "name_of_client_worked_before"=>$name_of_client_worked_before,
+                        "celebrity"=>$celebrity,"brands"=>$brands,
                         "added_on"=>$added_on,"added_by"=>$added_by,
                         "updated_on"=>$updated_on,"updated_by"=>$updated_by
                         ]);
@@ -332,6 +340,10 @@ if(isset($_POST['insertyoutube']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
     $influencer_category = strtoupper($influencer_category);
     $name_of_client_worked_before = cleanup($_POST['name_of_client_worked_before']);
     $name_of_client_worked_before = checkemptystring($name_of_client_worked_before);
+    $celebrity = cleanup($_POST['celebrity']);
+    $celebrity = checkemptystring($celebrity);
+    $brands = cleanup($_POST['brands']);
+    $brands = checkemptystring($brands);
     
     if(empty($channel_name) || empty($profile_url) || empty($language) || empty($gender) || 
        empty($enlyft_exclusive) || empty($contact_number) || empty($contact_person_name) ||
@@ -358,13 +370,14 @@ if(isset($_POST['insertyoutube']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
         $insertqry="INSERT INTO `youtube`(`channel_name`, `profile_url`, `subscribers`,`genre`,`language`,`gender`,`enlyft_exclusive`,`integrated_video_cost`,
             `dedicated_video_cost`,`youtube_story_cost`,`youtube_shorts_cost`,`contact_number`,`contact_person_name`,
             `email_id`,`comment`,`address`,`city`,`state`,`avg_views`,`avg_likes`,
-            `influencer_name`,`campaign_done_earlier`,`no_of_campaign`,`influencer_category`,`name_of_client_worked_before`,`added_on`,`added_by`,`updated_on`,`updated_by`) VALUES 
+            `influencer_name`,`campaign_done_earlier`,`no_of_campaign`,`influencer_category`,`name_of_client_worked_before`,
+            `celebrity`,`brands`,`added_on`,`added_by`,`updated_on`,`updated_by`) VALUES 
             (:channel_name,:profile_url,:subscribers,:genre,:language,
             :gender,:enlyft_exclusive,:integrated_video_cost,:dedicated_video_cost,
             :youtube_story_cost,:youtube_shorts_cost,:contact_number,:contact_person_name,
             :email_id,:comment,:address,:city,
             :state,:avg_views,:avg_likes,:influencer_name,:campaign_done_earlier,:no_of_campaign,
-            :influencer_category,:name_of_client_worked_before,
+            :influencer_category,:name_of_client_worked_before,:celebrity,:brands,
             :added_on,:added_by,:updated_on,:updated_by)";
             $stmt = $con->prepare($insertqry);
             $stmt->execute([
@@ -381,19 +394,21 @@ if(isset($_POST['insertyoutube']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
             "influencer_name"=>$influencer_name,"campaign_done_earlier"=>$campaign_done_earlier,
             "no_of_campaign"=>$no_of_campaign,"influencer_category"=>$influencer_category,
             "name_of_client_worked_before"=>$name_of_client_worked_before,
+            "celebrity"=>$celebrity,"brands"=>$brands,    
             "added_on"=>$added_on,"added_by"=>$added_by,
             "updated_on"=>$updated_on,"updated_by"=>$updated_by
             ]);
         $masterqry="INSERT INTO `masteryoutube`(`channel_name`, `profile_url`, `subscribers`,`genre`,`language`,`gender`,`enlyft_exclusive`,`integrated_video_cost`,
             `dedicated_video_cost`,`youtube_story_cost`,`youtube_shorts_cost`,`contact_number`,`contact_person_name`,
             `email_id`,`comment`,`address`,`city`,`state`,`avg_views`,`avg_likes`,
-            `influencer_name`,`campaign_done_earlier`,`no_of_campaign`,`influencer_category`,`name_of_client_worked_before`,`added_on`,`added_by`,`updated_on`,`updated_by`) VALUES 
+            `influencer_name`,`campaign_done_earlier`,`no_of_campaign`,`influencer_category`,`name_of_client_worked_before`,
+            `celebrity`,`brands`,`added_on`,`added_by`,`updated_on`,`updated_by`) VALUES 
             (:channel_name,:profile_url,:subscribers,:genre,:language,
             :gender,:enlyft_exclusive,:integrated_video_cost,:dedicated_video_cost,
             :youtube_story_cost,:youtube_shorts_cost,:contact_number,:contact_person_name,
             :email_id,:comment,:address,:city,
             :state,:avg_views,:avg_likes,:influencer_name,:campaign_done_earlier,:no_of_campaign,
-            :influencer_category,:name_of_client_worked_before,
+            :influencer_category,:name_of_client_worked_before,:celebrity,:brands,
             :added_on,:added_by,:updated_on,:updated_by)";
             $stmt1 = $con->prepare($masterqry);
             $stmt1->execute([
@@ -410,6 +425,7 @@ if(isset($_POST['insertyoutube']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
             "influencer_name"=>$influencer_name,"campaign_done_earlier"=>$campaign_done_earlier,
             "no_of_campaign"=>$no_of_campaign,"influencer_category"=>$influencer_category,
             "name_of_client_worked_before"=>$name_of_client_worked_before,
+            "celebrity"=>$celebrity,"brands"=>$brands,    
             "added_on"=>$added_on,"added_by"=>$added_by,
             "updated_on"=>$updated_on,"updated_by"=>$updated_by
             ]);

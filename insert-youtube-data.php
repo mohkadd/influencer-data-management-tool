@@ -312,6 +312,25 @@ if($_SESSION['admintype'] == 3){
                         </div>
                       </div>
                       
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="celebrity">Is He/She Celebrity?</label>
+                          <select name="celebrity" id="celebrity" class="form-control">
+                              <option value="">Select Option</option>
+                              <option value="Yes">Yes</option>
+                              <option value="No">No</option>        
+                              <option value="NA">NA</option>        
+                          </select>
+                        </div>
+                      </div>
+                      
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="brands">Brand Names Work With</label>
+                          <input type="text" id="brands" name="brands" class="form-control" placeholder="Enter Influencer Name">
+                        </div>
+                      </div>
+                      
                     </div>
                   </div>
                   <button class="btn btn-success" onclick="return insert()" type="submit" name="insertyoutube" id="insertyoutube">Submit</button>
@@ -368,6 +387,8 @@ $(document).ready(function() {
         var no_of_campaign = $("#no_of_campaign").val().trim();
         var influencer_category = $("#influencer_category").val().trim();
         var name_of_client_worked_before = $("#name_of_client_worked_before").val().trim();
+        var celebrity = $('#celebrity').val().trim();
+        var brands = $('#brands').val().trim();
         
         if(channel_name !== ""){
 //            alert("hello");
@@ -447,7 +468,7 @@ $(document).ready(function() {
                                                                 avg_views:avg_views,avg_likes:avg_likes,influencer_name:influencer_name,
                                                                 campaign_done_earlier:campaign_done_earlier,no_of_campaign:no_of_campaign,
                                                                 influencer_category:influencer_category,name_of_client_worked_before:name_of_client_worked_before,
-                                                                insertyoutube:"insertyoutube"},
+                                                                celebrity:celebrity,brands:brands,insertyoutube:"insertyoutube"},
                                                                 beforeSend: function(){
                                                                     $('#insertyoutube').prop("disabled",true);
                                                                     $('#insertyoutube').text("Submitting....");

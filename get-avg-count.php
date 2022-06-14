@@ -6,8 +6,24 @@ include "functions/functions.php";
 //header('Content-type: application/json');  
 //$API_Url = 'https://youtube.googleapis.com/youtube/v3/channels?part=snippet&part=statistics&id=UCA7RxVq2pMGYp_-Qo4S2dEw&key=AIzaSyClR56gbTmK3BhSka8UdrV8bjLYmJYHqSk';
 $API_Key = 'AIzaSyClR56gbTmK3BhSka8UdrV8bjLYmJYHqSk';
+//get first row id
+$getfirstid = "SELECT id from youtube order by id asc limit 1";
+$stmtfsid = $con->prepare($getfirstid);
+$stmtfsid->execute();
+$rowfs = $stmtfsid->fetch();
+$firstid = $rowfs->id;
 
-$selectqry = "SELECT * from youtube";
+//offset value
+$offset = 40;
+
+//get last row id
+$getlastid = "SELECT id from youtube order by id desc limit 1";
+$stmtlsid = $con->prepare($getlastid);
+$stmtlsid->execute();
+$rowls = $stmtlsid->fetch();
+$lastid = $rowls->id;
+
+$selectqry = "SELECT * from youtube where id between $lastid and $newid";
 $stmt = $con->prepare($selectqry);
 $stmt->execute();
 $rowcount =  $stmt->rowCount()."<br>";

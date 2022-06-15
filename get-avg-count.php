@@ -4,26 +4,58 @@ include "config-pdo.php";
 include "functions/functions.php";
 
 //header('Content-type: application/json');  
-//$API_Url = 'https://youtube.googleapis.com/youtube/v3/channels?part=snippet&part=statistics&id=UCA7RxVq2pMGYp_-Qo4S2dEw&key=AIzaSyClR56gbTmK3BhSka8UdrV8bjLYmJYHqSk';
-$API_Key = 'AIzaSyClR56gbTmK3BhSka8UdrV8bjLYmJYHqSk';
+//$API_Url = 'https://youtube.googleapis.com/youtube/v3/channels?part=snippet&part=statistics&id=UCA7RxVq2pMGYp_-Qo4S2dEw&key=[APIKEY]';
+$API_Key = '';
 //get first row id
 $getfirstid = "SELECT id from youtube order by id asc limit 1";
 $stmtfsid = $con->prepare($getfirstid);
 $stmtfsid->execute();
 $rowfs = $stmtfsid->fetch();
-$firstid = $rowfs->id;
-
-//offset value
-$offset = 40;
+$firstrowid1 = $rowfs->id;
 
 //get last row id
 $getlastid = "SELECT id from youtube order by id desc limit 1";
 $stmtlsid = $con->prepare($getlastid);
 $stmtlsid->execute();
 $rowls = $stmtlsid->fetch();
-$lastid = $rowls->id;
+$lastrowid1 = $rowls->id;
 
-$selectqry = "SELECT * from youtube where id between $lastid and $newid";
+//offset value
+$offset = 20;
+
+$updaterowid = "UPDATE ytid SET firstrowid = '".$firstrowid1."', lastrowid = '".$lastrowid1."'";
+$stmtrd = $con->prepare($updaterowid);
+$stmtrd->execute();
+
+$getrowid = "SELECT firstrowid, lastrowid,firstid,lastid from ytid";
+$stmtrid = $con->prepare($getrowid);
+$stmtrid->execute();
+$rowr = $stmtrid->fetch();
+$firstrowid = $rowr->firstrowid;
+$lastrowid = $rowr->lastrowid;
+$firstid = $rowr->firstid;
+$lastid = $rowr->lastid;
+echo "firstrowid from ytid table ".$firstrowid." <br>";
+echo "lastrowid from ytid table ".$lastrowid." <br><br>";
+
+if($firstid == $firstrowid){
+    $firstid = $firstrowid;
+    $lastid = $offset;
+}
+
+//update id youtube id table
+$updateid = "UPDATE ytid SET firstid = '".$firstid."', lastid = '".$lastid."'";
+$stmtmi = $con->prepare($updateid);
+$stmtmi->execute();
+echo "firstid from ytid table ".$firstid." <br>";
+echo "lastid from ytid table ".$lastid." <br><br>";
+//
+
+if($lastid > $lastrowid){
+    $lastid = $lastrowid;
+}
+
+$selectqry = "SELECT * from youtube where id between ".$firstid." and ".$lastid."";
 $stmt = $con->prepare($selectqry);
 $stmt->execute();
 $rowcount =  $stmt->rowCount()."<br>";
@@ -81,7 +113,7 @@ while($row = $stmt->fetch()){
     }
     $avg_views = ceil($views/10);
     $avg_likes = ceil($likes/10);
-    echo "<br>Avg Views ".$avg_views." Avg Likes ".$avg_likes."<br>";
+    echo "Avg Views ".$avg_views." Avg Likes ".$avg_likes."<br><br>";
     $updatelikeview = "UPDATE `youtube` SET `avg_views`=:avg_views, `avg_likes`=:avg_likes WHERE `profile_url`=:profile_url";
     $stmt1 = $con->prepare($updatelikeview);
     $stmt1->execute(["avg_views"=>$avg_views,"avg_likes"=>$avg_likes,"profile_url"=>$row->profile_url]);
@@ -94,10 +126,25 @@ while($row = $stmt->fetch()){
     $i = 0;$j = 1;
 }
 
+
+if($lastid == $lastrowid){
+    $firstid = $firstrowid;
+    $lastid = $offset;
+}
+else{
+    $firstid = $lastid;
+    $lastid = $lastid + $offset;
+}
+
+//update id youtube id table
+$updateid2 = "UPDATE ytid SET firstid = '".$firstid."', lastid = '".$lastid."'";
+$stmtmi2 = $con->prepare($updateid2);
+$stmtmi2->execute();
+
 date_default_timezone_set("Asia/Kolkata");
 $datenow = date("Y-m-d H:i:s");
 $operation = "Avg views, Avg likes Update";
-$comment = "Avg Views and Avg Likes has been updated of youtube channels through YouTube API cron job at $datenow";
+$comment = "Avg Views and Avg Likes has been updated of $offset youtube channels through YouTube API cron job at $datenow";
 $ipaddress = "0.0.0.0";
 $browser = "NA";
 $userid = "0";

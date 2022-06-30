@@ -38,8 +38,8 @@ if($_SESSION['admintype'] == 3){
                             <li>Step 1 => Download Excel Template</li>
                             <li>Step 2 => Columns marked in <span class="text-danger"><strong>Yellow are Mandatory fields</strong></span>, kindly fill those field properly for smooth importing process</li>
                             <li>Step 3 => Make sure each mandatory field entry has proper value respective to the columns whether its text or numeric value</li>
-                            <li>Step 4 => Once you have entered or copied the data properly, <span class="text-danger"><strong>delete the header row which have column name</strong></span></li>
-                            <li>Step 5 => Save the file and Import the excel below by selecting <span class="text-danger"><strong>.xlsx</strong></span> the file</li>
+<!--                            <li>Step 4 => Once you have entered or copied the data properly, <span class="text-danger"><strong>delete the header row which have column name</strong></span></li>-->
+                            <li>Step 4 => Save the file and Import the excel below by selecting <span class="text-danger"><strong>.xlsx</strong></span> the file</li>
                         </ul>
 <!--                        <p><span class="text-danger"><strong>Note: Make sure each profile url excel you are uploading is not present in system database, otherwise data importing will be failed due to already existing data.</strong></span></p>-->
                       </div>

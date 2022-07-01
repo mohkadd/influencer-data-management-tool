@@ -66,6 +66,10 @@
                               <td><?php echo youexclusivecount(); ?></td>
                           </tr>
                           <tr>
+                              <td>Non-Exclusive Influencers</td>
+                              <td><?php echo younonexclusivecount(); ?></td>
+                          </tr>
+                          <tr>
                               <td>Male</td>
                               <td><?php echo youmalecount(); ?></td>
                           </tr>
@@ -90,6 +94,7 @@
                         ["Element", "Count", { role: "style" } ],
                         ["Total Influencers", <?php echo youinfluencercount(); ?>, "black"],
                         ["Exclusive Influencers", <?php echo youexclusivecount(); ?>, "red"],
+                        ["Non-Exclusive Influencers", <?php echo younonexclusivecount(); ?>, "yellow"],
                         ["Male Influencers", <?php echo youmalecount(); ?>, "blue"],
                         ["Female Influencers", <?php echo youfemalecount(); ?>, "pink"]
                       ]);
@@ -114,6 +119,92 @@
                   }
                   </script>
                 <div id="columnchart_values" style="width: auto; height: 400px;"></div>
+            </div>
+            
+            <div class="col-xl-4 col-md-4">
+              <?php 
+//                $localIP = getHostByName(getHostName());
+  
+// Displaying the address 
+//echo $localIP;
+                ?>
+               <div class="card mb-3" style="border:1px solid black;">
+                  <div class="card-header bg-dark text-white">
+                    <i class="fas fa-table"></i>
+                   Instagram
+                    </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-condensed" width="100%" cellspacing="0">
+                        <thead class="bg-dark text-white">
+                          <tr>
+                            <th>Properties</th>
+                            <th>Count</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                              <td>Total Influencers</td>
+                              <td><?php echo instainfluencercount(); ?></td>
+                          </tr>
+                          <tr>
+                              <td>Exclusive Influencers</td>
+                              <td><?php echo instaexclusivecount(); ?></td>
+                          </tr>
+                          <tr>
+                              <td>Non-Exclusive Influencers</td>
+                              <td><?php echo instanonexclusivecount(); ?></td>
+                          </tr>
+                          <tr>
+                              <td>Male</td>
+                              <td><?php echo instamalecount(); ?></td>
+                          </tr>
+                          <tr>
+                              <td>Female</td>
+                              <td><?php echo instafemalecount(); ?></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </div>
+            </div>
+            <div class="col-xl-8">
+                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                  <script type="text/javascript">
+                    google.charts.load("current", {packages:['corechart']});
+                    google.charts.setOnLoadCallback(drawChart);
+                    function drawChart() {
+                      var data = google.visualization.arrayToDataTable([
+                        ["Element", "Count", { role: "style" } ],
+                        ["Total Influencers", <?php echo instainfluencercount(); ?>, "black"],
+                        ["Exclusive Influencers", <?php echo instaexclusivecount(); ?>, "red"],
+                        ["Non-Exclusive Influencers", <?php echo instanonexclusivecount(); ?>, "yellow"],
+                        ["Male Influencers", <?php echo instamalecount(); ?>, "blue"],
+                        ["Female Influencers", <?php echo instafemalecount(); ?>, "pink"]
+                      ]);
+
+                      var view = new google.visualization.DataView(data);
+                      view.setColumns([0, 1,
+                                       { calc: "stringify",
+                                         sourceColumn: 1,
+                                         type: "string",
+                                         role: "annotation" },
+                                       2]);
+
+                      var options = {
+                        title: "Overall Count of Instagram Influencers",
+//                        width: 800,
+//                        height: 400,
+                        bar: {groupWidth: "75%"},
+                        legend: { position: "none" },
+                      };
+                      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values1"));
+                      chart.draw(view, options);
+                  }
+                  </script>
+                <div id="columnchart_values1" style="width: auto; height: 400px;"></div>
             </div>
 <!--
             <div class="col-xl-8">

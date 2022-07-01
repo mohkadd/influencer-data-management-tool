@@ -56,7 +56,7 @@
           <a class="dropdown-item" href="view-instagram-data.php">View Instagram Data</a>
           <a class="dropdown-item" href="insert-instagram-data.php">Insert Instagram Data</a>
           <a class="dropdown-item" href="import-instagram-data.php">Import Instagram Data</a>
-          <a class="dropdown-item" href="bulk-delete-youtube.php">Delete Instagram Data</a>          
+          <a class="dropdown-item" href="bulk-delete-instagram.php">Delete Instagram Data</a>          
         </div>
         <?php    
         }

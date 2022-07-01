@@ -44,11 +44,81 @@ function youinfluencercount(){
 //   }
 }
 
+function instainfluencercount(){
+  global $con;
+  $contact_count = "SELECT COUNT(id) AS influencer_count FROM instagram";
+  $stmt = $con->prepare($contact_count);
+  $stmt->execute();
+  $run_count = $stmt->rowCount();
+//   if ($run_count) {
+    if ($run_count == 1) {
+      if ($row = $stmt->fetch()) {
+        $number_contact = $row->influencer_count;
+        echo $number_contact;
+      }
+    }
+//   }
+}
+
 function youexclusivecount(){
   global $con;
   $enex = "Yes";
   $enex = encrypt($enex);    
   $contact_count = "SELECT COUNT(IF(enlyft_exclusive = '$enex', id, NULL)) AS exclusive_count FROM youtube";
+  $stmt = $con->prepare($contact_count);
+  $stmt->execute();
+  $run_count = $stmt->rowCount();
+//   if ($run_count) {
+    if ($run_count == 1) {
+      if ($row = $stmt->fetch()) {
+        $number_contact = $row->exclusive_count;
+        echo $number_contact;
+      }
+    }
+//   }
+}
+
+function younonexclusivecount(){
+  global $con;
+  $enex = "No";
+  $enex = encrypt($enex);    
+  $contact_count = "SELECT COUNT(IF(enlyft_exclusive = '$enex', id, NULL)) AS exclusive_count FROM youtube";
+  $stmt = $con->prepare($contact_count);
+  $stmt->execute();
+  $run_count = $stmt->rowCount();
+//   if ($run_count) {
+    if ($run_count == 1) {
+      if ($row = $stmt->fetch()) {
+        $number_contact = $row->exclusive_count;
+        echo $number_contact;
+      }
+    }
+//   }
+}
+
+function instaexclusivecount(){
+  global $con;
+  $enex = "Yes";
+  $enex = encrypt($enex);    
+  $contact_count = "SELECT COUNT(IF(enlyft_exclusive = '$enex', id, NULL)) AS exclusive_count FROM instagram";
+  $stmt = $con->prepare($contact_count);
+  $stmt->execute();
+  $run_count = $stmt->rowCount();
+//   if ($run_count) {
+    if ($run_count == 1) {
+      if ($row = $stmt->fetch()) {
+        $number_contact = $row->exclusive_count;
+        echo $number_contact;
+      }
+    }
+//   }
+}
+
+function instanonexclusivecount(){
+  global $con;
+  $enex = "No";
+  $enex = encrypt($enex);    
+  $contact_count = "SELECT COUNT(IF(enlyft_exclusive = '$enex', id, NULL)) AS exclusive_count FROM instagram";
   $stmt = $con->prepare($contact_count);
   $stmt->execute();
   $run_count = $stmt->rowCount();
@@ -81,6 +151,38 @@ function youmalecount(){
 function youfemalecount(){
   global $con;
   $contact_count = "SELECT COUNT(IF(gender = 'Female', id, NULL)) AS female_count FROM youtube";
+  $stmt = $con->prepare($contact_count);
+  $stmt->execute();
+  $run_count = $stmt->rowCount();
+//   if ($run_count) {
+    if ($run_count == 1) {
+      if ($row = $stmt->fetch()) {
+        $number_contact = $row->female_count;
+        echo $number_contact;
+      }
+    }
+//   }
+}
+
+function instamalecount(){
+  global $con;
+  $contact_count = "SELECT COUNT(IF(gender = 'Male', id, NULL)) AS male_count FROM instagram";
+  $stmt = $con->prepare($contact_count);
+  $stmt->execute();
+  $run_count = $stmt->rowCount();
+//   if ($run_count) {
+    if ($run_count == 1) {
+      if ($row = $stmt->fetch()) {
+        $number_contact = $row->male_count;
+        echo $number_contact;
+      }
+    }
+//   }
+}
+
+function instafemalecount(){
+  global $con;
+  $contact_count = "SELECT COUNT(IF(gender = 'Female', id, NULL)) AS female_count FROM instagram";
   $stmt = $con->prepare($contact_count);
   $stmt->execute();
   $run_count = $stmt->rowCount();

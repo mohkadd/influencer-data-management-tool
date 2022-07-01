@@ -3,10 +3,10 @@ include "config-pdo.php";
 include "functions/functions.php";
 
 //header('Content-type: application/json');  
-//$API_Url = 'https://youtube.googleapis.com/youtube/v3/channels?part=snippet&part=statistics&id=UCA7RxVq2pMGYp_-Qo4S2dEw&key=[APIKEY]';
+//$API_Url = 'https://youtube.googleapis.com/youtube/v3/channels?part=snippet&part=statistics&id=UCA7RxVq2pMGYp_-Qo4S2dEw&key=';
 $API_Key = '';
 
-$selectqry = "SELECT id, subscribers, channel_name, profile_url, influencer_category, celebrity from youtube";
+$selectqry = "SELECT id, subscribers, channel_name, profile_url, influencer_category, celebrity from youtube where id = 1";
 $stmt = $con->prepare($selectqry);
 $stmt->execute();
 $rowcount =  $stmt->rowCount()."<br>";
@@ -26,6 +26,8 @@ while($row = $stmt->fetch()){
     if(array_key_exists("items",$json_details)){
         if(!$json_details['items'][0]['statistics']['hiddenSubscriberCount']){
             $latestsub = $json_details['items'][0]['statistics']['subscriberCount'];
+            $latestchannelname = $json_details['items'][0]['snippet']['title'];
+            $latestchannelname = encrypt($latestchannelname);
             if($row->celebrity == "Yes"){
                 $influencer_category = "CAT - A";
             }
@@ -38,12 +40,14 @@ while($row = $stmt->fetch()){
             else{
                 $influencer_category = "CAT - C";
             }
-            $updatesub = "UPDATE `youtube` SET `subscribers`=:subscribers, `influencer_category`=:influencer_category WHERE `profile_url`=:profile_url";
+            $updatesub = "UPDATE `youtube` SET `channel_name`=:channel_name, `subscribers`=:subscribers, `influencer_category`=:influencer_category WHERE `profile_url`=:profile_url";
             $stmt1 = $con->prepare($updatesub);
-            $stmt1->execute(["subscribers"=>$latestsub,"influencer_category"=>$influencer_category,"profile_url"=>$row->profile_url]);
-            $updatemaster = "UPDATE `masteryoutube` SET `subscribers`=:subscribers, `influencer_category`=:influencer_category WHERE `profile_url`=:profile_url";
+            $stmt1->execute(["channel_name"=>$latestchannelname,
+            "subscribers"=>$latestsub,"influencer_category"=>$influencer_category,"profile_url"=>$row->profile_url]);
+            $updatemaster = "UPDATE `masteryoutube` SET `channel_name`=:channel_name, `subscribers`=:subscribers, `influencer_category`=:influencer_category WHERE `profile_url`=:profile_url";
             $stmt2 = $con->prepare($updatemaster);
-            $stmt2->execute(["subscribers"=>$latestsub,"influencer_category"=>$influencer_category,"profile_url"=>$row->profile_url]); 
+            $stmt2->execute(["channel_name"=>$latestchannelname,
+            "subscribers"=>$latestsub,"influencer_category"=>$influencer_category,"profile_url"=>$row->profile_url]); 
             $count++;
         }
     }

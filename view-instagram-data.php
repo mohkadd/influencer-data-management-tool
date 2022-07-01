@@ -661,14 +661,14 @@ $i = 1;
 <script>
 //document.oncontextmenu = new Function("return false;");
 $(document).ready(function(){
-
+  
  $("#dataTable").on('click','.delete',function(){
      var id = $(this).attr("id");
      var channel = $(this).data("influencer-name");
      var ask = confirm("Are you sure you want to delete "+channel+" instagram inlfuencer?");
      if(ask){
          $.ajax({
-         url:'deleteyoutubedata.php',
+         url:'deleteinstagramdata.php',
          type:'POST',
          data:{id:id,channel:channel},
          cache:false,

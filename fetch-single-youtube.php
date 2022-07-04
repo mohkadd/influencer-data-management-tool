@@ -5,6 +5,7 @@
 -->
 <?php 
 include 'config-pdo.php';
+session_start();
 define("encryption_method", "AES-128-CBC");
 define("key", "enlyft@2022#$%");
 define("iv", "dataencrypt@2022");
@@ -38,6 +39,13 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt1 = $con->prepare($query);
     $stmt1->execute();
     $count = $stmt1->rowCount();
+    if($_SESSION['admintype'] == 2){
+        $readonly = "readonly";
+    }
+    else{
+        $readonly = " ";
+    }
+    
 //   if ($run_users) {
     if ($count == 1) {
       if ($row = $stmt1->fetch()) {
@@ -56,14 +64,14 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                           <div class='col-md-4'>
                             <div class='form-group'>
                               <label for='title'>Profile URL <strong class='text-danger'>**</strong></label>
-                              <input type='text' id='profile_url' name='profile_url' class='form-control' placeholder='Enter Profile URL' value='".decrypt($row->profile_url)."' required readonly>
+                              <input type='text' id='profile_url' name='profile_url' class='form-control' placeholder='Enter Profile URL' value='".decrypt($row->profile_url)."' required ".$readonly.">
                             </div>
                           </div>
 
                           <div class='col-md-4'>
                             <div class='form-group'>
                               <label for='title'>Subscribers <strong class='text-danger'>##</strong></label>
-                              <input type='number' id='subscribers' name='subscribers' class='form-control' placeholder='Enter Subscribers' value='$row->subscribers'>
+                              <input type='number' id='subscribers' name='subscribers' class='form-control' placeholder='Enter Subscribers' value='$row->subscribers' ".$readonly.">
                             </div>
                           </div>
                           
@@ -165,7 +173,7 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                           <div class='col-md-4'>
                             <div class='form-group'>
                               <label for='title'>Contact Number <strong class='text-danger'>**</strong></label>
-                              <input type='text' id='contact_number' name='contact_number' onkeypress='return isNumberKey(event)' class='form-control' placeholder='Enter Valid 10 Digit Contact Number' value='".decrypt($row->contact_number)."' required>
+                              <input type='text' id='contact_number' name='contact_number' onkeypress='return isNumberKey(event)' class='form-control' placeholder='Enter Valid 10 Digit Contact Number' value='".decrypt($row->contact_number)."' required ".$readonly.">
                             </div>
                           </div>
 
@@ -179,7 +187,7 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                           <div class='col-md-4'>
                             <div class='form-group'>
                               <label for='title'>Email ID <strong class='text-danger'>**</strong></label>
-                              <input type='text' id='email_id' name='email_id' class='form-control' placeholder='Enter Email ID' value='".decrypt($row->email_id)."' required>
+                              <input type='text' id='email_id' name='email_id' class='form-control' placeholder='Enter Email ID' value='".decrypt($row->email_id)."' required ".$readonly.">
                             </div>
                           </div>
 

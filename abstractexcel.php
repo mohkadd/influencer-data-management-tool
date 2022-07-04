@@ -31,7 +31,7 @@ function decrypt($data) {
     }
 }
 $delimiter = ",";
-$fileName = "backup_" . date('YmdHis') . ".csv"; 
+$fileName = "backupyoutube_" . date('YmdHis') . ".csv"; 
 $f = fopen("backup/$fileName", 'w+');
 $fields = array('channel_name', 'profile_url', 'subscribers', 'genre', 'language', 'gender', 'enlyft_exclusive', 'integrated_video_cost', 'dedicated_video_cost', 'youtube_story_cost', 'youtube_shorts_cost', 'contact_number', 'contact_person_name', 'email_id', 'comment', 'address', 'city', 'state', 'avg_views', 'avg_likes', 'influencer_name', 'campaign_done_earlier', 'no_of_campaign', 'influencer_category', 'name_of_client_worked_before', 'celebrity', 'brands');
 fputcsv($f, $fields, $delimiter); 

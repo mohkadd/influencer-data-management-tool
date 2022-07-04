@@ -161,3 +161,4 @@ $i = 1;
       <!-- /.container-fluid -->
 
  <?php include "footer.php"; ?>
+ <?php include "download-enable.php"; ?>

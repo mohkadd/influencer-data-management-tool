@@ -24,6 +24,9 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
           if($row->admin_type == 3){
               $word = "Viewer";
           }
+          if($row->admin_type == 4){
+              $word = "Scrapper";
+          }
         $output = "
          
                     <form method='POST' id='edit' name='edit' action='updateuser.php'>
@@ -50,6 +53,7 @@ if (isset($_POST['id']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                                   <option value='1'>Super Admin</option>
                                   <option value='2'>Admin</option>
                                   <option value='3'>Viewer</option>
+                                  <option value='4'>Scrapper</option>
                               </select>
                             </div>
                           </div>

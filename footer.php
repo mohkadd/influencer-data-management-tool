@@ -67,7 +67,7 @@
   <script src="js/sb-admin.min.js"></script>
 
   <!-- Demo scripts for this page-->
-  <script src="js/demo/datatables-demo.js"></script>
+<!--  <script src="js/demo/datatables-demo.js"></script>-->
   <script>
 document.body.style.zoom="90%";
 </script>

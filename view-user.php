@@ -87,6 +87,9 @@ $i = 1;
                         if($row->admin_type == 3){
                             $usertype = "Viewer";
                         }
+                        if($row->admin_type == 4){
+                            $usertype = "Scrapper";
+                        }
                         echo $usertype; ?></td>
                       <td>
                           <a href="javascript:void(0);" class="btn btn-sm btn-info edit modalButton" data-toggle="modal" data-id="<?php echo $row->id;?>"><i class="fas fa-fw fa-edit" title="EDIT/UPDATE"></i></a>
@@ -194,7 +197,8 @@ $i = 1;
  
  <link rel="stylesheet"
     href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>     
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+<?php include "download-enable.php"; ?>    
 <script>
 //document.oncontextmenu = new Function("return false;");
 $(document).ready(function(){

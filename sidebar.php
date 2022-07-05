@@ -1,11 +1,17 @@
 <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
+     <?php 
+      if($_SESSION['admintype'] !== 4){
+        ?>
       <li class="nav-item active">
         <a class="nav-link" href="dashboard.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
         </a>
       </li>
+      <?php 
+      }
+    ?>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-play"></i>
@@ -41,6 +47,14 @@
         </div>
         <?php     
         }
+        if($_SESSION['admintype'] == 4){
+        ?>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+          <a class="dropdown-item" href="insert-youtube-data.php">Insert YouTube Data</a>
+          <a class="dropdown-item" href="import-youtube-data.php">Import YouTube Data</a>
+        </div>
+        <?php     
+        }
         ?>
       </li>
       <li class="nav-item dropdown">
@@ -52,7 +66,7 @@
         if($_SESSION['admintype'] == 1){
         ?>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="youtube-dashboard.php">Instagram Dashboard</a>
+          <a class="dropdown-item" href="instagram-dashboard.php">Instagram Dashboard</a>
           <a class="dropdown-item" href="view-instagram-data.php">View Instagram Data</a>
           <a class="dropdown-item" href="insert-instagram-data.php">Insert Instagram Data</a>
           <a class="dropdown-item" href="import-instagram-data.php">Import Instagram Data</a>
@@ -63,7 +77,7 @@
         if($_SESSION['admintype'] == 2){
         ?>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="youtube-dashboard.php">Instagram Dashboard</a>
+          <a class="dropdown-item" href="instagram-dashboard.php">Instagram Dashboard</a>
           <a class="dropdown-item" href="view-instagram-data.php">View Instagram Listing</a>
           <a class="dropdown-item" href="insert-instagram-data.php">Insert Instagram Data</a>
           <a class="dropdown-item" href="import-instagram-data.php">Import Instagram Data</a>
@@ -73,8 +87,16 @@
         if($_SESSION['admintype'] == 3){
         ?>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-          <a class="dropdown-item" href="youtube-dashboard.php">Instagram Dashboard</a>
+          <a class="dropdown-item" href="instagram-dashboard.php">Instagram Dashboard</a>
           <a class="dropdown-item" href="view-instagram-data.php">View Instagram Listing</a>
+        </div>
+        <?php     
+        }
+        if($_SESSION['admintype'] == 4){
+        ?>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+          <a class="dropdown-item" href="insert-instagram-data.php">Insert Instagram Data</a>
+          <a class="dropdown-item" href="import-instagram-data.php">Import Instagram Data</a>
         </div>
         <?php     
         }

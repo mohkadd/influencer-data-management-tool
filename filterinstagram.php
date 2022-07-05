@@ -666,7 +666,8 @@ $maxlikes1 = $row->maxlikes;
     .ui-slider{background: #9099a3;}
     .ui-slider-range{background: #0062cc;}
     .ui-state-default, .ui-state-hover{background: #ED1B34 !important;}
-</style>      
+</style>   
+<?php include "download-disable.php"; ?>   
 <script>
 document.oncontextmenu = new Function("return false;");
 $(document).ready(function(){

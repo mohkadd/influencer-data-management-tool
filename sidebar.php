@@ -43,7 +43,7 @@
         ?>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <a class="dropdown-item" href="youtube-dashboard.php">YouTube Dashboard</a>
-          <a class="dropdown-item" href="view-youtube-data.php">View YouTube Listing</a>
+          <a class="dropdown-item" href="youtube-filter-data.php">View YouTube Listing</a>
         </div>
         <?php     
         }

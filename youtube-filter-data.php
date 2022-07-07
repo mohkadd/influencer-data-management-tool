@@ -1,6 +1,6 @@
 <?php include "header.php"; ?>
 <?php
-if($_SESSION['admintype'] !== 3){
+if($_SESSION['admintype'] != 3){
     header("Location: dashboard.php");
 }
 
@@ -128,4 +128,3 @@ if($_SESSION['admintype'] !== 3){
       <!-- /.container-fluid -->
 
  <?php include "footer.php"; ?>
-

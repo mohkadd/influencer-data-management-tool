@@ -77,6 +77,10 @@
                               <td>Female</td>
                               <td><?php echo youfemalecount(); ?></td>
                           </tr>
+                          <tr>
+                              <td>Both</td>
+                              <td><?php echo youbothcount(); ?></td>
+                          </tr>
                         </tbody>
                       </table>
                     </div>
@@ -95,8 +99,9 @@
                         ["Total Influencers", <?php echo youinfluencercount(); ?>, "black"],
                         ["Exclusive Influencers", <?php echo youexclusivecount(); ?>, "red"],
                         ["Non-Exclusive Influencers", <?php echo younonexclusivecount(); ?>, "yellow"],
-                        ["Male Influencers", <?php echo youmalecount(); ?>, "blue"],
-                        ["Female Influencers", <?php echo youfemalecount(); ?>, "pink"]
+                        ["Male", <?php echo youmalecount(); ?>, "blue"],
+                        ["Female", <?php echo youfemalecount(); ?>, "pink"],
+                        ["Both", <?php echo youbothcount(); ?>, "maroon"]
                       ]);
 
                       var view = new google.visualization.DataView(data);
@@ -163,6 +168,10 @@
                               <td>Female</td>
                               <td><?php echo instafemalecount(); ?></td>
                           </tr>
+                          <tr>
+                              <td>Both</td>
+                              <td><?php echo instabothcount(); ?></td>
+                          </tr>
                         </tbody>
                       </table>
                     </div>
@@ -181,8 +190,9 @@
                         ["Total Influencers", <?php echo instainfluencercount(); ?>, "black"],
                         ["Exclusive Influencers", <?php echo instaexclusivecount(); ?>, "red"],
                         ["Non-Exclusive Influencers", <?php echo instanonexclusivecount(); ?>, "yellow"],
-                        ["Male Influencers", <?php echo instamalecount(); ?>, "blue"],
-                        ["Female Influencers", <?php echo instafemalecount(); ?>, "pink"]
+                        ["Male", <?php echo instamalecount(); ?>, "blue"],
+                        ["Female", <?php echo instafemalecount(); ?>, "pink"],
+                        ["Both", <?php echo instabothcount(); ?>, "maroon"]
                       ]);
 
                       var view = new google.visualization.DataView(data);

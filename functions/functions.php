@@ -132,6 +132,22 @@ function instanonexclusivecount(){
 //   }
 }
 
+function youbothcount(){
+  global $con;
+  $contact_count = "SELECT COUNT(IF(gender = 'Both', id, NULL)) AS male_count FROM youtube";
+  $stmt = $con->prepare($contact_count);
+  $stmt->execute();
+  $run_count = $stmt->rowCount();
+//   if ($run_count) {
+    if ($run_count == 1) {
+      if ($row = $stmt->fetch()) {
+        $number_contact = $row->male_count;
+        echo $number_contact;
+      }
+    }
+//   }
+}
+
 function youmalecount(){
   global $con;
   $contact_count = "SELECT COUNT(IF(gender = 'Male', id, NULL)) AS male_count FROM youtube";
@@ -158,6 +174,22 @@ function youfemalecount(){
     if ($run_count == 1) {
       if ($row = $stmt->fetch()) {
         $number_contact = $row->female_count;
+        echo $number_contact;
+      }
+    }
+//   }
+}
+
+function instabothcount(){
+  global $con;
+  $contact_count = "SELECT COUNT(IF(gender = 'Both', id, NULL)) AS male_count FROM instagram";
+  $stmt = $con->prepare($contact_count);
+  $stmt->execute();
+  $run_count = $stmt->rowCount();
+//   if ($run_count) {
+    if ($run_count == 1) {
+      if ($row = $stmt->fetch()) {
+        $number_contact = $row->male_count;
         echo $number_contact;
       }
     }

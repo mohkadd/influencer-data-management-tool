@@ -657,7 +657,8 @@ $i = 1;
     .ui-slider{background: #9099a3;}
     .ui-slider-range{background: #0062cc;}
     .ui-state-default, .ui-state-hover{background: #ED1B34 !important;}
-</style>    
+</style> 
+<?php include "download-disable.php"; ?>   
 <script>
 //document.oncontextmenu = new Function("return false;");
 $(document).ready(function(){
@@ -702,7 +703,7 @@ $("#dataTable").on('click','.modalButton',function(){
 //        $("#dynamicModal").modal('show');
 //        $("#modtext").text(media);
         $.ajax({
-            url:"fetch-single-youtube.php",
+            url:"fetch-single-instagram.php",
             method:"post",
             data:{id:id},
             success:function(response){
@@ -771,201 +772,190 @@ $(function() {
 <script>
 function update(){
         var id = $('#id').val().trim();
-        var channel_name = $('#channel_name').val().trim();
+        var unique_id = $('#unique_id').val().trim();
+        var influencer_name = $('#influencer_name').val().trim();
+        var handle = $('#handle').val().trim();
         var profile_url = $('#profile_url').val().trim();
-        var subscribers = $('#subscribers').val().trim();
+//        alert(extension1);
+        var followers = $('#followers').val().trim();
         var genre = $('#genre').val().trim();
         var language = $('#language').val().trim();
+        var verified = $('#verified').val().trim();
         var gender = $('#gender').val().trim();
         var enlyft_exclusive = $('#enlyft_exclusive').val().trim();
-        var integrated_video_cost = $('#integrated_video_cost').val().trim();
-        var dedicated_video_cost = $('#dedicated_video_cost').val().trim();
-        var youtube_story_cost = $('#youtube_story_cost').val().trim();
-        var youtube_shorts_cost = $('#youtube_shorts_cost').val().trim();
+        var image_cost = $('#image_cost').val().trim();
+        var video_cost = $('#video_cost').val().trim();
+        var igtv_cost = $('#igtv_cost').val().trim();
+        var reels_15sec = $('#reels_15sec').val().trim();
+        var reels_30sec = $('#reels_30sec').val().trim();
+        var image_story_cost = $('#image_story_cost').val().trim();
+        var video_story_cost = $('#video_story_cost').val().trim();
+        var image_story_swipeup_cost = $('#image_story_swipeup_cost').val().trim();
+        var video_story_swipeup_cost = $('#video_story_swipeup_cost').val().trim();
+        var carousel_cost = $('#carousel_cost').val().trim();
         var contact_number = $('#contact_number').val().trim();
         var contact_person_name = $('#contact_person_name').val().trim();
-        var email_id = $('#email_id').val().trim();
+        var email = $('#email').val().trim();
         var comment = $('#comment').val().trim();
         var address = $('#address').val().trim();
         var city = $('#city').val().trim();
         var state = $('#state').val().trim();
         var avg_views = $('#avg_views').val().trim();
         var avg_likes = $('#avg_likes').val().trim();
-        var influencer_name = $('#influencer_name').val().trim();
         var campaign_done_earlier = $("#campaign_done_earlier").val().trim();
         var no_of_campaign = $("#no_of_campaign").val().trim();
         var influencer_category = $("#influencer_category").val().trim();
         var name_of_client_worked_before = $("#name_of_client_worked_before").val().trim();
-        var celebrity = $('#celebrity').val().trim();
         var brands = $('#brands').val().trim();
+        var celebrity = $('#celebrity').val().trim();
         
-        if(channel_name !== ""){
-//            alert("hello");
-            if(profile_url !== ""){
-                if(subscribers !== ""){
-                   subscribers = parseInt(subscribers);
-                   if(isNaN(subscribers) && typeof subscribers !== 'number'){
-                        alert("Please Enter Valid Numeric Data");
-                        $("#subscribers").focus();
-                    }
-                }
-                if(language !== ""){
-                    if(gender !== ""){
-                        if(enlyft_exclusive !== ""){
-                            if(integrated_video_cost !== ""){
-                               integrated_video_cost = parseFloat(integrated_video_cost);
-                               if(isNaN(integrated_video_cost) && typeof integrated_video_cost !== 'number'){
-                                    alert("Please Enter Valid Numeric Data");
-                                    $("#integrated_video_cost").focus();
-                               }
-                            }
-                            if(dedicated_video_cost !== ""){
-                                dedicated_video_cost = parseFloat(dedicated_video_cost);
-                                if(isNaN(dedicated_video_cost) && typeof dedicated_video_cost !== 'number'){
-                                      alert("Please Enter Valid Numeric Data");
-                                      $("#dedicated_video_cost").focus();
-                               }
-                            }
-                            if(youtube_story_cost !== ""){
-                                youtube_story_cost = parseFloat(youtube_story_cost);
-                                if(isNaN(youtube_story_cost) && typeof youtube_story_cost !== 'number'){
-                                    alert("Please Enter Valid Numeric Data");
-                                    $("#youtube_story_cost").focus();
-                                }
-                            }
-                            if(youtube_shorts_cost !== ""){
-                                youtube_shorts_cost = parseFloat(youtube_shorts_cost);
-                                if(isNaN(youtube_shorts_cost) && typeof youtube_shorts_cost !== 'number'){
-                                    alert("Please Enter Valid Numeric Data");
-                                    $("#youtube_shorts_cost").focus();
-                                }
-                            }
-                            if(contact_number !== "" && contact_number.length == 10){
-                                if(contact_person_name !== ""){
-                                    if(email_id !== ""){
-                                        if(state !== ""){
-                                            if(avg_views !== ""){
-                                                 avg_views = parseInt(avg_views);
-                                                 if(isNaN(avg_views) && typeof avg_views !== 'number'){
-                                                     alert("Please Enter Valid Numeric Data");
-                                                     $("#avg_views").focus();
-                                                 }
-                                            }
-                                            if(avg_likes !== ""){
-                                                avg_likes = parseInt(avg_likes);
-                                                if(isNaN(avg_likes) && typeof avg_likes !== 'number'){
-                                                    alert("Please Enter Valid Numeric Data");
-                                                    $("#avg_likes").focus();
-                                                }
-                                            }
-                                            if(influencer_name !== ""){
-                                                
-                                                        if(influencer_category !== ""){
-                                                            $.ajax({
+        if(unique_id !== ""){
+            if(influencer_name !== ""){
+                if(handle !== ""){
+                    if(profile_url !== ""){
+                        if(followers !== ""){
+                            if(genre !== ""){
+                                if(enlyft_exclusive !== ""){
+                                    if(contact_number !== ""){
+                                        if(contact_person_name !== ""){
+                                            if(email !== ""){
+                                                if(address !== ""){
+                                                    if(city !== ""){
+                                                        if(state !== ""){
+                                                            if(avg_views !== ""){
+                                                                if(avg_likes !== ""){
+                                                                    if(influencer_category !== ""){
+                                                                       $.ajax({
+                                                                          url: 'updateinstagram.php',
+                                                                          type: 'POST',
+                                                                          data: {id:id,unique_id:unique_id,
+                                                                        influencer_name:influencer_name,handle:handle,
+                                                                        profile_url:profile_url,followers:followers,
+                                                                        genre:genre,language:language,verified:verified,
+                                                                        gender:gender,enlyft_exclusive:enlyft_exclusive,
+                                                                        image_cost:image_cost,video_cost:video_cost,igtv_cost:igtv_cost,
+                                                                        reels_15sec:reels_15sec,reels_30sec:reels_30sec,
+                                                                        image_story_cost:image_story_cost,video_story_cost:video_story_cost,
+                                                                        image_story_swipeup_cost:image_story_swipeup_cost,
+                                                                        video_story_swipeup_cost:video_story_swipeup_cost,
+                                                                        carousel_cost:carousel_cost,contact_number:contact_number,
+                                                                        contact_person_name:contact_person_name,email:email,comment:comment,
+                                                                        address:address,city:city,state:state,avg_views:avg_views,
+                                                                        avg_likes:avg_likes,campaign_done_earlier:campaign_done_earlier,
+                                                                        no_of_campaign:no_of_campaign,influencer_category:influencer_category,
+                                                                        name_of_client_worked_before:name_of_client_worked_before,
+                                                                        brands:brands,celebrity:celebrity,updateinstagram:"updateinstagram"},
+                                                                          beforeSend: function(){
+                                                                                $('#updateinstagram').prop("disabled",true);
+                                                                                $('#updateinstagram').text("Updating....");
+                                                                                $(".iderror").css("display","none"); 
+                                                                          },
+                                                                          success: function(data){
+                                                                                $('#updateinstagram').prop("disabled",false);
+                                                                                $('#updateinstagram').text("Submit"); 
+                                                                                if(data == 'success'){
+                                                                                    alert("Data Updated Successfully");
+                                                                                    $("#edit")[0].reset();
+                                                                                    $(".select2").val(null).trigger('change');
+                                                                                    $("#dynamicModal").modal('hide');
 
-                                                                url: 'updateyoutube.php',
-                                                                type: 'POST',
-                                                                data:{id:id,channel_name:channel_name,
-                                                                profile_url:profile_url,subscribers:subscribers,
-                                                                genre:genre,language:language,gender:gender,
-                                                                enlyft_exclusive:enlyft_exclusive,
-                                                                integrated_video_cost:integrated_video_cost,
-                                                                dedicated_video_cost:dedicated_video_cost,
-                                                                youtube_story_cost:youtube_story_cost,
-                                                                youtube_shorts_cost:youtube_shorts_cost,
-                                                                contact_number:contact_number,contact_person_name:contact_person_name,
-                                                                email_id:email_id,comment:comment,address:address,city:city,state:state,
-                                                                avg_views:avg_views,avg_likes:avg_likes,influencer_name:influencer_name,
-                                                                campaign_done_earlier:campaign_done_earlier,no_of_campaign:no_of_campaign,
-                                                                influencer_category:influencer_category,name_of_client_worked_before:name_of_client_worked_before,
-                                                                celebrity:celebrity,brands:brands,updateyoutube:"updateyoutube"},
-                                                                beforeSend: function(){
-                                                                    $('.update').prop("disabled",true);
-                                                                    $('.update').text("Updating....");
-                                                                },
-                                                                success: function(data){
-                                                                    $('.update').prop("disabled",false);
-                                                                    $('.update').text("Update"); 
-                                                                    if(data == 'success'){
-                                                                        alert("Data Updated Successfully");
-                                                                        $("#edit")[0].reset();
-                                                                        $(".select2").val(null).trigger('change');
-                                                                        $("#dynamicModal").modal('hide');
-                                                                        
-//                                                                        $("#dataTable").load();
-                                                                        location.reload();
-            //                                                            $("#state").val("");
-            //                                                            $("#language").val("");
-                                                                     }
-                                                                    if(data == 'duplicate'){
-                                                                        alert("Profile URL already exists, Please Enter Unique Profile URL");
-                                                                        $("#profile_url").focus();
+            //                                                                        $("#dataTable").load();
+                                                                                    location.reload();
+                        //                                                            $("#state").val("");
+                        //                                                            $("#language").val("");
+                                                                                 }
+                                                                                if(data == 'duplicate'){
+                                                                                    alert("Unique ID already exist, Please Enter Unique Entry");
+                                                                                    $("#unique_id").focus();
+                                                                                    $(".iderror").css("display","inline");
+                                                                                }                                                                                
+                                                                                if(data == 'mandatory'){
+                                                                                    alert("Please Fill All Fields Properly");
+                                                                                }
+                                                                                if(data == 'fail'){
+                                                                                    alert("There was some while submitting, please try again later or contact website administrator");
+                                                                                }
+                                                                          }   
+                                                                       }); 
                                                                     }
-                                                                    if(data == 'invalid'){
-                                                                        alert("Please Fill All Numberic Fields Properly");
-                                                                    }
-                                                                    if(data == 'mandatory'){
-                                                                        alert("Please Fill All Fields Properly");
-                                                                    }
-                                                                    if(data == 'fail'){
-                                                                        alert("There was some while submitting, please try again later or contact website administrator");
+                                                                    else{
+                                                                        alert("Please Select Influencer Category");
+                                                                        $("#influencer_category").focus();
                                                                     }
                                                                 }
-                                                            });
+                                                                else{
+                                                                    alert("Please Enter Avg Likes");
+                                                                    $("#avg_likes").focus();
+                                                                }
+                                                            }
+                                                            else{
+                                                                alert("Please Enter Avg Views");
+                                                                $("#avg_views").focus();
+                                                            }
                                                         }
                                                         else{
-                                                            alert("Please Select Influencer Category");
-                                                            $("#influencer_category").focus();
+                                                            alert("Please Select State");
+                                                            $("#state").focus();
                                                         }
+                                                    }
+                                                    else{
+                                                        alert("Please Select City");
+                                                        $("#city").focus();
+                                                    }
+                                                }
+                                                else{
+                                                    alert("Please Enter Address");
+                                                    $("#address").focus();
+                                                }
                                             }
                                             else{
-                                                alert("Please Enter Influencer Name");
-                                                $("#influencer_name").focus();
+                                                alert("Please Enter Email ID");
+                                                $("#email").focus();
                                             }
                                         }
                                         else{
-                                            alert("Please Select State");
-                                            $("#state").focus();
+                                            alert("Please Enter Contact Person Name");
+                                            $("#contact_person_name").focus();
                                         }
                                     }
                                     else{
-                                        alert("Please Enter Email ID");
-                                        $("#email_id").focus();
+                                        alert("Please Enter Contact Number");
+                                        $("#contact_number").focus();
                                     }
                                 }
                                 else{
-                                    alert("Please Enter Contact Person Name");
-                                    $("#contact_person_name").focus();
+                                    alert("Please Select Enlyft Exclusive");
+                                    $("#enlyft_exclusive").focus();
                                 }
                             }
                             else{
-                                alert("Please Enter Valid 10 Digit Contact Number");
-                                $("#contact_number").focus();
+                                alert("Please Enter Genre");
+                                $("#genre").focus();
                             }
                         }
                         else{
-                            alert("Please Select Enlyft Exclusive");
-                            $("#enlyft_exclusive").focus();
+                            alert("Please Enter Followers");
+                            $("#followers").focus();
                         }
                     }
                     else{
-                        alert("Please Select Gender");
-                        $("#gender").focus();
+                        alert("Please Enter Profile URL");
+                        $("#profile_url").focus();
                     }
                 }
                 else{
-                    alert("Please Select Language");
-                    $("#language").focus();
+                    alert("Please Enter Instagram handle");
+                    $("#handle").focus();
                 }
             }
             else{
-                alert("Please Enter Profile URL");
-                $("#profile_url").focus();
+                alert("Please Enter Influencer Name");
+                $("#influencer_name").focus();
             }
         }
         else{
-            alert("Please Enter Channel Name");
-            $("#channel_name").focus();
+           alert("Please Enter Unique ID");
+           $('#unique_id').focus();   
         }
         return false;
     }

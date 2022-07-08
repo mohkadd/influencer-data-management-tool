@@ -184,7 +184,7 @@ $maxlikes = $row->maxlikes;
                     <th>Youtube Story Cost</th>
                     <th>Youtube Shorts Cost</th>
                     <th>Contact Number</th>
-                    <th>Conact Person Name</th>
+                    <th>Contact Person Name</th>
                     <th>Email ID</th>
                     <th>Comment</th>
                     <th>Address</th>
@@ -221,7 +221,7 @@ $maxlikes = $row->maxlikes;
                     <th>Youtube Story Cost</th>
                     <th>Youtube Shorts Cost</th>
                     <th>Contact Number</th>
-                    <th>Conact Person Name</th>
+                    <th>Contact Person Name</th>
                     <th>Email ID</th>
                     <th>Comment</th>
                     <th>Address</th>
@@ -322,7 +322,7 @@ $i = 1;
                     <th>Youtube Story Cost</th>
                     <th>Youtube Shorts Cost</th>
                     <th>Contact Number</th>
-                    <th>Conact Person Name</th>
+                    <th>Contact Person Name</th>
                     <th>Email ID</th>
                     <th>Comment</th>
                     <th>Address</th>
@@ -359,7 +359,7 @@ $i = 1;
                     <th>Youtube Story Cost</th>
                     <th>Youtube Shorts Cost</th>
                     <th>Contact Number</th>
-                    <th>Conact Person Name</th>
+                    <th>Contact Person Name</th>
                     <th>Email ID</th>
                     <th>Comment</th>
                     <th>Address</th>

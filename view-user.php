@@ -173,6 +173,7 @@ $i = 1;
                                   <option value="1">Super Admin</option>
                                   <option value="2">Admin</option>
                                   <option value="3">Viewer</option>
+                                  <option value="4">Scrapper</option>
                               </select>
                             </div>
                           </div>

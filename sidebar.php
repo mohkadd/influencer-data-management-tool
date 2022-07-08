@@ -88,7 +88,7 @@
         ?>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <a class="dropdown-item" href="instagram-dashboard.php">Instagram Dashboard</a>
-          <a class="dropdown-item" href="view-instagram-data.php">View Instagram Listing</a>
+          <a class="dropdown-item" href="instagram-filter-data.php">View Instagram Listing</a>
         </div>
         <?php     
         }

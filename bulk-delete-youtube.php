@@ -174,6 +174,7 @@ $i = 1;
       <!-- /.container-fluid -->
 
  <?php include "footer.php"; ?>
+ <?php include "download-enable.php"; ?>
 <script>
 $('document').ready(function() {
     $(document).on('click', '#select_all', function() {          	

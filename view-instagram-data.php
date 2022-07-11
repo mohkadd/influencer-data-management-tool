@@ -279,22 +279,22 @@ $i = 1;
                       <td><?php echo decrypt($row->influencer_name) ?></td>
                       <td><?php echo $row->handle ?></td>
                       <td><?php echo decrypt($row->profile_url) ?></td>
-                      <td><?php echo $row->followers ?></td>
+                      <td><?php echo number_format($row->followers) ?></td>
                       <td><?php echo $row->genre ?></td>
                       <td><?php echo $row->language ?></td>
                       <td><?php echo $row->verified ?></td>
                       <td><?php echo $row->gender ?></td>
                       <td><?php echo decrypt($row->enlyft_exclusive) ?></td>
-                      <td><?php echo decrypt($row->image_cost) ?></td>
-                      <td><?php echo decrypt($row->video_cost) ?></td>
-                      <td><?php echo decrypt($row->igtv_cost) ?></td>
-                      <td><?php echo decrypt($row->reels_15sec) ?></td>
-                      <td><?php echo decrypt($row->reels_30sec) ?></td>
-                      <td><?php echo decrypt($row->image_story_cost) ?></td>
-                      <td><?php echo decrypt($row->video_story_cost) ?></td>
-                      <td><?php echo decrypt($row->image_story_swipeup_cost) ?></td>
-                      <td><?php echo decrypt($row->video_story_swipeup_cost) ?></td>
-                      <td><?php echo decrypt($row->carousel_cost) ?></td>
+                      <td><?php echo number_format(decrypt($row->image_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->video_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->igtv_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->reels_15sec)) ?></td>
+                      <td><?php echo number_format(decrypt($row->reels_30sec)) ?></td>
+                      <td><?php echo number_format(decrypt($row->image_story_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->video_story_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->image_story_swipeup_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->video_story_swipeup_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->carousel_cost)) ?></td>
                       <td><?php echo decrypt($row->contact_no) ?></td>
                       <td><?php echo decrypt($row->contact_person_name) ?></td>
                       <td><?php echo decrypt($row->email) ?></td>
@@ -302,8 +302,8 @@ $i = 1;
                       <td><?php echo decrypt($row->address) ?></td>
                       <td><?php echo $row->city ?></td>
                       <td><?php echo $row->state ?></td>
-                      <td><?php echo $row->avg_likes ?></td>
-                      <td><?php echo $row->avg_views ?></td>
+                      <td><?php echo number_format($row->avg_likes) ?></td>
+                      <td><?php echo number_format($row->avg_views) ?></td>
                       <td><?php echo decrypt($row->campaign_done_earlier) ?></td>
                       <td><?php echo decrypt($row->no_of_campaign) ?></td>
                       <td><?php echo $row->influencer_category ?></td>
@@ -441,22 +441,22 @@ $i = 1;
                       <td><?php echo decrypt($row->influencer_name) ?></td>
                       <td><?php echo $row->handle ?></td>
                       <td><?php echo decrypt($row->profile_url) ?></td>
-                      <td><?php echo $row->followers ?></td>
+                      <td><?php echo number_format($row->followers) ?></td>
                       <td><?php echo $row->genre ?></td>
                       <td><?php echo $row->language ?></td>
                       <td><?php echo $row->verified ?></td>
                       <td><?php echo $row->gender ?></td>
                       <td><?php echo decrypt($row->enlyft_exclusive) ?></td>
-                      <td><?php echo decrypt($row->image_cost) ?></td>
-                      <td><?php echo decrypt($row->video_cost) ?></td>
-                      <td><?php echo decrypt($row->igtv_cost) ?></td>
-                      <td><?php echo decrypt($row->reels_15sec) ?></td>
-                      <td><?php echo decrypt($row->reels_30sec) ?></td>
-                      <td><?php echo decrypt($row->image_story_cost) ?></td>
-                      <td><?php echo decrypt($row->video_story_cost) ?></td>
-                      <td><?php echo decrypt($row->image_story_swipeup_cost) ?></td>
-                      <td><?php echo decrypt($row->video_story_swipeup_cost) ?></td>
-                      <td><?php echo decrypt($row->carousel_cost) ?></td>
+                      <td><?php echo number_format(decrypt($row->image_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->video_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->igtv_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->reels_15sec)) ?></td>
+                      <td><?php echo number_format(decrypt($row->reels_30sec)) ?></td>
+                      <td><?php echo number_format(decrypt($row->image_story_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->video_story_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->image_story_swipeup_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->video_story_swipeup_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->carousel_cost)) ?></td>
                       <td><?php echo decrypt($row->contact_no) ?></td>
                       <td><?php echo decrypt($row->contact_person_name) ?></td>
                       <td><?php echo decrypt($row->email) ?></td>
@@ -464,8 +464,8 @@ $i = 1;
                       <td><?php echo decrypt($row->address) ?></td>
                       <td><?php echo $row->city ?></td>
                       <td><?php echo $row->state ?></td>
-                      <td><?php echo $row->avg_likes ?></td>
-                      <td><?php echo $row->avg_views ?></td>
+                      <td><?php echo number_format($row->avg_likes) ?></td>
+                      <td><?php echo number_format($row->avg_views) ?></td>
                       <td><?php echo decrypt($row->campaign_done_earlier) ?></td>
                       <td><?php echo decrypt($row->no_of_campaign) ?></td>
                       <td><?php echo $row->influencer_category ?></td>
@@ -578,26 +578,26 @@ $i = 1;
                       <td><?php echo decrypt($row->influencer_name) ?></td>
                       <td><?php echo $row->handle ?></td>
                       <td><?php echo decrypt($row->profile_url) ?></td>
-                      <td><?php echo $row->followers ?></td>
+                      <td><?php echo number_format($row->followers) ?></td>
                       <td><?php echo $row->genre ?></td>
                       <td><?php echo $row->language ?></td>
                       <td><?php echo $row->verified ?></td>
                       <td><?php echo $row->gender ?></td>
                       <td><?php echo decrypt($row->enlyft_exclusive) ?></td>
-                      <td><?php echo decrypt($row->image_cost) ?></td>
-                      <td><?php echo decrypt($row->video_cost) ?></td>
-                      <td><?php echo decrypt($row->igtv_cost) ?></td>
-                      <td><?php echo decrypt($row->reels_15sec) ?></td>
-                      <td><?php echo decrypt($row->reels_30sec) ?></td>
-                      <td><?php echo decrypt($row->image_story_cost) ?></td>
-                      <td><?php echo decrypt($row->video_story_cost) ?></td>
-                      <td><?php echo decrypt($row->image_story_swipeup_cost) ?></td>
-                      <td><?php echo decrypt($row->video_story_swipeup_cost) ?></td>
-                      <td><?php echo decrypt($row->carousel_cost) ?></td>
+                      <td><?php echo number_format(decrypt($row->image_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->video_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->igtv_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->reels_15sec)) ?></td>
+                      <td><?php echo number_format(decrypt($row->reels_30sec)) ?></td>
+                      <td><?php echo number_format(decrypt($row->image_story_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->video_story_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->image_story_swipeup_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->video_story_swipeup_cost)) ?></td>
+                      <td><?php echo number_format(decrypt($row->carousel_cost)) ?></td>
                       <td><?php echo $row->city ?></td>
                       <td><?php echo $row->state ?></td>
-                      <td><?php echo $row->avg_likes ?></td>
-                      <td><?php echo $row->avg_views ?></td>
+                      <td><?php echo number_format($row->avg_likes) ?></td>
+                      <td><?php echo number_format($row->avg_views) ?></td>
                       <td><?php echo decrypt($row->campaign_done_earlier) ?></td>
                       <td><?php echo decrypt($row->no_of_campaign) ?></td>
                       <td><?php echo $row->influencer_category ?></td>

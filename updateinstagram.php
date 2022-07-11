@@ -225,14 +225,14 @@ function checkemptynumber($data){
             date_default_timezone_set("Asia/Kolkata");
             $datenow = date("Y-m-d H:i:s");
             $operation = "Update";
-            $comment = $_SESSION['admin_username']." has updated ID number $id of instagram data from system at $datenow";
+            $comment = $_SESSION['admin_username']." has updated ID number $id of instagram data from system at $updated_on";
             $ipaddress = $_SERVER['REMOTE_ADDR'];
             $browser = $_SERVER['HTTP_USER_AGENT'];
             $log = "INSERT into `loghistory` (`userid`,`username`,`operation`,`comment`,`ipaddress`,`browser`,
                 `actiontime`) values (:userid,:username,:operation,:comment,:ipaddress,:browser,:actiontime)";
             $stmt2 = $con->prepare($log);
             $stmt2->execute(['userid'=>$_SESSION['adminid'],'username'=>$_SESSION['admin_username'],'operation'=>$operation,
-                'comment'=>$comment,'ipaddress'=>$ipaddress,'browser'=>$browser,'actiontime'=>$datenow]);
+                'comment'=>$comment,'ipaddress'=>$ipaddress,'browser'=>$browser,'actiontime'=>$updated_on]);
             echo "success";
         }
         else{

@@ -850,7 +850,7 @@ function update(){
                                     $("#youtube_shorts_cost").focus();
                                 }
                             }
-                            if(contact_number !== "" && contact_number.length == 10){
+                            if(contact_number !== ""){
                                 if(contact_person_name !== ""){
                                     if(email_id !== ""){
                                         if(state !== ""){

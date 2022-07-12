@@ -55,6 +55,7 @@ function checkemptynumber($data){
 }
    if(isset($_POST['updateinstagram']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
         $id = cleanup($_POST['id']);
+       
         $unique_id = cleanup($_POST['unique_id']);
 //        $unique_id = encrypt($unique_id);
 //        $checkid = "SELECT `unique_id` from `instagram` WHERE `unique_id`=:unique_id";

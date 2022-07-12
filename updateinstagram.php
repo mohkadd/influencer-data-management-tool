@@ -134,7 +134,7 @@ function checkemptynumber($data){
         if(empty($unique_id) || empty($influencer_name) || empty($handle) || empty($profile_url) || 
     empty($followers) || empty($genre) || empty($language) || empty($verified) || empty($gender) || 
        empty($enlyft_exclusive) || empty($contact_number) || empty($contact_person_name) ||
-      empty($email) || empty($address) || empty($city) || empty($state) || empty($avg_views) || empty($avg_likes) ||  
+      empty($email) || empty($address) || empty($city) || empty($state) ||  
        empty($influencer_category)){
             echo "mandatory";
         }

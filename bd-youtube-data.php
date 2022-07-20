@@ -42,6 +42,7 @@ if(isset($_POST['filteryoutube'])){
                     <i class="fas fa-table"></i>
                    YouTube Data 
                    <span style="float: right;">
+                   <strong><span class="rows_selected" id="select_count">0 Selected </span></strong>
                    <a class="btn btn-primary" id="showfilter" href="youtube-filter-data.php"><i class="fas fa-filter"></i> Back to Filters</a>
                    <button type="submit" name="internal" class="btn btn-info" id="delete_records"><i class="fas fa-download"></i> Internal PDF</button>
                    <button type="submit" name="external" class="btn btn-success" id="delete_records1"><i class="fas fa-download"></i> External PDF</button>

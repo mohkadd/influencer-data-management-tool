@@ -145,27 +145,23 @@ $maxlikes = $row->maxlikes;
             </div>
         </div>
         <div class="card mb-3">
-        <?php 
-        if($_SESSION['admintype'] == 1){
-        ?>
         <form target="_blank" name='delete_records' action="pdf/youtube/youtube-influencers.php" method="post">
-        <?php    
-        }    
-        ?>
         <div class="card-header bg-dark text-white py-4">
                     <i class="fas fa-table"></i>
                    YouTube Data 
                    <span style="float: right;">
+                   <strong><span class="rows_selected" id="select_count">0 Selected </span></strong>
                    <?php 
                    if($_SESSION['admintype'] == 1){
                    ?>
-                      <strong><span class="rows_selected" id="select_count">0 Selected </span></strong>
+                      
                        <a class="btn btn-danger" href="bulk-delete-youtube.php"><i class="fas fa-trash"></i> Bulk Delete</a>
-                       <button type="submit" name="internal" class="btn btn-info" id="delete_records"><i class="fas fa-download"></i> Internal PDF</button>
-                       <button type="submit" name="external" class="btn btn-success" id="delete_records1"><i class="fas fa-download"></i> External PDF</button> 
+                        
                    <?php
                    }       
                    ?>
+                   <button type="submit" name="internal" class="btn btn-info" id="delete_records"><i class="fas fa-download"></i> Internal PDF</button>
+                    <button type="submit" name="external" class="btn btn-success" id="delete_records1"><i class="fas fa-download"></i> External PDF</button>
                    <a class="btn btn-primary" id="showfilter" href="javascript:void(0);"><i class="fas fa-filter"></i> Special Filters</a></span>
                     </div>
 <!--
@@ -323,6 +319,7 @@ $i = 1;
                 <thead class="bg-dark text-white">
                   <tr>
 <!--                    <th>Sr. No.</th>-->
+                   <th><input type='checkbox' id='select_all'></th>
                     <th>Channel Name</th>
                     <th>Profile URL</th>
                     <th>Subscribers</th>
@@ -360,6 +357,7 @@ $i = 1;
                 <tfoot>
                   <tr>
 <!--                    <th>Sr. No.</th>-->
+                   <th><input type='checkbox' id='select_all'></th>
                     <th>Channel Name</th>
                     <th>Profile URL</th>
                     <th>Subscribers</th>
@@ -409,6 +407,7 @@ $i = 1;
                 ?>
                   <tr onmousedown = 'return false' onselectstart = 'return false'>
 <!--                      <td><?php //echo $i; ?></td>-->
+                     <td><input type='checkbox' name="channel-id[]" value="<?php echo $row->id; ?>" class='delete-youtube' data-channel-id="<?php echo $row->id; ?>"></td>
                       <td><?php echo decrypt($row->channel_name); ?></td>
                       <td><?php echo decrypt($row->profile_url); ?></td>
                       <td><?php echo number_format($row->subscribers); ?></td>
@@ -524,6 +523,7 @@ $i = 1;
                 ?>
                   <tr onmousedown = 'return false' onselectstart = 'return false'>
 <!--                      <td><?php //echo $i; ?></td>-->
+                     <td><input type='checkbox' name="channel-id[]" value="<?php echo $row->id; ?>" class='delete-youtube' data-channel-id="<?php echo $row->id; ?>"></td>
                       <td><?php echo decrypt($row->channel_name); ?></td>
                       <td><?php echo decrypt($row->profile_url); ?></td>
                       <td><?php echo number_format($row->subscribers); ?></td>
@@ -560,13 +560,7 @@ $i = 1;
             </div>
           </div>
           <!-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
-          <?php 
-            if($_SESSION['admintype'] == 1){
-          ?>
             </form>
-            <?php       
-            }
-            ?>
         </div>
 
       </div>
@@ -607,9 +601,6 @@ $i = 1;
     .ui-state-default, .ui-state-hover{background: #ED1B34 !important;}
 </style>
 <?php include "download-disable.php"; ?>  
-<?php 
-if($_SESSION['admintype'] == 1){
-?>
 <script>
 $('document').ready(function() {
     $(document).on('click', '#select_all', function() {          	
@@ -689,11 +680,7 @@ $('document').ready(function() {
 //        }  
     });
 });
-</script>   
-
-<?php    
-}        
-?>  
+</script>     
 <script>
 //document.oncontextmenu = new Function("return false;");
 $(document).ready(function(){

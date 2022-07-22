@@ -198,7 +198,7 @@ if(isset($_POST['external'])){
 	</style>
 	<br>
 	<div style="background-color:black;"><br>
-		<img style="text-align:center;" src="https://yt3.ggpht.com/ytc/AKedOLREOBT109d1QFQcEBEKs25fsOi9nOWxGT75UoIN5g=s88-c-k-c0x00ffffff-no-rj" class="img-radius" align="center" alt="User-Profile-Image"><br><br>
+		<img style="text-align:center;" src="'.$row->profile_image.'" class="img-radius" align="center" alt="User-Profile-Image"><br><br>
 		<table border="1" cellpadding="4" align="center">
 			<tr class="txtred">
 				<th>Channel Name</th>

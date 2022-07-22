@@ -2,13 +2,13 @@
 <?php
   
 $url = 
-'https://yt3.ggpht.com/ytc/AKedOLREOBT109d1QFQcEBEKs25fsOi9nOWxGT75UoIN5g=s88-c-k-c0x00ffffff-no-rj'; 
+'https://secureservercdn.net/50.62.89.58/a5l.a90.myftpupload.com/wp-content/uploads/2020/07/CAIT-LOGO-1.png'; 
   
-$img = 'youtube1.png'; 
+$img = 'youtube1.jpg'; 
   
 // Function to write image into file
 file_put_contents($img, file_get_contents($url));
   
-echo "File downloaded!"
+echo "File downloaded!";
   
 ?>

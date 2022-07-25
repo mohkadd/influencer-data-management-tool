@@ -214,22 +214,24 @@ if(isset($_POST['external'])){
 		<table cellspacing="2" cellpadding="4" align="center">
 			<tr class="txtred">
 				<th>Subscribers</th>
+                <th></th>
 				<th>Gender</th>
 			</tr>
 			<tr class="txtwhite">
 				<td>'.number_format($row->subscribers).'</td>
+                <td></td>
 				<td>'.$row->gender.'</td>
 			</tr>
 		</table><br><br>
 		<table cellspacing="2" cellpadding="4" align="center">
 			<tr class="txtred">
-				
 				<th>State</th>
+                <th></th>
 				<th>Language</th>
 			</tr>
 			<tr class="txtwhite">
-				
 				<td>'.ucwords($row->state).'</td>
+                <td></td>
 				<td>'.ucwords($row->language).'</td>
 			</tr>
 		</table><br><br>

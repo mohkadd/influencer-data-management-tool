@@ -29,7 +29,7 @@ while($row = $stmt->fetch()){
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => [
             "X-RapidAPI-Host: instagram28.p.rapidapi.com",
-            "X-RapidAPI-Key: cc64a88bbfmsh7fdd5714f1ee4c5p1a304fjsnb4e1953cdb17",
+            "X-RapidAPI-Key: ",
             "Content-Type: application/json"
         ],
      ]);

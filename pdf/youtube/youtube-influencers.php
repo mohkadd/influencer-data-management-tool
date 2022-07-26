@@ -120,8 +120,17 @@ $pdf->setFont('dejavusans', '', 14);
 
 // add a page
 $pdf->AddPage('L');
+$i = 0;
 $channelid = $_POST['channel-id'];
+//print_r($channelid);
+//echo "<br>";
 $ids = implode(',', $channelid);
+$markupivcost = $_POST['markupivcost'];
+//print_r($markupivcost);
+//echo "<br>";
+$markupdvcost = $_POST['markupdvcost'];
+//print_r($markupdvcost);
+//exit();
 //fetching data from database
 $table_data = "SELECT * FROM youtube WHERE id IN ($ids)";
 $stmt1 = $con->prepare($table_data);
@@ -176,14 +185,26 @@ if(isset($_POST['internal'])){
 				<td>'.ucwords($row->language).'</td>
 			</tr>
 		</table><br><br>
+        <table cellspacing="2" cellpadding="4" align="center">
+			<tr class="txtred">
+				<th>Integrated Video Cost</th>
+				<th></th>
+				<th>Dedicated Video Cost</th>
+			</tr>
+			<tr class="txtwhite">
+				<td> INR '.number_format($markupivcost["$i"]).'</td>
+				<td></td>
+				<td> INR '.number_format($markupdvcost["$i"]).'</td>
+			</tr>
+		</table><br>
 		<table cellspacing="2" cellpadding="4" align="center">
 			<tr class="txtred">
 				<td colspan="3"><a style="text-decoration:none;color:red;font-size:17px;" target="_blank" href="'.decrypt($row->profile_url).'">Visit Channel</a></td>
 			</tr>
 		</table>
 	</div>
-	<br><br><br>
 	';
+    $i++;
 
 }
 }
@@ -235,14 +256,26 @@ if(isset($_POST['external'])){
 				<td>'.ucwords($row->language).'</td>
 			</tr>
 		</table><br><br>
+        <table cellspacing="2" cellpadding="4" align="center">
+			<tr class="txtred">
+				<th>Integrated Video Cost</th>
+				<th></th>
+				<th>Dedicated Video Cost</th>
+			</tr>
+			<tr class="txtwhite">
+				<td> INR '.number_format($markupivcost["$i"]).'</td>
+				<td></td>
+				<td> INR '.number_format($markupdvcost["$i"]).'</td>
+			</tr>
+		</table><br>
 		<table cellspacing="2" cellpadding="4" align="center">
 			<tr class="txtred">
 				<td colspan="3"><a style="text-decoration:none;color:red;font-size:17px;" target="_blank" href="'.decrypt($row->profile_url).'">Visit Channel</a></td>
 			</tr>
 		</table>
 	</div>
-	<br><br><br>
 	';
+    $i++;
 
 } 
 }

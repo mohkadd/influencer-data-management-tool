@@ -37,15 +37,14 @@ if(isset($_POST['filteryoutube'])){
         </ol>
         <!-- DataTables Example -->
         <div class="card mb-3">
-        <form target="_blank" name='delete_records' action="pdf/youtube/youtube-influencers.php" method="post">
+        <form target="_blank" name='delete_records' action="youtube-markup-cost.php" method="post">
         <div class="card-header bg-dark text-white py-4">
                     <i class="fas fa-table"></i>
                    YouTube Data 
                    <span style="float: right;">
                    <strong><span class="rows_selected" id="select_count">0 Selected </span></strong>
                    <a class="btn btn-primary" id="showfilter" href="youtube-filter-data.php"><i class="fas fa-filter"></i> Back to Filters</a>
-                   <button type="submit" name="internal" class="btn btn-info" id="delete_records"><i class="fas fa-download"></i> Internal PDF</button>
-                   <button type="submit" name="external" class="btn btn-success" id="delete_records1"><i class="fas fa-download"></i> External PDF</button>
+                   <button type="submit" name="markup" class="btn btn-success" id="delete_records"><i class="fas fa-arrow-up"></i> Markup Cost</button>
                    </span>
                     </div>
 <!--
@@ -206,39 +205,6 @@ $('document').ready(function() {
 ////                            $("#"+yt_ids[i]).remove();
 ////                        }
 ////                        location.reload();
-//                    }   
-//                });				
-//            }  
-//        }  
-    });
-    
-    $('#delete_records1').on('click', function(e) { 
-        var youtube = [];  
-        $(".delete-youtube:checked").each(function() {  
-            youtube.push($(this).data('channel-id'));
-        });	
-        if(youtube.length <=0)  {
-            alert("Please select records."); 
-            e.preventDefault();
-        }  
-//        else {
-//            WRN_PROFILE_DELETE = "Are you sure you want to download external PDF of "+youtube.length+" channel?";  
-//            var checked = confirm(WRN_PROFILE_DELETE);  
-//            if(checked == true) {			
-//                var selected_values = youtube.join(","); 
-//                $.ajax({ 
-//                    type: "POST",  
-//                    url: "delete-youtube-bulk.php",  
-//                    cache:false,  
-//                    data: 'yt_id='+selected_values,  
-//                    success: function(response) {	
-//                        // remove deleted employee rows
-//                        var yt_ids = response.split(",");
-//                        alert(youtube.length+" youtube channel deleted");
-//                        for (var i=0; i < yt_ids.length; i++ ) {						
-//                            $("#"+yt_ids[i]).remove();
-//                        }
-//                        location.reload();
 //                    }   
 //                });				
 //            }  

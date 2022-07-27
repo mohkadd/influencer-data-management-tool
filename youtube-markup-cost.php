@@ -67,8 +67,19 @@ if(isset($_POST['markup'])){
 <?php  
                 while($row = $stmt1->fetch())  
                 {
-                    $markupivcost = (decrypt($row->integrated_video_cost) * (25/100)) + decrypt($row->integrated_video_cost);
-                    $markupdvcost = (decrypt($row->dedicated_video_cost) * (25/100)) + decrypt($row->dedicated_video_cost);
+                    if(decrypt($row->markupivcost) == 0){
+                        $markupivcost = (decrypt($row->integrated_video_cost) * (25/100)) + decrypt($row->integrated_video_cost);
+                    }
+                    else{
+                        $markupivcost = decrypt($row->markupivcost);
+                    }
+                    
+                    if(decrypt($row->markupdvcost) == 0){
+                        $markupdvcost = (decrypt($row->dedicated_video_cost) * (25/100)) + decrypt($row->dedicated_video_cost);
+                    }
+                    else{
+                        $markupdvcost = decrypt($row->markupdvcost);
+                    }
                 ?>
                   <tr id="<?php echo $row->id; ?>">
 <!--                      <td><?php //echo $i; ?></td>-->

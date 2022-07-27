@@ -136,15 +136,23 @@ $table_data = "SELECT * FROM youtube WHERE id IN ($ids)";
 $stmt1 = $con->prepare($table_data);
 $stmt1->execute();
 
+
 // create some HTML content
 $html = '';
 if(isset($_POST['internal'])){
     while($row = $stmt1->fetch()){
+        
+    $updatemarkup = "UPDATE youtube SET markupivcost=:markupivcost, markupdvcost=:markupdvcost WHERE id=:id";
+    $stmt11 = $con->prepare($updatemarkup);
+    $stmt11->execute(["markupivcost"=>encrypt($markupivcost["$i"]),
+                     "markupdvcost"=>encrypt($markupdvcost["$i"]),
+                    "id"=>$channelid["$i"]]);
 
 	$html .= '
 	<style>
 	.txtwhite{color:white;font-weight:bold;}
-	.txtred{color:red;font-weight:bold;}
+	.txtred{color:#EF1931;font-weight:bold;}
+    .txtyellow{color:yellow;font-weight:bold;}
 	</style>
 	<br>
 	<div style="background-color:black;"><br>
@@ -191,7 +199,7 @@ if(isset($_POST['internal'])){
 				<th></th>
 				<th>Dedicated Video Cost</th>
 			</tr>
-			<tr class="txtwhite">
+			<tr class="txtyellow">
 				<td> INR '.number_format($markupivcost["$i"]).'</td>
 				<td></td>
 				<td> INR '.number_format($markupdvcost["$i"]).'</td>
@@ -199,7 +207,7 @@ if(isset($_POST['internal'])){
 		</table><br>
 		<table cellspacing="2" cellpadding="4" align="center">
 			<tr class="txtred">
-				<td colspan="3"><a style="text-decoration:none;color:red;font-size:17px;" target="_blank" href="'.decrypt($row->profile_url).'">Visit Channel</a></td>
+				<td colspan="3"><a style="text-decoration:none;color:#EF1931;font-size:17px;" target="_blank" href="'.decrypt($row->profile_url).'">Visit Channel</a></td>
 			</tr>
 		</table>
 	</div>

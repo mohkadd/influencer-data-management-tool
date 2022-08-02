@@ -28,7 +28,7 @@ if(isset($_POST['markup'])){
         </ol>
         <!-- DataTables Example -->
         <div class="card mb-3">
-        <form target="_blank" name='delete_records' action="pdf/youtube/youtube-influencers.php" method="post">
+        <form target="_blank" name='delete_records' action="pdf/youtube/youtube-influencers-markup.php" method="post">
         <div class="card-header bg-dark text-white py-4">
                     <i class="fas fa-table"></i>
                    YouTube Data 

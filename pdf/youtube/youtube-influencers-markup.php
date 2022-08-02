@@ -120,8 +120,17 @@ $pdf->setFont('dejavusans', '', 14);
 
 // add a page
 $pdf->AddPage('L');
+$i = 0;
 $channelid = $_POST['channel-id'];
+//print_r($channelid);
+//echo "<br>";
 $ids = implode(',', $channelid);
+$markupivcost = $_POST['markupivcost'];
+//print_r($markupivcost);
+//echo "<br>";
+$markupdvcost = $_POST['markupdvcost'];
+//print_r($markupdvcost);
+//exit();
 //fetching data from database
 $table_data = "SELECT * FROM youtube WHERE id IN ($ids)";
 $stmt1 = $con->prepare($table_data);
@@ -132,6 +141,18 @@ $stmt1->execute();
 $html = '';
 if(isset($_POST['internal'])){
     while($row = $stmt1->fetch()){
+        
+    $updatemarkup = "UPDATE youtube SET markupivcost=:markupivcost, markupdvcost=:markupdvcost WHERE id=:id";
+    $stmt11 = $con->prepare($updatemarkup);
+    $stmt11->execute(["markupivcost"=>encrypt($markupivcost["$i"]),
+                     "markupdvcost"=>encrypt($markupdvcost["$i"]),
+                    "id"=>$channelid["$i"]]);
+        
+    $mastermarkup = "UPDATE masteryoutube SET markupivcost=:markupivcost, markupdvcost=:markupdvcost WHERE id=:id";
+    $stmt22 = $con->prepare($mastermarkup);
+    $stmt22->execute(["markupivcost"=>encrypt($markupivcost["$i"]),
+                     "markupdvcost"=>encrypt($markupdvcost["$i"]),
+                    "id"=>$channelid["$i"]]);
 
 	$html .= '
 	<style>
@@ -178,14 +199,26 @@ if(isset($_POST['internal'])){
 				<td>'.ucwords($row->language).'</td>
 			</tr>
 		</table><br><br>
+        <table cellspacing="2" cellpadding="4" align="center">
+			<tr class="txtred">
+				<th>Integrated Video Cost</th>
+				<th></th>
+				<th>Dedicated Video Cost</th>
+			</tr>
+			<tr class="txtyellow">
+				<td> INR '.number_format($markupivcost["$i"]).'</td>
+				<td></td>
+				<td> INR '.number_format($markupdvcost["$i"]).'</td>
+			</tr>
+		</table><br>
 		<table cellspacing="2" cellpadding="4" align="center">
 			<tr class="txtred">
 				<td colspan="3"><a style="text-decoration:none;color:#EF1931;font-size:17px;" target="_blank" href="'.decrypt($row->profile_url).'">Visit Channel</a></td>
 			</tr>
 		</table>
 	</div>
-	<br><br><br>
 	';
+    $i++;
 
 }
 }
@@ -237,14 +270,26 @@ if(isset($_POST['external'])){
 				<td>'.ucwords($row->language).'</td>
 			</tr>
 		</table><br><br>
+        <table cellspacing="2" cellpadding="4" align="center">
+			<tr class="txtred">
+				<th>Integrated Video Cost</th>
+				<th></th>
+				<th>Dedicated Video Cost</th>
+			</tr>
+			<tr class="txtwhite">
+				<td> INR '.number_format($markupivcost["$i"]).'</td>
+				<td></td>
+				<td> INR '.number_format($markupdvcost["$i"]).'</td>
+			</tr>
+		</table><br>
 		<table cellspacing="2" cellpadding="4" align="center">
 			<tr class="txtred">
 				<td colspan="3"><a style="text-decoration:none;color:red;font-size:17px;" target="_blank" href="'.decrypt($row->profile_url).'">Visit Channel</a></td>
 			</tr>
 		</table>
 	</div>
-	<br><br><br>
 	';
+    $i++;
 
 } 
 }

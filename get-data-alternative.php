@@ -18,7 +18,7 @@ while($row = $stmt->fetch()){
     $curl = curl_init();
 
     curl_setopt_array($curl, [
-        CURLOPT_URL => "https://instagram174.p.rapidapi.com/api/v1/user/196490967/info",
+        CURLOPT_URL => "https://instagram174.p.rapidapi.com/api/v1/user/".$userid."/info",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_FOLLOWLOCATION => true,
         CURLOPT_ENCODING => "",
@@ -28,7 +28,8 @@ while($row = $stmt->fetch()){
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => [
             "X-RapidAPI-Host: instagram174.p.rapidapi.com",
-            "X-RapidAPI-Key: "
+            "X-RapidAPI-Key: ",
+            "Content-Type: application/json"
         ],
     ]);
 

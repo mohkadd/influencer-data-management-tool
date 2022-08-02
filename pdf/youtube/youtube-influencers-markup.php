@@ -1,4 +1,5 @@
 <?php
+session_start();
 // File name   : example_custom_header_footer.php
 // Begin       : 2013-12-03
 // Last Update : 2013-12-03
@@ -226,6 +227,18 @@ if(isset($_POST['internal'])){
 if(isset($_POST['external'])){
    while($row = $stmt1->fetch()){
 
+	$updatemarkup = "UPDATE youtube SET markupivcost=:markupivcost, markupdvcost=:markupdvcost WHERE id=:id";
+    $stmt11 = $con->prepare($updatemarkup);
+    $stmt11->execute(["markupivcost"=>encrypt($markupivcost["$i"]),
+                     "markupdvcost"=>encrypt($markupdvcost["$i"]),
+                    "id"=>$channelid["$i"]]);
+        
+    $mastermarkup = "UPDATE masteryoutube SET markupivcost=:markupivcost, markupdvcost=:markupdvcost WHERE id=:id";
+    $stmt22 = $con->prepare($mastermarkup);
+    $stmt22->execute(["markupivcost"=>encrypt($markupivcost["$i"]),
+                     "markupdvcost"=>encrypt($markupdvcost["$i"]),
+                    "id"=>$channelid["$i"]]);
+
 	$html .= '
 	<style>
 	.txtwhite{color:white;font-weight:bold;}
@@ -294,6 +307,17 @@ if(isset($_POST['external'])){
 } 
 }
 
+date_default_timezone_set("Asia/Kolkata");
+$datenow = date("Y-m-d H:i:s");
+$operation = "Cost Markup";
+$comment = $_SESSION['admin_username']." has updated markup cost of $i youtube channels and generated pdf at $datenow";
+$ipaddress = $_SERVER['REMOTE_ADDR'];
+$browser = $_SERVER['HTTP_USER_AGENT'];
+$log = "INSERT into `loghistory` (`userid`,`username`,`operation`,`comment`,`ipaddress`,`browser`,
+    `actiontime`) values (:userid,:username,:operation,:comment,:ipaddress,:browser,:actiontime)";
+$stmt1111 = $con->prepare($log);
+$stmt1111->execute(['userid'=>$_SESSION['adminid'],'username'=>$_SESSION['admin_username'],'operation'=>$operation,
+    'comment'=>$comment,'ipaddress'=>$ipaddress,'browser'=>$browser,'actiontime'=>$datenow]);
 
 // output the HTML content
 $pdf->writeHTML($html, true, false, true, false, '');

@@ -243,6 +243,7 @@ if(isset($_POST['external'])){
 	<style>
 	.txtwhite{color:white;font-weight:bold;}
 	.txtred{color:red;font-weight:bold;}
+	.txtyellow{color:yellow;font-weight:bold;}
 	</style>
 	<br>
 	<div style="background-color:black;"><br>
@@ -289,7 +290,7 @@ if(isset($_POST['external'])){
 				<th></th>
 				<th>Dedicated Video Cost</th>
 			</tr>
-			<tr class="txtwhite">
+			<tr class="txtyellow">
 				<td> INR '.number_format($markupivcost["$i"]).'</td>
 				<td></td>
 				<td> INR '.number_format($markupdvcost["$i"]).'</td>

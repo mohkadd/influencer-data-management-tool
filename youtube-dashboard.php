@@ -15,7 +15,10 @@
           </li>
           <li class="breadcrumb-item active">Youtube Dashboard</li>
         </ol>
-
+<!--
+For exclusive influencer dashboard summary count        
+SELECT DISTINCT genre, COUNT(id) AS countid FROM youtube WHERE enlyft_exclusive = 'ZGF0YWVuY3J5cHRAMjAyMql53Z3kyjq/QmeDSCIggH1xducysxmjQuWsRR4SRN4Lf4QW7PKDIUnrNJ2pFs2CvA==' GROUP BY genre ORDER BY genre ASC
+-->
         <!-- Icon Cards-->
         <div class="row">
          <?php 

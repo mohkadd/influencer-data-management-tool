@@ -123,5 +123,19 @@ $updateid2 = "UPDATE inidlikes SET firstid = '".$firstid."', lastid = '".$lastid
 $stmtmi2 = $con->prepare($updateid2);
 $stmtmi2->execute();
 
+date_default_timezone_set("Asia/Kolkata");
+$datenow = date("Y-m-d H:i:s");
+$operation = "Avg likes Update";
+$comment = "Avg Likes has been updated of $offset instagram handles through Instagram API cron job at $datenow";
+$ipaddress = "0.0.0.0";
+$browser = "NA";
+$userid = "0";
+$username = "automatedsystem";
+$log = "INSERT into `loghistory` (`userid`,`username`,`operation`,`comment`,`ipaddress`,`browser`,
+        `actiontime`) values (:userid,:username,:operation,:comment,:ipaddress,:browser,:actiontime)";
+$stmt31 = $con->prepare($log);
+$stmt31->execute(['userid'=>$userid,'username'=>$username,'operation'=>$operation,
+        'comment'=>$comment,'ipaddress'=>$ipaddress,'browser'=>$browser,'actiontime'=>$datenow]);
+
 echo "$count instagram handles updated<br><br>";
 ?>

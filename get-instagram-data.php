@@ -116,9 +116,9 @@ while($row = $stmt->fetch()){
         echo $newfollower."<br>";
         echo "Profile Picture URL from API => ".$response['user']['profile_pic_url']."<br><br><br>";
         $count++;
-        $updatefol = "UPDATE instagram SET influencer_name=:influencer_name, handle=:handle, profile_url=:profile_url,followers=:followers, verified=:verified WHERE unique_id=:unique_id";
+        $updatefol = "UPDATE instagram SET handle=:handle, profile_url=:profile_url,followers=:followers, verified=:verified WHERE unique_id=:unique_id";
         $stmt1 = $con->prepare($updatefol);
-        $stmt1->execute(["influencer_name"=>$newname,"handle"=>$newusername,"profile_url"=>$newurl,"followers"=>$newfollower,"verified"=>$verified,"unique_id"=>encrypt($userid)]);
+        $stmt1->execute(["handle"=>$newusername,"profile_url"=>$newurl,"followers"=>$newfollower,"verified"=>$verified,"unique_id"=>encrypt($userid)]);
     }
 }
 
@@ -135,6 +135,20 @@ else{
 $updateid2 = "UPDATE inidfollowers SET firstid = '".$firstid."', lastid = '".$lastid."'";
 $stmtmi2 = $con->prepare($updateid2);
 $stmtmi2->execute();
+
+date_default_timezone_set("Asia/Kolkata");
+$datenow = date("Y-m-d H:i:s");
+$operation = "Followers Update";
+$comment = "Followers has been updated of $offset instagram handles through Instagram API cron job at $datenow";
+$ipaddress = "0.0.0.0";
+$browser = "NA";
+$userid = "0";
+$username = "automatedsystem";
+$log = "INSERT into `loghistory` (`userid`,`username`,`operation`,`comment`,`ipaddress`,`browser`,
+        `actiontime`) values (:userid,:username,:operation,:comment,:ipaddress,:browser,:actiontime)";
+$stmt31 = $con->prepare($log);
+$stmt31->execute(['userid'=>$userid,'username'=>$username,'operation'=>$operation,
+        'comment'=>$comment,'ipaddress'=>$ipaddress,'browser'=>$browser,'actiontime'=>$datenow]);
 
 echo "$count instagram handles updated<br><br>";
 ?>

@@ -152,9 +152,14 @@ if(isset($_POST['submit_range'])){
             </div>
         </div>
         <div class="card mb-3">
-        <div class="card-header bg-dark text-white">
+        <form target="_blank" name='delete_records' action="pdf/youtube/instagram-influencers.php" method="post">
+        <div class="card-header bg-dark text-white py-4">
                     <i class="fas fa-table"></i>
-                   Instagram Data <span style="float: right;"><a class="btn btn-danger" id="showfilter" href="javascript:void(0);"><i class="fas fa-filter"></i> Special Filters</a></span>
+                   Instagram Data <span style="float: right;">
+                   <strong><span class="rows_selected" id="select_count">0 Selected </span></strong>
+                   <button type="submit" name="internal" class="btn btn-info" id="delete_records"><i class="fas fa-download"></i> Internal PDF</button>
+                    <button type="submit" name="external" class="btn btn-success" id="delete_records1"><i class="fas fa-download"></i> External PDF</button>
+                   <a class="btn btn-danger" id="showfilter" href="javascript:void(0);"><i class="fas fa-filter"></i> Special Filters</a></span>
                     </div>
 <!--
           <div class="card-header">
@@ -169,6 +174,7 @@ if(isset($_POST['submit_range'])){
              <table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-dark text-white">
                   <tr>
+                  <th><input type='checkbox' id='select_all'></th>
 <!--                    <th>Sr. No.</th>-->
                     <th>Unique ID</th>
                     <th>Influencer Name</th>
@@ -214,6 +220,7 @@ if(isset($_POST['submit_range'])){
                 </thead>
                 <tfoot>
                   <tr>
+                  <th><input type='checkbox' id='select_all'></th>
 <!--                    <th>Sr. No.</th>-->
                    <th>Unique ID</th>
                     <th>Influencer Name</th>
@@ -271,6 +278,7 @@ $i = 1;
                 {
                 ?>
                   <tr onmousedown = 'return false' onselectstart = 'return false'>
+                  <td><input type='checkbox' name="instagram-id[]" value="<?php echo $row->id; ?>" class='delete-youtube' data-channel-id="<?php echo $row->id; ?>"></td>
 <!--                      <td><?php //echo $i; ?></td>-->
                      <td><?php echo decrypt($row->unique_id) ?></td>
                       <td><?php echo decrypt($row->influencer_name) ?></td>
@@ -331,6 +339,7 @@ $i = 1;
              <table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-dark text-white">
                   <tr>
+                  <th><input type='checkbox' id='select_all'></th>
 <!--                    <th>Sr. No.</th>-->
                    <th>Unique ID</th>
                     <th>Influencer Name</th>
@@ -376,6 +385,7 @@ $i = 1;
                 </thead>
                 <tfoot>
                   <tr>
+                  <th><input type='checkbox' id='select_all'></th>
 <!--                    <th>Sr. No.</th>-->
                    <th>Unique ID</th>
                     <th>Influencer Name</th>
@@ -433,6 +443,7 @@ $i = 1;
                 {
                 ?>
                   <tr onmousedown = 'return false' onselectstart = 'return false'>
+                  <td><input type='checkbox' name="instagram-id[]" value="<?php echo $row->id; ?>" class='delete-youtube' data-channel-id="<?php echo $row->id; ?>"></td>
 <!--                      <td><?php //echo $i; ?></td>-->
                      <td><?php echo decrypt($row->unique_id) ?></td>
                       <td><?php echo decrypt($row->influencer_name) ?></td>
@@ -490,6 +501,7 @@ $i = 1;
              <table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
                 <thead class="bg-dark text-white">
                   <tr>
+                  <th><input type='checkbox' id='select_all'></th>
 <!--                    <th>Sr. No.</th>-->
                    <th>Unique ID</th>
                     <th>Unique ID</th>
@@ -525,6 +537,7 @@ $i = 1;
                 </thead>
                 <tfoot>
                   <tr>
+                  <th><input type='checkbox' id='select_all'></th>
 <!--                    <th>Sr. No.</th>-->
                    <th>Unique ID</th>
                     <th>Unique ID</th>
@@ -572,6 +585,7 @@ $i = 1;
                 {
                 ?>
                   <tr onmousedown = 'return false' onselectstart = 'return false'>
+                  <td><input type='checkbox' name="instagram-id[]" value="<?php echo $row->id; ?>" class='delete-youtube' data-channel-id="<?php echo $row->id; ?>"></td>
 <!--                      <td><?php //echo $i; ?></td>-->
                      <td><?php echo decrypt($row->unique_id) ?></td>
                       <td><?php echo decrypt($row->influencer_name) ?></td>
@@ -618,6 +632,7 @@ $i = 1;
             </div>
           </div>
           <!-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
+            </form>
         </div>
 
       </div>
@@ -668,6 +683,86 @@ $maxlikes1 = $row->maxlikes;
     .ui-state-default, .ui-state-hover{background: #ED1B34 !important;}
 </style>   
 <?php include "download-disable.php"; ?>   
+<script>
+$('document').ready(function() {
+    $(document).on('click', '#select_all', function() {          	
+		$(".delete-youtube").prop("checked", this.checked);
+		$("#select_count").html($("input.delete-youtube:checked").length+" Selected");
+	});
+    $(document).on('click', '.delete-youtube', function() {		
+            $("#select_count").html($("input.delete-youtube:checked").length+" Selected");
+        });
+    // delete selected records
+    $('#delete_records').on('click', function(e) { 
+        var youtube = [];  
+        $(".delete-youtube:checked").each(function() {  
+            youtube.push($(this).data('channel-id'));
+        });	
+        if(youtube.length <=0)  {  
+            alert("Please select records.");
+            e.preventDefault();
+        }  
+//        else {
+//            WRN_PROFILE_DELETE = "Are you sure you want to download internal PDF of "+youtube.length+" channel?";  
+//            var checked = confirm(WRN_PROFILE_DELETE);  
+//            if(checked == true) {			
+//                var selected_values = youtube.join(","); 
+//                $.ajax({ 
+//                    type: "POST",  
+//                    url: "pdf/youtube/youtube-influencers.php",  
+//                    cache:false,  
+//                    data: 'yt_id='+selected_values,  
+//                    success: function(response) {
+//                        var blob = new Blob([response], { type: "application/octetstream" });
+//                        window.navigator.msSaveOrOpenBlob(blob, 'youtube-influencer.pdf');
+//                        alert("PDF Downloaded");
+//                        // remove deleted employee rows
+////                        var yt_ids = response.split(",");
+////                        alert(youtube.length+" youtube channel deleted");
+////                        for (var i=0; i < yt_ids.length; i++ ) {						
+////                            $("#"+yt_ids[i]).remove();
+////                        }
+////                        location.reload();
+//                    }   
+//                });				
+//            }  
+//        }  
+    });
+    
+    $('#delete_records1').on('click', function(e) { 
+        var youtube = [];  
+        $(".delete-youtube:checked").each(function() {  
+            youtube.push($(this).data('channel-id'));
+        });	
+        if(youtube.length <=0)  {
+            alert("Please select records."); 
+            e.preventDefault();
+        }  
+//        else {
+//            WRN_PROFILE_DELETE = "Are you sure you want to download external PDF of "+youtube.length+" channel?";  
+//            var checked = confirm(WRN_PROFILE_DELETE);  
+//            if(checked == true) {			
+//                var selected_values = youtube.join(","); 
+//                $.ajax({ 
+//                    type: "POST",  
+//                    url: "delete-youtube-bulk.php",  
+//                    cache:false,  
+//                    data: 'yt_id='+selected_values,  
+//                    success: function(response) {	
+//                        // remove deleted employee rows
+//                        var yt_ids = response.split(",");
+//                        alert(youtube.length+" youtube channel deleted");
+//                        for (var i=0; i < yt_ids.length; i++ ) {						
+//                            $("#"+yt_ids[i]).remove();
+//                        }
+//                        location.reload();
+//                    }   
+//                });				
+//            }  
+//        }  
+    });
+});
+</script> 
 <script>
 document.oncontextmenu = new Function("return false;");
 $(document).ready(function(){

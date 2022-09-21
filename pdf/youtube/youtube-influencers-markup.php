@@ -247,7 +247,7 @@ if(isset($_POST['external'])){
 	</style>
 	<br>
 	<div style="background-color:black;"><br>
-		<img style="text-align:center;" src="'.$row->profile_image.'" class="img-radius" align="center" alt="User-Profile-Image"><br><br>
+		<br><br><br>
 		<table border="1" cellpadding="4" align="center">
 			<tr class="txtred">
 				<th>Channel Name</th>
@@ -259,31 +259,30 @@ if(isset($_POST['external'])){
 				<td>'.decrypt($row->influencer_name).'</td>
 				<td>'.ucwords($row->genre).'</td>
 			</tr>
-		</table><br><br>
+		</table><br><br><br>
 		<table cellspacing="2" cellpadding="4" align="center">
 			<tr class="txtred">
 				<th>Subscribers</th>
-                <th></th>
+                <th rowspan="4"><img style="text-align:center;" src="'.$row->profile_image.'" class="img-radius" align="center" alt="User-Profile-Image"></th>
 				<th>Gender</th>
 			</tr>
 			<tr class="txtwhite">
 				<td>'.number_format($row->subscribers).'</td>
-                <td></td>
+                
 				<td>'.$row->gender.'</td>
 			</tr>
-		</table><br><br>
-		<table cellspacing="2" cellpadding="4" align="center">
 			<tr class="txtred">
 				<th>State</th>
-                <th></th>
+                
 				<th>Language</th>
 			</tr>
 			<tr class="txtwhite">
 				<td>'.ucwords($row->state).'</td>
-                <td></td>
+                
 				<td>'.ucwords($row->language).'</td>
 			</tr>
-		</table><br><br>
+		</table><br><br><br>
+		
         <table cellspacing="2" cellpadding="4" align="center">
 			<tr class="txtred">
 				<th>Integrated Video Cost</th>
@@ -295,7 +294,7 @@ if(isset($_POST['external'])){
 				<td></td>
 				<td> INR '.number_format($markupdvcost["$i"]).'</td>
 			</tr>
-		</table><br>
+		</table><br><br>
 		<table cellspacing="2" cellpadding="4" align="center">
 			<tr class="txtred">
 				<td colspan="3"><a style="text-decoration:none;color:red;font-size:17px;" target="_blank" href="'.decrypt($row->profile_url).'">Visit Channel</a></td>

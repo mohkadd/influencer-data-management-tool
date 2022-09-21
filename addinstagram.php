@@ -169,7 +169,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['uploadfile'])){
                 $stmt4 = $con->prepare($checkid2);
                 $stmt4->execute(["unique_id"=>$encryptid]);
                 $count2 = $stmt4->rowCount();
-                if($count1 > 0 || $intid == 0){
+                if($count1 > 0 || $intid == 0 || empty($contact_number)){
                     $error = 1;
                 }
                 else{

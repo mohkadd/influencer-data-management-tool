@@ -138,7 +138,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['uploadfile'])){
                 $stmt4 = $con->prepare($checkurl2);
                 $stmt4->execute(["profile_url"=>$encrypturl]);
                 $count2 = $stmt4->rowCount();
-                if((!preg_match("[https://www.youtube.com/channel/]", $profile_url)) || ($lastchar == '/') ||
+                if((!preg_match("[https://www.youtube.com/channel/]", $profile_url)) || ($lastchar == '/') || empty(trim($contact_number)) ||
                    ($extlen !== 24) || ($count1 > 0)){
                     $error = 1;
                 }

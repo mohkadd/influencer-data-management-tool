@@ -382,7 +382,7 @@ $i = 1;
                     <th>Added by</th>
                     <th>Updated on</th>
                     <th>Updated by</th>                    
-                    
+                    <th>Options</th>
                   </tr>
                 </thead>
                 <tfoot>
@@ -428,7 +428,7 @@ $i = 1;
                     <th>Added by</th>
                     <th>Updated on</th>
                     <th>Updated by</th>                    
-                    
+                    <th>Options</th>
                   </tr>
                 </tfoot>
 
@@ -486,7 +486,9 @@ $i = 1;
                       <td><?php echo $row->added_by ?></td>
                       <td><?php echo $row->updated_on ?></td>
                       <td><?php echo $row->updated_by ?></td>
-                      
+                      <td>
+                      <a href="javascript:void(0);" class="btn btn-sm btn-info edit modalButton" data-toggle="modal" data-id="<?php echo $row->id;?>"><i class="fas fa-fw fa-edit" title="EDIT/UPDATE"></i></a>
+                      </td>
                   </tr>
 
                 <?php 

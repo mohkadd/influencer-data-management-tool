@@ -18,7 +18,7 @@ $rowls = $stmtlsid->fetch();
 $lastrowid1 = $rowls->id;
 
 //offset value
-$offset = 4;
+$offset = 2;
 
 $updaterowid = "UPDATE inidfollowers SET firstrowid = '".$firstrowid1."', lastrowid = '".$lastrowid1."'";
 $stmtrd = $con->prepare($updaterowid);
@@ -30,7 +30,7 @@ $stmtrid->execute();
 $rowr = $stmtrid->fetch();
 $firstrowid = $rowr->firstrowid;
 $lastrowid = $rowr->lastrowid;
-$firstid = $rowr->firstid;
+$firstid = $rowr->firstid + 1;
 $lastid = $rowr->lastid;
 echo "firstrowid from inidfollowers table ".$firstrowid." <br>";
 echo "lastrowid from inidfollowers table ".$lastrowid." <br><br>";
@@ -104,13 +104,14 @@ while($row = $stmt->fetch()){
         $newurl = encrypt($newurl);
         echo "Full Name from API ".$response['user']['full_name']."<br>";
         $newname = encrypt($response['user']['full_name']);
-        echo "Is Verified? from API => ".$response['user']['is_verified']."<br>";
-       if($response['user']['is_verified'] == 1){
-           $verified = "Yes";
-       }
-       else{
-           $verified = "No";
-       }
+        if($response['user']['is_verified'] == 1){
+            $verified = "Yes";
+        }
+        else{
+            $verified = "No";
+        }
+        echo "Is Verified? from API => ".$verified."<br>";
+       
         echo "Follower Count from API ".number_format($response['user']['follower_count'])."<br>";
         $newfollower = $response['user']['follower_count'];
         echo $newfollower."<br>";
@@ -119,6 +120,9 @@ while($row = $stmt->fetch()){
         $updatefol = "UPDATE instagram SET handle=:handle, profile_url=:profile_url,followers=:followers, verified=:verified WHERE unique_id=:unique_id";
         $stmt1 = $con->prepare($updatefol);
         $stmt1->execute(["handle"=>$newusername,"profile_url"=>$newurl,"followers"=>$newfollower,"verified"=>$verified,"unique_id"=>encrypt($userid)]);
+        $updatemasterfol = "UPDATE instagram SET handle=:handle, profile_url=:profile_url,followers=:followers, verified=:verified WHERE unique_id=:unique_id";
+        $stmt101 = $con->prepare($updatemasterfol);
+        $stmt101->execute(["handle"=>$newusername,"profile_url"=>$newurl,"followers"=>$newfollower,"verified"=>$verified,"unique_id"=>encrypt($userid)]);
     }
 }
 

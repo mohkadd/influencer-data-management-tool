@@ -18,7 +18,7 @@ $rowls = $stmtlsid->fetch();
 $lastrowid1 = $rowls->id;
 
 //offset value
-$offset = 4;
+$offset = 2;
 
 $updaterowid = "UPDATE inidlikes SET firstrowid = '".$firstrowid1."', lastrowid = '".$lastrowid1."'";
 $stmtrd = $con->prepare($updaterowid);
@@ -30,7 +30,7 @@ $stmtrid->execute();
 $rowr = $stmtrid->fetch();
 $firstrowid = $rowr->firstrowid;
 $lastrowid = $rowr->lastrowid;
-$firstid = $rowr->firstid;
+$firstid = $rowr->firstid + 1;
 $lastid = $rowr->lastid;
 echo "firstrowid from inidlikes table ".$firstrowid." <br>";
 echo "lastrowid from inidlikes table ".$lastrowid." <br><br>";
@@ -105,6 +105,9 @@ while($row = $stmt->fetch()){
         $updatelikes = "UPDATE instagram SET avg_likes=:avg_likes WHERE unique_id=:unique_id";
         $stmt1 = $con->prepare($updatelikes);
         $stmt1->execute(["avg_likes"=>$avglikes,"unique_id"=>encrypt($userid)]);
+        $updatemasterlikes = "UPDATE instagram SET avg_likes=:avg_likes WHERE unique_id=:unique_id";
+        $stmt101 = $con->prepare($updatemasterlikes);
+        $stmt101->execute(["avg_likes"=>$avglikes,"unique_id"=>encrypt($userid)]);
         $count++;
     }
 }

@@ -35,4 +35,18 @@ while($row = $stmt->fetch()){
     $stmt2 = $con->prepare($updatemaster);
     $stmt2->execute(["influencer_category"=>$influencer_category,"unique_id"=>$unique_id]);
 }
+
+date_default_timezone_set("Asia/Kolkata");
+$datenow = date("Y-m-d H:i:s");
+$operation = "Category Update";
+$comment = "Automated instagram category updated with cron job at $datenow";
+$ipaddress = "0.0.0.0";
+$browser = "NA";
+$userid = "0";
+$username = "automatedsystem";
+$log = "INSERT into `loghistory` (`userid`,`username`,`operation`,`comment`,`ipaddress`,`browser`,
+        `actiontime`) values (:userid,:username,:operation,:comment,:ipaddress,:browser,:actiontime)";
+$stmt31 = $con->prepare($log);
+$stmt31->execute(['userid'=>$userid,'username'=>$username,'operation'=>$operation,
+        'comment'=>$comment,'ipaddress'=>$ipaddress,'browser'=>$browser,'actiontime'=>$datenow]);
 ?>

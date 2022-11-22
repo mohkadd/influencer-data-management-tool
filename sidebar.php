@@ -25,7 +25,8 @@
           <a class="dropdown-item" href="view-youtube-data.php">View YouTube Data</a>
           <a class="dropdown-item" href="insert-youtube-data.php">Insert YouTube Data</a>
           <a class="dropdown-item" href="import-youtube-data.php">Import YouTube Data</a>
-          <a class="dropdown-item" href="bulk-delete-youtube.php">Delete Youtube Data</a>          
+          <a class="dropdown-item" href="bulk-delete-youtube.php">Delete Youtube Data</a>
+          <a class="dropdown-item" href="youtube-insert-validation.php">Validate Youtube Data</a>           
         </div>
         <?php    
         }
@@ -36,6 +37,7 @@
           <a class="dropdown-item" href="view-youtube-data.php">View YouTube Listing</a>
           <a class="dropdown-item" href="insert-youtube-data.php">Insert YouTube Data</a>
           <a class="dropdown-item" href="import-youtube-data.php">Import YouTube Data</a>
+          <a class="dropdown-item" href="youtube-insert-validation.php">Validate Youtube Data</a>
         </div>
         <?php     
         }
@@ -52,6 +54,7 @@
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <a class="dropdown-item" href="insert-youtube-data.php">Insert YouTube Data</a>
           <a class="dropdown-item" href="import-youtube-data.php">Import YouTube Data</a>
+          <a class="dropdown-item" href="youtube-insert-validation.php">Validate Youtube Data</a>
         </div>
         <?php     
         }
@@ -70,7 +73,8 @@
           <a class="dropdown-item" href="view-instagram-data.php">View Instagram Data</a>
           <a class="dropdown-item" href="insert-instagram-data.php">Insert Instagram Data</a>
           <a class="dropdown-item" href="import-instagram-data.php">Import Instagram Data</a>
-          <a class="dropdown-item" href="bulk-delete-instagram.php">Delete Instagram Data</a>          
+          <a class="dropdown-item" href="bulk-delete-instagram.php">Delete Instagram Data</a>
+          <a class="dropdown-item" href="instagram-insert-validation.php">Validate Instagram Data</a>          
         </div>
         <?php    
         }
@@ -81,6 +85,7 @@
           <a class="dropdown-item" href="view-instagram-data.php">View Instagram Listing</a>
           <a class="dropdown-item" href="insert-instagram-data.php">Insert Instagram Data</a>
           <a class="dropdown-item" href="import-instagram-data.php">Import Instagram Data</a>
+          <a class="dropdown-item" href="instagram-insert-validation.php">Validate Instagram Data</a>
         </div>
         <?php     
         }
@@ -97,6 +102,7 @@
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <a class="dropdown-item" href="insert-instagram-data.php">Insert Instagram Data</a>
           <a class="dropdown-item" href="import-instagram-data.php">Import Instagram Data</a>
+          <a class="dropdown-item" href="instagram-insert-validation.php">Validate Instagram Data</a>
         </div>
         <?php     
         }

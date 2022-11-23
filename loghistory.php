@@ -1,8 +1,8 @@
 <?php include "header.php"; ?>
 <?php
-if($_SESSION['admintype'] == 3){
-    header("Location: dashboard.php");
-}
+// if($_SESSION['admintype'] == 3){
+//     header("Location: dashboard.php");
+// }
 ?>
 <?php include "functions/functions.php";?>
   <div id="wrapper">

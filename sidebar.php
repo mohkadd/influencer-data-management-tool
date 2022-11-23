@@ -144,6 +144,12 @@
       <?php      
       }
       ?>
+      <li class="nav-item active">
+        <a class="nav-link" href="loghistory.php">
+          <i class="fas fa-fw fa-history"></i>
+          <span>Log History</span>
+        </a>
+      </li>
 <!--
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

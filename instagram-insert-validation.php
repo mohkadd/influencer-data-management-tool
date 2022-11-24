@@ -75,6 +75,39 @@ if($_SESSION['admintype'] == 3){
           <!-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
         </div>
 
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Validate Instagram Data as Excel Import Bulk</div>
+          <div class="card-body">
+            <div class="userform">
+                <form name="importinstagram" id="importinstagram" method="post" action="validate-instagram.php" enctype="multipart/form-data">
+                  <div class="form-group">
+                    <div class="form-row">
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="uploadfile">Upload Excel (<strong class="text-danger">**only .xlsx file to be uploaded</strong>)</label>
+                          <input type="file" id="uploadfile" name="uploadfile" class="form-control" required="required" accept=".xlsx">
+                          <span class="text-danger" id="exterror" style="display: none;"><strong>Please Enter Valid File</strong></span>
+                          <span class="text-danger" id="msgerror" style="display: none;"><strong>Data has some duplicate entries, please check in below table</strong></span>
+                          <span class="text-success" id="msgsuccess" style="display: none;"><strong>Data is Unique</strong></span>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-danger" type="submit" name="submitfile" id="submitfile">Import</button>
+                </form>
+            </div>
+          </div>
+          <!-- <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div> -->
+        </div>
+
+        <div class="col-xl-9 col-sm-12 responsetxt" style="display:none;">
+              
+        </div>
+
       </div>
       <!-- /.container-fluid -->
 
@@ -115,5 +148,72 @@ if($_SESSION['admintype'] == 3){
         }
         return false;
     }
+
+    $(document).ready(function(){
+    $('#uploadfile').change(function(){
+        var extension1 = $(this).val().split('\\').pop();
+        var validfile = ['import-instagram-data-template.xlsx'];
+//        alert(extension1);
+        var extension = $(this).val().split('.').pop().toLowerCase();
+        var validextension = ['xlsx'];
+        if(($.inArray(extension, validextension) == -1) || (!extension1.startsWith("import-instagram-data-template"))){
+            $("#exterror").css({"display":"inline"});
+            $("#submitfile").prop("disabled",true);
+        }
+        else{
+            $("#exterror").css({"display":"none"});
+            $("#submitfile").prop("disabled",false);
+        }
+    });
+    
+    $("#importinstagram").on('submit', function(e){
+        e.preventDefault();
+        $.ajax({
+            url: "validate-instagram.php",
+            type: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function(){
+                $("#submitfile").prop("disabled",true);
+                $("#submitfile").text("Submitting.....");
+                $("#exterror").css({"display":"none"});
+                $("#msgerror").css({"display":"none"});
+                $("#msgsuccess").css({"display":"none"});
+                $(".responsetxt").css({"display":"none"});
+            },
+            success: function(data){
+                if(data == 'success'){
+                    $("#submitfile").prop("disabled",false);
+                    $("#submitfile").text("Import");
+                    alert("Data is Unique");
+                    $("#importinstagram")[0].reset();
+                    $("#msgsuccess").css({"display":"inline"});
+                }
+                else{
+                    $("#submitfile").prop("disabled",false);
+                    $("#submitfile").text("Import");
+                    alert("Data has some duplicate entries, please check in below table");
+                    $(".responsetxt").css({"display":"block"});
+                    $(".responsetxt").html(data);
+                    $("#importinstagram")[0].reset();
+                    $("#msgerror").css({"display":"inline"});
+                }
+                if(data == 'invalid'){
+                    alert("Please Enter Valid File");
+                    $("#submitfile").prop("disabled",false);
+                    $("#submitfile").text("Import");
+                    $("#exterror").css({"display":"inline"});
+                }
+                if(data == 'fail'){
+                    alert("There was some error while submitting, Please try after some time or contact your Website Administrator");
+                    $("#submitfile").prop("disabled",false);
+                    $("#submitfile").text("Import");
+                }
+            }
+        });
+    });
+});
 </script> 
    

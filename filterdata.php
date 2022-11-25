@@ -611,6 +611,7 @@ $maxlikes1 = $row->maxlikes;
     .ui-slider-range{background: #0062cc;}
     .ui-state-default, .ui-state-hover{background: #ED1B34 !important;}
 </style>
+<?php include "download-disable.php"; ?> 
 <script>
 $('document').ready(function() {
     $(document).on('click', '#select_all', function() {          	

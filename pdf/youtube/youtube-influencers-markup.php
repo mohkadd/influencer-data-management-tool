@@ -64,7 +64,7 @@ function decrypt($data) {
         // Position at 25 mm from bottom
         $this->SetY(-15);
         // Set font
-        $this->SetFont('times', 'B', 12);
+        $this->SetFont('times', 'B', 13);
         
         // $this->Cell(0, 0, 'ENLYFT NETWORK PRIVATE LIMITED', 0, 0, 'C');
         $this->Ln(1);
@@ -114,7 +114,7 @@ $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 // ---------------------------------------------------------
 
 // set font
-$pdf->setFont('dejavusans', '', 14);
+$pdf->setFont('dejavusans', '', 12);
 // $pdf->SetFont('times', '', 10); 
 // *** Very IMP: Please use times font, so that if you send this pdf file in gmail as attachment and if user
 //opens it in google document, then all the text within the pdf would be visible properly.
@@ -130,6 +130,8 @@ $markupivcost = $_POST['markupivcost'];
 //print_r($markupivcost);
 //echo "<br>";
 $markupdvcost = $_POST['markupdvcost'];
+$name_of_client = $_POST['name_of_client'];
+$name_of_campaign = $_POST['name_of_campaign'];
 //print_r($markupdvcost);
 //exit();
 //fetching data from database
@@ -161,10 +163,21 @@ if(isset($_POST['internal'])){
 	.txtred{color:#EF1931;font-weight:bold;}
     .txtyellow{color:yellow;font-weight:bold;}
 	</style>
-	<br>
+	<table style="background-color:red;" cellspacing="2" cellpadding="2" align="center">
+			<tr>
+				<th style="font-weight:bold;">Name of Client</th>
+				
+				<th style="font-weight:bold;">Name of Campaign</th>
+			</tr>
+			<tr>
+				<td style="font-weight:bold;color:yellow;">'.$name_of_client.'</td>
+				
+				<td style="font-weight:bold;color:yellow;">'.$name_of_campaign.'</td>
+			</tr>
+		</table>
 	<div style="background-color:black;"><br>
 		<img style="text-align:center;" src="'.$row->profile_image.'" class="img-radius" align="center" alt="User-Profile-Image"><br><br>
-		<table border="1" cellpadding="4" align="center">
+		<table cellpadding="4" align="center">
 			<tr class="txtred">
 				<th>Channel Name</th>
 				<th>Influencer Name</th>
@@ -223,7 +236,7 @@ if(isset($_POST['internal'])){
 
 }
 }
-
+$pdf->setFont('dejavusans', '', 13);
 if(isset($_POST['external'])){
    while($row = $stmt1->fetch()){
 
@@ -245,10 +258,21 @@ if(isset($_POST['external'])){
 	.txtred{color:red;font-weight:bold;}
 	.txtyellow{color:yellow;font-weight:bold;}
 	</style>
-	<br>
+	<table style="background-color:red;" cellspacing="2" cellpadding="4" align="center">
+			<tr>
+				<th style="font-weight:bold;">Name of Client</th>
+				
+				<th style="font-weight:bold;">Name of Campaign</th>
+			</tr>
+			<tr>
+				<td style="font-weight:bold;color:yellow;">'.$name_of_client.'</td>
+				
+				<td style="font-weight:bold;color:yellow;">'.$name_of_campaign.'</td>
+			</tr>
+		</table>
 	<div style="background-color:black;"><br>
 		<br><br><br>
-		<table border="1" cellpadding="4" align="center">
+		<table cellpadding="4" align="center">
 			<tr class="txtred">
 				<th>Channel Name</th>
 				<th>Influencer Name</th>

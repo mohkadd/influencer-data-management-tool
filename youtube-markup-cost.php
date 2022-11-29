@@ -99,6 +99,12 @@ if(isset($_POST['markup'])){
 //                    $i++;
                 }  
                 ?>
+                <tr>
+                  <td>Name of Client</td>
+                  <td colspan="3"><input class="form-control" type="text" name="name_of_client" id="name_of_client" placeholder="Enter Name of Client"></td>
+                  <td>Name of Campaign</td>
+                  <td colspan="2"><input class="form-control" type="text" name="name_of_campaign" id="name_of_campaign" placeholder="Enter Name of Campaign"></td>
+                </tr>
                   
                 </tbody>
               </table>
